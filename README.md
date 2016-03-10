@@ -37,8 +37,8 @@
 	We will need to calculate total nutritional information for the week in terms of calories, fat, and protein. We will need to use the Document Object Model to parse through the HTML of the Tufts Dining website to get nutritional information for each food. 
 
 ### Mockups
-	![Home Page](/mockups/home.png)
-	![Food Entry Page](/mockups/input_food.png)
-	![Progress Display for the Week](/mockups/progress.png)
-	![Allows User to Update Goal](/mockups/update_goal.png)
-	![User's Home Page](/mockups/user_home.png)
+![Home Page](/mockups/home.png)
+![Food Entry Page](/mockups/input_food.png)
+![Progress Display for the Week](/mockups/progress.png)
+![Allows User to Update Goal](/mockups/update_goal.png)
+![User's Home Page](/mockups/user_home.png)
