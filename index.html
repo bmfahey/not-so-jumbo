@@ -17,13 +17,15 @@
 
     <script> 
 
-function logout(){
+function buttonListen(){
         $("#logout").click(function() {
           FB.logout(function(response) {
           });
-           $("#status").html(response.id + "goodbye");
+           $("#status").html("goodbye");
+           $("#logout").hide();
+           $("#login").show();
         });
-      }
+}
 
         function statusChange(response) {
           if (response.status == 'connected') {
@@ -67,6 +69,8 @@ function logout(){
         function doStuff() {
           FB.api('/me', function(response) {
             $('#status').html(response.id);
+            $('#login').hide();
+            $("#logout").show();
           });
         } 
 
@@ -74,10 +78,10 @@ function logout(){
     
     </head>
     
-    <body onload = "logout()">
+    <body onload = "buttonListen()">
    <div class = "container-fluid">
 
-   <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+   <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
    </fb:login-button>
 
    <button type="button" class="btn btn-default" id='logout'>Logout</button>
