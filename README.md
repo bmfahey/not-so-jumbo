@@ -42,3 +42,7 @@
 ![Progress Display for the Week](/mockups/progress.png)
 ![Allows User to Update Goal](/mockups/update_goal.png)
 ![User's Home Page](/mockups/user_home.png)
+
+#Comments by Ming
+* Generally a good idea.  Scraping menus from the Tufts Dining website can be a challenge.  I never heard of FatSecret but cool that it exists!
+* 15 / 15
