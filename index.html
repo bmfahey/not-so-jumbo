@@ -3,6 +3,8 @@
 <head>
     
     <meta charset = "utf-8">
+
+    <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
     
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -30,6 +32,26 @@ function buttonListen(){
            $("#login").show();
            $("#name").html("");
         });
+
+        $("#food_search").click(function() {
+          search_string = $("#food-input").val();
+          $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=n&max=25&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
+              display_search_results(result);
+          }});
+        });
+
+        $("#food-input").keyup(function(event) {
+          if (event.which == 13) {
+            search_string = $("#food-input").val();
+            $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=n&max=25&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
+              display_search_results(result);
+          }});
+        }});
+}
+
+function display_search_results(result) {
+  $("#food-input").val("");
+  console.log(result);
 }
 
         function statusChange(response) {
@@ -97,24 +119,17 @@ function buttonListen(){
             </span>
         </div>
 
-
-
-   <div id = "food-input-api" class = "col-sm-6">
-
-   <label for="food-input">Find a Food:</label>
-   <input type="text" class="form-control" id="food-input">
-
-   <script src="http://platform.fatsecret.com/js?key=0903184a1d2a4ef08f44aae7c0d0fbf3&auto_template=false"></script>
-
-   </div>
-   <div id = "food-input-manual" class = "col-sm-6">
-
-
-   Second Column
-
-   </div>
+        <div id = "food-input-api" class = "col-sm-6">
+          <label for="food-input">Find a Food:</label>
+          <input type="text" class="form-control" id="food-input">
+          <button type="button" class="btn btn-default" id="food_search">Search</button>
+          <script src="http://platform.fatsecret.com/js?key=0903184a1d2a4ef08f44aae7c0d0fbf3&auto_load=false"></script>
+        </div>
+   
+        <div id = "food-input-manual" class = "col-sm-6">
+          Second Column
+        </div>
         
-  </div>
-    
+      </div>
     </body>
 </html>
