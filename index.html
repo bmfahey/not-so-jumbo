@@ -84,20 +84,34 @@ function buttonListen(){
     
     </head>
     
-  <body onload = "buttonListen()">
-   <div class = "container-fluid">
+    <body onload = "buttonListen()">
+      <div class = "container-fluid">
+        <div class = "page-header">
+            <span id = "title">Not So Jumbo</span>
+            <img src = "./images/elephant.png" alt = "Elephant Picture">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
+            </fb:login-button>
+            <span id = "top-right">
+              <span id = "name"> </span>
+              <button type="button" class="btn btn-default" id='logout'>Logout</button>
+            </span>
+        </div>
 
-   <div class = "page-header"> 
-   <h1>Not So Jumbo</h1>
-   <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
-   </fb:login-button>
 
-   <div id = "name"> </div>
 
-   <button type="button" class="btn btn-default" id='logout'>Logout</button>
+   <div id = "food-input-api" class = "col-sm-6">
+
+   <label for="food-input">Find a Food:</label>
+   <input type="text" class="form-control" id="food-input">
+
+   <script src="http://platform.fatsecret.com/js?key=0903184a1d2a4ef08f44aae7c0d0fbf3&auto_template=false"></script>
+
    </div>
+   <div id = "food-input-manual" class = "col-sm-6">
 
-   <div id = "status">
+
+   Second Column
+
    </div>
         
   </div>
