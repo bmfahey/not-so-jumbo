@@ -21,48 +21,65 @@
 
     <script> 
 
+    var id_number = -1;
+
 function buttonListen(){
         $("#logout").hide();
 
         $("#logout").click(function() {
           FB.logout(function(response) {
           });
-           $("#status").html("goodbye");
+          id_number = -1;
            $("#logout").hide();
            $("#login").show();
            $("#name").html("");
         });
 
         $("#food_search").click(function() {
+          if (id_number == -1) {
+            $("#results").html("Please Log In to Facebook!");
+          }
+          else {
           search_string = $("#food-input").val();
-          $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=n&max=25&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-              display_search_results(result);
-          }});
-        });
-
-        $("#food-input").keyup(function(event) {
-          if (event.which == 13) {
-            search_string = $("#food-input").val();
-            $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=n&max=25&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
+          search_string = search_string.replace("%","%25");
+          $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
               display_search_results(result);
           }});
         }});
+
+        $("#food-input").keyup(function(event) {
+          if (event.which == 13) {
+            if (id_number == -1) {
+              $("#results").html("Please Log In to Facebook");
+            }
+            else {
+            search_string = $("#food-input").val();
+            search_string = search_string.replace("%","%25");
+            $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
+              display_search_results(result);
+          }});
+        }}});
 }
 
-function display_search_results(result) {
-  $("#food-input").val("");
-  console.log(result);
-}
+       function display_search_results(result) {
+          $("#food-input").val("");
+          window.location.hash = "#results";
+          all_results_str = "";
+          for (i = 0; i < result.list.item.length; i++) {
+              all_results_str += "<a onclick = populate_info(" + result.list.item[i].ndbno+") class='list-group-item'>" + result.list.item[i].name + "</a>";
+          }
+          if (all_results_str == "") {
+            all_results_str = "<p>Sorry, no results. Please widen your search!</p>";
+          }
+          $("#results").html(all_results_str);
+          }
 
-        function statusChange(response) {
+          function statusChange(response) {
           if (response.status == 'connected') {
-              doStuff();
+              login_success();
           }
           else if (response.status == 'not_authorized') {
-              $("#status").html("<p>Please authorize this website!</p>");
-          }
-          else {
-              $("#status").html("<p>Please log into Facebook!</p>");
+              alert("Please authorize this website.");
           }
         }
 
@@ -70,6 +87,11 @@ function display_search_results(result) {
           FB.getLoginStatus(function(response) {
             statusChange(response);
           });
+        }
+
+        function populate_info(number) {
+          window.location.hash = "";
+          console.log(number);
         }
 
         window.fbAsyncInit = function() {
@@ -93,9 +115,9 @@ function display_search_results(result) {
           fjs.parentNode.insertBefore(js, fjs);
         } (document, 'script', 'facebook-jssdk'));
 
-        function doStuff() {
+        function login_success() {
           FB.api('/me', function(response) {
-            $('#status').html(response.id);
+            id_number = response.id;
             $("#name").html(response.name);
             $('#login').hide();
             $("#logout").show();
@@ -123,11 +145,12 @@ function display_search_results(result) {
           <label for="food-input">Find a Food:</label>
           <input type="text" class="form-control" id="food-input">
           <button type="button" class="btn btn-default" id="food_search">Search</button>
-          <script src="http://platform.fatsecret.com/js?key=0903184a1d2a4ef08f44aae7c0d0fbf3&auto_load=false"></script>
+          <hr>
+          <label for="results">Click on a Result:</label>
+          <div id = "results" class = "list-group" style="overflow-y:scroll; height:400px;"></div>
         </div>
-   
+
         <div id = "food-input-manual" class = "col-sm-6">
-          Second Column
         </div>
         
       </div>
