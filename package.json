@@ -1,5 +1,5 @@
 {
-        "name": "simpleexpress",
+        "name": "comp20-s2016-team2",
         "version": "0.0.1",
         "dependencies": {
                 "express": "latest"
