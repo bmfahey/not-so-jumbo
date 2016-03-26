@@ -1,12 +1,10 @@
 var express = require('express');
 var app = express();
 
-app.use('./', function (req, res, next) {
-	next();
-});
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-  response.sendFile('./index.html' , { root : __dirname});
+  response.sendFile(__dirname + "/index.html");
 });
 
 app.listen(process.env.PORT || 8888);
