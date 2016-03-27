@@ -8,7 +8,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/progress', function (request, response) {
-	response.sendFile("./progress.html");
+	response.sendFile(__dirname + "./progress.html");
 });
 
 app.get('/goal', function(request,response) {
