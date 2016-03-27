@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
     
     <meta charset = "utf-8">
 
@@ -42,29 +44,42 @@ function buttonListen(){
             $("#results").html("Please Log In to Facebook!");
           }
           else {
-          search_string = $("#food-input").val();
+          search_string = $("#search-input").val();
           search_string = search_string.replace("%","%25");
           $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
               display_search_results(result);
           }});
         }});
 
-        $("#food-input").keyup(function(event) {
+        $("#search-input").keyup(function(event) {
           if (event.which == 13) {
             if (id_number == -1) {
               $("#results").html("Please Log In to Facebook");
             }
             else {
-            search_string = $("#food-input").val();
+            search_string = $("#search-input").val();
             search_string = search_string.replace("%","%25");
             $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
               display_search_results(result);
           }});
         }}});
+
+        $("#food-input").click(function() {
+        	if (id_number == -1) {
+        		$("#results").html("Please Log In to Facebook");
+        	}
+        	else {
+        		console.log(id_number);
+        		console.log("Protein" + $("protein").val()*$("#servings").val());
+        		console.log("Calories" + $("#calories").val()*$("#servings").val());
+        		console.log("Fat" + $("#fat").val()*$("#servings").val());
+        	}
+        	}
+        })
 }
 
        function display_search_results(result) {
-          $("#food-input").val("");
+          $("#search-input").val("");
           window.location.hash = "#results";
           all_results_str = "";
           for (i = 0; i < result.list.item.length; i++) {
@@ -92,8 +107,10 @@ function buttonListen(){
         }
 
         function populate_info(number) {
-          window.location.hash = "";
-          console.log(number);
+          window.location.hash = "#food-input-manual";
+          $.ajax({url: "http://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU&nutrients=205&nutrients=204&nutrients=208&nutrients=269&ndbno=" + number, success: function(result) {
+          	console.log(result);
+          }});
         }
 
         window.fbAsyncInit = function() {
@@ -145,7 +162,7 @@ function buttonListen(){
 
         <div id = "food-input-api" class = "col-sm-6">
           <label for="food-input">Find a Food:</label>
-          <input type="text" class="form-control" id="food-input">
+          <input type="text" class="form-control" id="search-input">
           <button type="button" class="btn btn-default" id="food_search">Search</button>
           <hr>
           <label for="results">Click on a Result:</label>
@@ -153,6 +170,21 @@ function buttonListen(){
         </div>
 
         <div id = "food-input-manual" class = "col-sm-6">
+        	<div id = "input-left" class = "col-sm-3">
+        		<label for="calories">Calories (C per serving):</label>
+        		<input type = "text" class = "form-control" id="calories">
+        		<label for="protein">Protein (g per serving):</label>
+        		<input type="text" class="form-control" id="protein">
+        	</div>
+
+        	<div id = "input-right" class = "col-sm-3">
+        		<label for="fat">Fat (g per serving):</label>
+        		<input type="text" class="form-control" id="fat">
+        		<span id="serving-size"></span>
+        		<label for="servings">Servings:</label>
+        		<input type="number" class="form-control" id="servings">
+        	</div>
+        	<button type = "button" class = "btn btn-default" id = "food-input">Submit This Food!</button>
         </div>
         
       </div>
