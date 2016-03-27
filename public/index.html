@@ -108,7 +108,11 @@ function buttonListen(){
         function populate_info(number) {
           window.location.hash = "#food-input-manual";
           $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + number + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-          	console.log(result);
+          	$("#food_name").val(result.report.food.name);
+          	$("#protein").val(results.report.food.nutrients[3].value);
+          	$("#calories").val(result.report.food.nutrients[1].value);
+          	$("#fat").val(result.report.food.nutrients[4].value);
+          	$("#serving-size").val("Serving Size: 100 g");
           }});
         }
 
@@ -169,6 +173,8 @@ function buttonListen(){
         </div>
 
         <div id = "food-input-manual" class = "col-sm-6">
+        		<label for="food_name">Food Name:</label>
+        		<input type="text" class="form-control" id="food_name">
         		<label for="calories">Calories (C per serving):</label>
         		<input type = "number" class = "form-control" id="calories">
         		<label for="protein">Protein (g per serving):</label>
