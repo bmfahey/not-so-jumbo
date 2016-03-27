@@ -111,8 +111,7 @@ function buttonListen(){
           window.location.hash = "#food-input-manual";
           $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + number + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
           	$("#food_name").val(result.report.food.name);
-          	console.log(result);
-          	$("#protein").val(results.report.food.nutrients[3].value);
+          	$("#protein").val(result.report.food.nutrients[3].value);
           	$("#calories").val(result.report.food.nutrients[1].value);
           	$("#fat").val(result.report.food.nutrients[4].value);
           	$("#serving-size").val("Serving Size: 100 g");
