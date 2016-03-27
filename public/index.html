@@ -79,10 +79,10 @@ function buttonListen(){
 
        function display_search_results(result) {
           $("#search-input").val("");
-          num = result.list.item[i].ndbno + "";
           window.location.hash = "#results";
           all_results_str = "";
           for (i = 0; i < result.list.item.length; i++) {
+          	  num = result.list.item[i].ndbno + "";
               all_results_str += "<a onclick = populate_info(" + num +") class='list-group-item'>" + result.list.item[i].name + "</a>";
           }
           if (all_results_str == "") {
