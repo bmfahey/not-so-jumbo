@@ -29,6 +29,7 @@
 
 function buttonListen(){
         $("#logout").hide();
+        $("#servings").val(1);
 
         $("#logout").click(function() {
           FB.logout(function(response) {
