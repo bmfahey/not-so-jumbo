@@ -28,7 +28,7 @@
     function init(){
         $("#logout").hide();
 
-        $("#logout").click(function() {
+    $("#logout").click(function() {
           FB.logout(function(response) {
           });
           id_number = -1;
@@ -90,7 +90,7 @@
 <body onload = "init()">
     <div class="container-fluid">
         <div class = "page-header">
-            <span id = "title">Not So Jumbo - Your Progress</span>
+            <span id = "title">Not So Jumbo - Dining Halls</span>
             <img src = "./images/elephant.png" alt = "Elephant Picture">
             <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
             </fb:login-button>
@@ -111,24 +111,19 @@
             <div class="collapse navbar-collapse" id="navBar">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li><a href = "#">My Progress</a></li>
+                    <li><a href = "/progress">My Progress</a></li>
                     <li><a href = "/goal">My Goal</a></li>
-                    <li><a href = "/dining">Dining Hall Suggestions</a></li>
+                    <li><a href = "#">Dining Hall Suggestions</a></li>
                 </ul>
             </div>
         </nav>
 
-        <div id = "goal" class="col-small-4">
-            <label for="goal-display">Your Goal:</label>
-            <input type="text" class="form-control" id="goal-display" val = "Please Log In to Facebook" disabled>
-            <br><br><br><br>
-            <label for="progress">Progress:</label>
-            <div class = "progress">
-                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div> 
-            </div>
+        <div class = "col-sm-6">
+            <div id = "goal"></div>
+            <br><br>
+            <textarea class = "form-control" rows="10" id = "suggestions" disabled></textarea>
         </div>
-        <div id = "graph" class = "col-small-8">
-        </div>
+
     </div>
 </body>
 </html>

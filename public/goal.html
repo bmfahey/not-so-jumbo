@@ -6,7 +6,7 @@
     
     <meta charset = "utf-8">
 
-    <title>Progress</title>
+    <title>Goal</title>
 
     <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
     
@@ -24,9 +24,12 @@
     <script> 
 
     var id_number = -1;
+    var value = "calories";
 
     function init(){
         $("#logout").hide();
+
+        $("#amount").val(0);
 
         $("#logout").click(function() {
           FB.logout(function(response) {
@@ -35,6 +38,29 @@
            $("#logout").hide();
            $("#login").show();
            $("#name").html("");
+        });
+
+        $("#submit").click(function () {
+            if (id_number == -1) {
+                alert("Please Log In to Facebook");
+            }
+            else {
+                console.log(value);
+                console.log($("#amount").val());
+                window.location.href="/progress";
+            }
+        });
+        $("#amount").keyup(function(event) {
+            if (event.which == 13) {
+                if (id_number == -1) {
+                    alert("Please Log In to Facebook");
+                }
+                else {
+                    console.log(value);
+                    console.log($("#amount").val());
+                    window.location.href="/progress";
+                }
+            }
         });
     }
 
@@ -83,6 +109,10 @@
           });
         } 
 
+        function set_value(v) {
+            value = v;
+        }
+
     </script>
     
 </head>
@@ -90,7 +120,7 @@
 <body onload = "init()">
     <div class="container-fluid">
         <div class = "page-header">
-            <span id = "title">Not So Jumbo - Your Progress</span>
+            <span id = "title">Not So Jumbo - Set a Goal</span>
             <img src = "./images/elephant.png" alt = "Elephant Picture">
             <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
             </fb:login-button>
@@ -111,24 +141,33 @@
             <div class="collapse navbar-collapse" id="navBar">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li><a href = "#">My Progress</a></li>
-                    <li><a href = "/goal">My Goal</a></li>
+                    <li><a href = "/progress">My Progress</a></li>
+                    <li><a href = "#">My Goal</a></li>
                     <li><a href = "/dining">Dining Hall Suggestions</a></li>
                 </ul>
             </div>
         </nav>
 
-        <div id = "goal" class="col-small-4">
-            <label for="goal-display">Your Goal:</label>
-            <input type="text" class="form-control" id="goal-display" val = "Please Log In to Facebook" disabled>
-            <br><br><br><br>
-            <label for="progress">Progress:</label>
-            <div class = "progress">
-                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div> 
+        <div class = "col-sm-4">
+            <h3>Update Weekly Goal:</h3>
+            <br><br>
+            <div id = "update-goal">
+                <label for="selection">Please Select One:</label>
+                <div class="radio" id="selection">
+                    <label class = "radio-inline">
+                        <input type="radio" name="optradio" onclick = "set_value('calories')" checked="checked">Calories</label>
+                    <label class = "radio-inline">
+                        <input type="radio" name="optradio" onclick = "set_value('protein')">Protein</label>
+                    <label class = "radio-inline">
+                        <input type="radio" name="optradio" onclick = "set_value('fat')">Fat</label>
+                </div>
+                <label for="amount">Enter an Amount:</label>
+                <input type="number" class = "form-control" id="amount">
+                <br><br>
+                <button type = "button" class = "btn btn-default" id = "submit">Submit Goal</button>
             </div>
         </div>
-        <div id = "graph" class = "col-small-8">
-        </div>
+
     </div>
 </body>
 </html>

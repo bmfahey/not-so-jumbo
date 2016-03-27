@@ -72,7 +72,7 @@
         		console.log("Protein " + $("#protein").val()*$("#servings").val());
         		console.log("Calories " + $("#calories").val()*$("#servings").val());
         		console.log("Fat " + $("#fat").val()*$("#servings").val());
-        		window.location.href="./status.html";
+        		window.location.href="/progress";
         	}
         });
 	}
@@ -175,10 +175,10 @@
         	</div>
         	<div class="collapse navbar-collapse" id="navBar">
         		<ul class="nav navbar-nav">
-        			<li class="active"><a href="#">Home</a></li>
-        			<li><a href = "./progress.html">My Progress</a></li>
-        			<li><a href = "./goal.html">My Goal</a></li>
-        			<li><a href = "./dining.html">Dining Hall Suggestions</a></li>
+        			<li><a href="#">Home</a></li>
+        			<li><a href = "/progress">My Progress</a></li>
+        			<li><a href = "/goal">My Goal</a></li>
+        			<li><a href = "/dining">Dining Hall Suggestions</a></li>
         		</ul>
         	</div>
         </nav>
@@ -189,7 +189,7 @@
           <button type="button" class="btn btn-default" id="food_search">Search</button>
           <hr>
           <label for="results">Click on a Result:</label>
-          <div id = "results" class = "list-group" style="overflow-y:scroll; height:400px;"></div>
+          <div id = "results" class = "list-group"></div>
         </div>
 
         <div id = "food-input-manual" class = "col-sm-6">

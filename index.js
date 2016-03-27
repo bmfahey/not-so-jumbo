@@ -1,22 +1,28 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
+var path = __dirname + "/public/";
 
-app.use(express.static(__dirname + '/public'));
-
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + "./index.html");
+router.use(function (req,res,next) {
+	next();
 });
 
-app.get('/progress', function (request, response) {
-	response.sendFile(__dirname + "./progress.html");
+router.get("/",function(request,response) {
+	response.sendFile(path+"index.html");
 });
 
-app.get('/goal', function(request,response) {
-	response.sendFile(__dirname+"./goal.html");
+router.get("/progress", function (request,response) {
+	response.sendFile(path+"progress.html");
 });
 
-app.get('/dining', function(request,response) {
-	reponse.sendFile(__dirname+"./goal.html");
-})
+router.get("/goal", function(request,response) {
+	response.sendFile(path+"goal.html");
+});
+
+router.get("/dining", function(request,response) {
+	response.sendFile(path+"dining.html");
+});
+
+app.use("/",router);
 
 app.listen(process.env.PORT || 8888);
