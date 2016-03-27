@@ -73,6 +73,7 @@ function buttonListen(){
         		console.log("Protein " + $("#protein").val()*$("#servings").val());
         		console.log("Calories " + $("#calories").val()*$("#servings").val());
         		console.log("Fat " + $("#fat").val()*$("#servings").val());
+        		window.location.href="./status.html";
         	}
         });
 }
@@ -114,7 +115,7 @@ function buttonListen(){
           	$("#protein").val(result.report.food.nutrients[3].value);
           	$("#calories").val(result.report.food.nutrients[1].value);
           	$("#fat").val(result.report.food.nutrients[4].value);
-          	$("#serving-size").html("Serving Size: 100 g");
+          	$("#serving-size").html("<p>Serving Size: 100 g</p>");
           }});
         }
 
