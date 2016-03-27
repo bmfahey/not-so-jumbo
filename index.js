@@ -7,15 +7,15 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + "./index.html");
 });
 
-app.get('./progress', function (request, response) {
+app.get('/progress', function (request, response) {
 	response.sendFile(__dirname + "./progress.html");
 });
 
-app.get('./goal', function(request,response) {
+app.get('/goal', function(request,response) {
 	response.sendFile(__dirname+"./goal.html");
 });
 
-app.get('./dining', function(request,response) {
+app.get('/dining', function(request,response) {
 	reponse.sendFile(__dirname+"./goal.html");
 })
 
