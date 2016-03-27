@@ -70,9 +70,9 @@ function buttonListen(){
         	}
         	else {
         		console.log(id_number);
-        		console.log("Protein" + $("protein").val()*$("#servings").val());
-        		console.log("Calories" + $("#calories").val()*$("#servings").val());
-        		console.log("Fat" + $("#fat").val()*$("#servings").val());
+        		console.log("Protein " + $("#protein").val()*$("#servings").val());
+        		console.log("Calories " + $("#calories").val()*$("#servings").val());
+        		console.log("Fat " + $("#fat").val()*$("#servings").val());
         	}
         });
 }
@@ -107,7 +107,7 @@ function buttonListen(){
 
         function populate_info(number) {
           window.location.hash = "#food-input-manual";
-          $.ajax({url: "http://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU&nutrients=205&nutrients=204&nutrients=208&nutrients=269&ndbno=" + number, success: function(result) {
+          $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + number + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
           	console.log(result);
           }});
         }
@@ -169,20 +169,15 @@ function buttonListen(){
         </div>
 
         <div id = "food-input-manual" class = "col-sm-6">
-        	<div id = "input-left" class = "col-sm-3">
         		<label for="calories">Calories (C per serving):</label>
-        		<input type = "text" class = "form-control" id="calories">
+        		<input type = "number" class = "form-control" id="calories">
         		<label for="protein">Protein (g per serving):</label>
-        		<input type="text" class="form-control" id="protein">
-        	</div>
-
-        	<div id = "input-right" class = "col-sm-3">
+        		<input type="number" class="form-control" id="protein">
         		<label for="fat">Fat (g per serving):</label>
-        		<input type="text" class="form-control" id="fat">
+        		<input type="number" class="form-control" id="fat">
         		<span id="serving-size"></span>
         		<label for="servings">Servings:</label>
         		<input type="number" class="form-control" id="servings">
-        	</div>
         	<button type = "button" class = "btn btn-default" id = "food-input">Submit This Food!</button>
         </div>
         
