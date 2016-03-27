@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <meta charset = "utf-8">
+
+    <title>Not So Jumbo</title>
+
+    <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script> 
+
+    var id_number = -1;
+
+    function init(){
+        $("#logout").hide();
+
+        $("#logout").click(function() {
+          FB.logout(function(response) {
+          });
+          id_number = -1;
+           $("#logout").hide();
+           $("#login").show();
+           $("#name").html("");
+        });
+    }
+
+    function statusChange(response) {
+          if (response.status == 'connected') {
+              login_success();
+          }
+          else if (response.status == 'not_authorized') {
+              alert("Please authorize this website.");
+          }
+        }
+
+        function checkLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChange(response);
+          });
+        }
+
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId: '1712697512306795',
+            cookie: true,
+            xfbml: true,
+            version: 'v2.5'
+          });
+
+          FB.getLoginStatus(function(response) {
+            statusChange(response);
+          });
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));
+
+        function login_success() {
+          FB.api('/me', function(response) {
+            id_number = response.id;
+            $("#name").html(response.name);
+            $('#login').hide();
+            $("#logout").show();
+          });
+        } 
+
+    </script>
+    
+</head>
+
+<body onload = "init()">
+    <div class="container-fluid">
+        <div class = "page-header">
+            <span id = "title">Not So Jumbo - Your Progress</span>
+            <img src = "./images/elephant.png" alt = "Elephant Picture">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
+            </fb:login-button>
+            <span id = "top-right">
+              <span id = "name"> </span>
+              <button type="button" class="btn btn-default" id='logout'>Logout</button>
+            </span>
+        </div>
+
+        <nav class = "navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+                <span class = "icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class = "icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navBar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="not-so-jumbo.herokuapp.com">Home</a></li>
+                    <li><a href = "#">My Progress</a></li>
+                    <li><a href = "not-so-jumbo.herokuapp.com/goal">My Goal</a></li>
+                    <li><a href = "not-so-jumbo.herokuapp.com/dining">Dining Hall Suggestions</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id = "goal" class="col-small-4">
+            <label for="goal-display">Your Goal:</label>
+            <input type="text" class="form-control" id="goal-display" val = "Please Log In to Facebook" disabled>
+            <br><br><br><br>
+            <label for="progress">Progress:</label>
+            <div class = "progress">
+                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div> 
+            </div>
+        </div>
+        <div id = "graph" class = "col-small-8">
+        </div>
+    </div>
+</body>
+</html>

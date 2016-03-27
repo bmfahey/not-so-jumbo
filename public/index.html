@@ -20,14 +20,12 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script> 
 
     var id_number = -1;
 
-function buttonListen(){
+	function buttonListen(){
         $("#logout").hide();
         $("#servings").val(1);
 
@@ -77,7 +75,7 @@ function buttonListen(){
         		window.location.href="./status.html";
         	}
         });
-}
+	}
 
        function display_search_results(result) {
           $("#search-input").val("");
@@ -116,7 +114,7 @@ function buttonListen(){
           	$("#protein").val(result.report.food.nutrients[3].value);
           	$("#calories").val(result.report.food.nutrients[1].value);
           	$("#fat").val(result.report.food.nutrients[4].value);
-          	$("#serving-size").html("<p>Serving Size: 100 g</p>");
+          	$("#serving-size").html("Serving Size: 100 g");
           }});
         }
 
@@ -167,6 +165,24 @@ function buttonListen(){
             </span>
         </div>
 
+        <nav class = "navbar navbar-default">
+        	<div class="navbar-header">
+        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+        		<span class = "icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class = "icon-bar"></span>
+        		</button>
+        	</div>
+        	<div class="collapse navbar-collapse" id="navBar">
+        		<ul class="nav navbar-nav">
+        			<li class="active"><a href="#">Home</a></li>
+        			<li><a href = "not-so-jumbo.herokuapp.com/progress">My Progress</a></li>
+        			<li><a href = "not-so-jumbo.herokuapp.com/goal">My Goal</a></li>
+        			<li><a href = "not-so-jumbo.herokuapp.com/dining">Dining Hall Suggestions</a></li>
+        		</ul>
+        	</div>
+        </nav>
+
         <div id = "food-input-api" class = "col-sm-6">
           <label for="food-input">Find a Food:</label>
           <input type="text" class="form-control" id="search-input">
@@ -185,7 +201,9 @@ function buttonListen(){
         		<input type="number" class="form-control" id="protein">
         		<label for="fat">Fat (g per serving):</label>
         		<input type="number" class="form-control" id="fat">
+        		<br>
         		<span id="serving-size"></span>
+        		<br>
         		<label for="servings">Servings:</label>
         		<input type="number" class="form-control" id="servings">
         	<button type = "button" class = "btn btn-default" id = "food-input">Submit This Food!</button>
