@@ -58,13 +58,12 @@
             else {
             search_string = $("#search-input").val();
             search_string = search_string.replace("%","%25");
-            $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-              	if (result.status != 404) {
+            $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", error: function(result) {
+            	$("results").html("Sorry, no results. Please widen your search!");
+            },
+
+            	success: function(result) {
               		display_search_results(result);
-              	}
-              	else {
-              		$("results").html("Sorry, no results. Please widen your search!");
-              	}
           }});
         }}});
 
