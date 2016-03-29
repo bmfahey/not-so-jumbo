@@ -3,6 +3,8 @@ var app = express();
 var router = express.Router();
 var path = __dirname + "/public/";
 
+app.use(express.static(path));
+
 router.use(function (req,res,next) {
 	next();
 });
