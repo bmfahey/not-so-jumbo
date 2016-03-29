@@ -59,7 +59,12 @@
             search_string = $("#search-input").val();
             search_string = search_string.replace("%","%25");
             $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-              display_search_results(result);
+              	if (result.status != 404) {
+              		display_search_results(result);
+              	}
+              	else {
+              		$("results").html("Sorry, no results. Please widen your search!");
+              	}
           }});
         }}});
 
@@ -85,9 +90,6 @@
           	  num = result.list.item[i].ndbno + "";
               all_results_str += "<a onclick = populate_info(" + num +") class='list-group-item'>" + result.list.item[i].name + "</a>";
           }
-          if (all_results_str == "") {
-            all_results_str = "<p>Sorry, no results. Please widen your search!</p>";
-          }
           $("#results").html(all_results_str);
           }
 
@@ -96,7 +98,7 @@
               login_success();
           }
           else if (response.status == 'not_authorized') {
-              alert("Please authorize this website.");
+              $("#results").html("Please Log In to Facebook!");
           }
         }
 
@@ -110,11 +112,11 @@
         	number += "";
           window.location.hash = "#food-input-manual";
           $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + number + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-          	$("#food_name").val(result.report.food.name);
-          	$("#protein").val(result.report.food.nutrients[3].value);
-          	$("#calories").val(result.report.food.nutrients[1].value);
-          	$("#fat").val(result.report.food.nutrients[4].value);
-          	$("#serving-size").html("Serving Size: 100 g");
+          		$("#food_name").val(result.report.food.name);
+	          	$("#protein").val(result.report.food.nutrients[3].value);
+	          	$("#calories").val(result.report.food.nutrients[1].value);
+	          	$("#fat").val(result.report.food.nutrients[4].value);
+	          	$("#serving-size").html("Serving Size: 100 g");
           }});
         }
 
