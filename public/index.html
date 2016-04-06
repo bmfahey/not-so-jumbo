@@ -3,214 +3,85 @@
 <head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	
-	<meta charset = "utf-8">
+    
+    <meta charset = "utf-8">
 
-	<title>Not So Jumbo</title>
+    <title>Not So Jumbo</title>
 
-	<link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-	<link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css">
 
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
-	<!-- Latest compiled JavaScript -->
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-	<script> 
+    <script src="javascript/index.js"></script>
+    
+    </head>
+    
+    <body onload = "buttonListen()">
+      <div class = "container-fluid">
+        <div class = "page-header">
+            <img src = "./images/elephant.png" alt = "Elephant Picture">
+            <span id = "title">Not So Jumbo</span>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
+            </fb:login-button>
+            <span id = "top-right">
+              <span id = "name"> </span>
+              <button type="button" class="btn btn-default" id='logout'>Logout</button>
+            </span>
+        </div>
 
-	var id_number = -1;
+        <nav class = "navbar navbar-default">
+        	<div class="navbar-header">
+        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+        		<span class = "icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class = "icon-bar"></span>
+        		</button>
+        	</div>
+        	<div class="collapse navbar-collapse" id="navBar">
+        		<ul class="nav navbar-nav">
+        			<li><a href="#">Home</a></li>
+        			<li><a href = "/progress">My Progress</a></li>
+        			<li><a href = "/goal">My Goal</a></li>
+        			<li><a href = "/dining">Dining Hall Suggestions</a></li>
+        		</ul>
+        	</div>
+        </nav>
 
-	function buttonListen(){
-		$("#logout").hide();
-		$("#servings").val(1);
+        <div id = "food-input-api" class = "col-sm-6">
+          <label for="food-input">Find a Food:</label>
+          <input type="text" class="form-control" id="search-input">
+          <button type="button" class="btn btn-default" id="food_search">Search</button>
+          <hr>
+          <label for="results">Click on a Result:</label>
+          <div id = "results" class = "list-group"></div>
+        </div>
 
-		$("#logout").click(function() {
-		  FB.logout(function(response) {
-		  });
-		  id_number = -1;
-		   $("#logout").hide();
-		   $("#login").show();
-		   $("#name").html("");
-		});
-
-		$("#food_search").click(function() {
-		  if (id_number == -1) {
-			$("#results").html("Please Log In to Facebook!");
-		  }
-		  else {
-		  search_string = $("#search-input").val();
-		  search_string = search_string.replace("%","%25");
-		  $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-			  display_search_results(result);
-		  }});
-		}});
-
-		$("#search-input").keyup(function(event) {
-		  if (event.which == 13) {
-			if (id_number == -1) {
-			  $("#results").html("Please Log In to Facebook");
-			}
-			else {
-			search_string = $("#search-input").val();
-			search_string = search_string.replace("%","%25");
-			$.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", statusCode: {0: function() {
-				$("#results").html("Sorry, no results. Please widen your search!");
-			}, 404: function() {
-				$("#results").html("Sorry, no results. Please widen your search!");
-			}},
-				success: function(result) {
-					display_search_results(result);
-		  }});
-		}}});
-
-		$("#food-input").click(function() {
-			if (id_number == -1) {
-				$("#results").html("Please Log In to Facebook");
-			}
-			else {
-				console.log(id_number);
-				console.log("Protein " + $("#protein").val()*$("#servings").val());
-				console.log("Calories " + $("#calories").val()*$("#servings").val());
-				console.log("Fat " + $("#fat").val()*$("#servings").val());
-				window.location.href="/progress";
-			}
-		});
-	}
-
-	   function display_search_results(result) {
-		  $("#search-input").val("");
-		  window.location.hash = "#results";
-		  all_results_str = "";
-		  for (i = 0; i < result.list.item.length; i++) {
-			  num = result.list.item[i].ndbno + "";
-			  all_results_str += "<a onclick = populate_info(" + num +") class='list-group-item'>" + result.list.item[i].name + "</a>";
-		  }
-		  $("#results").html(all_results_str);
-		  }
-
-		  function statusChange(response) {
-		  if (response.status == 'connected') {
-			  login_success();
-		  }
-		  else if (response.status == 'not_authorized') {
-			  $("#results").html("Please Log In to Facebook!");
-		  }
-		}
-
-		function checkLoginState() {
-		  FB.getLoginStatus(function(response) {
-			statusChange(response);
-		  });
-		}
-
-		function populate_info(number) {
-			number += "";
-		  window.location.hash = "#food-input-manual";
-		  $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + number + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-				$("#food_name").val(result.report.food.name);
-				$("#protein").val(result.report.food.nutrients[3].value);
-				$("#calories").val(result.report.food.nutrients[1].value);
-				$("#fat").val(result.report.food.nutrients[4].value);
-				$("#serving-size").html("Serving Size: 100 g");
-		  }});
-		}
-
-		window.fbAsyncInit = function() {
-		  FB.init({
-			appId: '1712697512306795',
-			cookie: true,
-			xfbml: true,
-			version: 'v2.5'
-		  });
-
-		  FB.getLoginStatus(function(response) {
-			statusChange(response);
-		  });
-		};
-
-		(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/sdk.js";
-		  fjs.parentNode.insertBefore(js, fjs);
-		} (document, 'script', 'facebook-jssdk'));
-
-		function login_success() {
-		  FB.api('/me', function(response) {
-			id_number = response.id;
-			$("#name").html(response.name);
-			$('#login').hide();
-			$("#logout").show();
-		  });
-		} 
-
-	</script>
-	
-	</head>
-	
-	<body onload = "buttonListen()">
-	  <div class = "container-fluid">
-		<div class = "page-header">
-			<img src = "./images/elephant.png" alt = "Elephant Picture">
-			<span id = "title">Not So Jumbo</span>
-			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
-			</fb:login-button>
-			<span id = "top-right">
-				<span id = "name"> </span>
-				<button type="button" class="btn btn-default" id='logout'>Logout</button>
-			</span>
-		</div>
-
-		<nav class = "navbar navbar-default">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
-				<span class = "icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class = "icon-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse" id="navBar">
-				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href = "/progress">My Progress</a></li>
-					<li><a href = "/goal">My Goal</a></li>
-					<li><a href = "/dining">Dining Hall Suggestions</a></li>
-				</ul>
-			</div>
-		</nav>
-
-		<div id = "food-input-api" class = "col-sm-6">
-		  <label for="food-input">Find a Food:</label>
-		  <input type="text" class="form-control" id="search-input">
-		  <button type="button" class="btn btn-default" id="food_search">Search</button>
-		  <hr>
-		  <label for="results">Click on a Result:</label>
-		  <div id = "results" class = "list-group"></div>
-		</div>
-
-		<div id = "food-input-manual" class = "col-sm-6">
-				<label for="food_name">Food Name:</label>
-				<input type="text" class="form-control" id="food_name">
-				<label for="calories">Calories (C per serving):</label>
-				<input type = "number" class = "form-control" id="calories">
-				<label for="protein">Protein (g per serving):</label>
-				<input type="number" class="form-control" id="protein">
-				<label for="fat">Fat (g per serving):</label>
-				<input type="number" class="form-control" id="fat">
-				<br>
-				<span id="serving-size"></span>
-				<br>
-				<label for="servings">Servings:</label>
-				<input type="number" class="form-control" id="servings">
-			<button type = "button" class = "btn btn-default" id = "food-input">Submit This Food!</button>
-		</div>
-		
-	  </div>
-	</body>
+        <div id = "food-input-manual" class = "col-sm-6">
+        		<label for="food_name">Food Name:</label>
+        		<input type="text" class="form-control" id="food_name">
+        		<label for="calories">Calories (C per serving):</label>
+        		<input type = "number" class = "form-control" id="calories">
+        		<label for="protein">Protein (g per serving):</label>
+        		<input type="number" class="form-control" id="protein">
+        		<label for="fat">Fat (g per serving):</label>
+        		<input type="number" class="form-control" id="fat">
+        		<br>
+        		<span id="serving-size"></span>
+        		<br>
+        		<label for="servings">Servings:</label>
+        		<input type="number" class="form-control" id="servings">
+        	<button type = "button" class = "btn btn-default" id = "food-input">Submit This Food!</button>
+        </div>
+        
+      </div>
+    </body>
 </html>
