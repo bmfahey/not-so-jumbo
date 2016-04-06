@@ -24,11 +24,11 @@
 
 	1. The dining hall menus (ingredients and nutritional information).
 
-	2. The nutrition database from FatSecret. 
+	2. The nutrition database from the USDA. 
 
 ### APIs
 	
-	1. FatSecret API: contains a nutrition database for foods not in the dining hall. Users can search for foods and calories,
+	1. USDA food database: contains a nutrition database for foods not in the dining hall. Users can search for foods and calories,
 	proteins, sugar, etc, can be added to their progress.
 
 	2. Google Charts API: displays charts for your progress in completing goals. 
