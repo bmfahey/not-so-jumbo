@@ -19,18 +19,47 @@ app.use(express.static(path));
 
 app.post('/submitFood', function(request, response) {
 	var id = request.body.id;
+	id = id.replace(/[^\w\s]/gi, '');
 	var timeStamp = request.body.timeStamp;
+	timeStamp = timeStamp.replace(/[^\w\s]/gi, '');
 	var protein = request.body.protein;
+	protein = protein.replace(/[^\w\s]/gi, '');
 	var fat = request.body.fat;
+	fat = fat.replace(/[^\w\s]/gi, '');
 	var calories = request.body.calories;
+	calories = calories.replace(/[^\w\s]/gi, '');
 	var toInsert = {
 		"id": id,
 		"timeStamp": timeStamp,
 		"protein": protein,
 		"fat": fat,
 		"calories": calories,
-	}
-	
+	};
+
+});
+//finds id in database to send back progress of the user
+app.post('/sendProgress', function(request, response) {
+	var id = request.body.id;
+	id = id.replace(/[^\w\s]/gi, '');
+	var toInsert = {
+		"id":id,
+	};
+});
+app.post('/submitGoal', function(request, response) {
+	var goal = request.body.goal;
+	goal = goal.replace(/[^\w\s]/gi, '');
+	var toInsert = {
+		"goal": goal,
+	};
+});
+//finds id in database to make suggestions for food being served at the 
+//dining hall
+app.post('/sendSuggest', function(request, response){
+	var id = request.body.id;
+	id = id.replace(/[^\w\s]/gi, '');
+	var toInsert = {
+		"id":id,
+	};
 });
 router.use(function (req,res,next) {
 	next();
