@@ -44,14 +44,32 @@ function buttonListen(){
     });
 
         $("#food-input").click(function() {
+            if ($("#servings").val() < 0 || $("#servings").val() == "") {
+                $("#servings").val() = 1;
+            }
+            if ($("#protein").val() < 0 || $("#protein").val() == "") {
+                $("#protein").val() = 0;
+            }
+            if ($("#calories").val() < 0 || $("#calories").val() == "") {
+                $("#calories").val() = 0;
+            }
+            if ($("#fat").val() < 0 || $("#fat").val() == "") {
+                $("fat").val() = 0;
+            }
             if (id_number == -1) {
                 $("#results").html("Please Log In to Facebook");
             }
             else {
-                console.log(id_number);
-                console.log("Protein " + $("#protein").val()*$("#servings").val());
-                console.log("Calories " + $("#calories").val()*$("#servings").val());
-                console.log("Fat " + $("#fat").val()*$("#servings").val());
+                now = new Date();
+                now = now.toString();
+                protein = $("#protein").val() * $("#servings").val();
+                fat = $("fat").val() * $("#servings").val();
+                calories = $("#calories").val() * $("#servings").val();
+                $.ajax({url: "/submitFood?id=" + id_number+"&timeStamp="+now+"&protein="+protein+"fat="+fat+"&calories="+calories+"",
+                    failure: function (result) {
+                        alert("Sorry, that didn't submit! Try again.");
+                    }
+                });
                 window.location.href="/progress";
             }
         });
@@ -123,4 +141,4 @@ function buttonListen(){
             $('#login').hide();
             $("#logout").show();
           });
-        } 
+        }
