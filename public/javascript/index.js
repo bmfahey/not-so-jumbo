@@ -60,7 +60,7 @@ function buttonListen(){
                 $("#results").html("Please Log In to Facebook");
             }
             else {
-                now - new Date();
+                now = new Date();
                 now = now.toString();
                 protein = $("#protein").val() * $("#servings").val();
                 fat = $("fat").val() * $("#servings").val();
