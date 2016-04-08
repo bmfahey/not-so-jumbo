@@ -2,7 +2,10 @@
         "name": "comp20-s2016-team2",
         "version": "0.0.1",
         "dependencies": {
-                "express": "latest"
+                "express": "latest",
+                "mongodb": "latest",
+                "body-parser": "latest",
+                "validator": "latest"
         },
         "scripts" : {
         	"start" : "node index.js"
