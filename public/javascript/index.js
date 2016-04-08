@@ -46,7 +46,7 @@ function buttonListen(){
         $("#food-input").click(function() {
             if ($("#servings").val() < 0 || $("#servings").val() == "") {
                 $("#servings").val() = 1;
-            }(
+            }
             if ($("#protein").val() < 0 || $("#protein").val() == "") {
                 $("#protein").val() = 0;
             }
