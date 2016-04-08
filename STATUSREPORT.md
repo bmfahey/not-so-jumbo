@@ -2,7 +2,7 @@
 
 ## April 6, 5015
 
-1. We serpated the javascript from the HTML files for a cleaner look.
+1. We separated the JavaScript from the HTML files for a cleaner look.
 Futhermore, we implemented the POST functions on the server side so that
 when the user submits the food, a POST request is sent to the server. We 
 also implemented the client side of the POST request and implemented data
