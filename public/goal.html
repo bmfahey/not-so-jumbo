@@ -3,13 +3,13 @@
 <head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    
+
     <meta charset = "utf-8">
 
     <title>Goal</title>
 
     <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
-    
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -23,7 +23,7 @@
 
     <!-- JavaScript for this page -->
     <script src="javascript/goal.js"></script>
-    
+
 </head>
 
 <body onload = "init()">
@@ -57,23 +57,20 @@
             </div>
         </nav>
 
-        <div class = "col-sm-4">
+        <div class = "col-sm-8">
             <h3>Update Weekly Goal:</h3>
-            <br><br>
+            <br>
             <div id = "update-goal">
-                <label for="selection">Please Select One:</label>
-                <div class="radio" id="selection">
-                    <label class = "radio-inline">
-                        <input type="radio" name="optradio" onclick = "set_value('calories')" checked="checked">Calories</label>
-                    <label class = "radio-inline">
-                        <input type="radio" name="optradio" onclick = "set_value('protein')">Protein</label>
-                    <label class = "radio-inline">
-                        <input type="radio" name="optradio" onclick = "set_value('fat')">Fat</label>
-                </div>
-                <label for="amount">Enter an Amount:</label>
-                <input type="number" class = "form-control" id="amount">
-                <br><br>
-                <button type = "button" class = "btn btn-default" id = "submit">Submit Goal</button>
+                <label for="fat">Fat: </label>
+				<input type="number" class="form-control" id="fat">
+				<label for="protein">Protein: </label>
+				<input type="number" class="form-control" id="protein">
+				<label for="calories">Calories: </label>
+				<input type="number" class = "form-control" id="calories">
+				<label for="email">If you'd like an email alert to change your goal in a week, enter your email here:</label>
+				<input type = "text" class = "form-control" id = "email">
+				<br>
+				<button type="button" class="btn btn-default" id="submit">Submit</button>
             </div>
         </div>
 
