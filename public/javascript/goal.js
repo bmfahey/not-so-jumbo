@@ -1,7 +1,7 @@
 var id_number = -1;
-var value = "calories";
+var email = "";
 
-function init(){
+function init() {
     $("#logout").hide();
 
     $("#amount").val(0);
@@ -14,25 +14,28 @@ function init(){
         $("#name").html("");
     });
 
-    $("#submit").click(function () {
+    $("#submit").click(function() {
         if (id_number == -1) {
             alert("Please Log In to Facebook");
         } else {
-            console.log(value);
-            console.log($("#amount").val());
-            window.location.href="/progress";
-        }
-    });
-    
-    $("#amount").keyup(function(event) {
-        if (event.which == 13) {
-            if (id_number == -1) {
-                alert("Please Log In to Facebook");
-            } else {
-                console.log(value);
-                console.log($("#amount").val());
-                window.location.href="/progress";
+            protein = $("#protein").val();
+            if (protein == NaN || protein < 0) {
+                protein = 0;
             }
+            fat = $("#fat").val();
+            if (fat == NaN || fat < 0) {
+                fat = 0;
+            }
+            calories = $("#calories").val();
+            if (calories == NaN || calories < 0) {
+                calories = 0;
+            }
+            $.ajax({
+                url: "/submitGoal?fb_id=" + id_number + "&email="+email+"&protein=" + protein + "fat=" + fat + "&calories=" + calories + "",
+                failure: function(result) {
+                    alert("Sorry, that didn't submit! Try again.");
+                }
+            });
         }
     });
 }
@@ -67,19 +70,21 @@ window.fbAsyncInit = function() {
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
+    js = d.createElement(s);
+    js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
-} (document, 'script', 'facebook-jssdk'));
+}(document, 'script', 'facebook-jssdk'));
 
 function login_success() {
     FB.api('/me', function(response) {
         id_number = response.id;
+        email = response.email;
         $("#name").html(response.name);
         $('#login').hide();
         $("#logout").show();
     });
-} 
+}
 
 function set_value(v) {
     value = v;
