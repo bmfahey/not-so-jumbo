@@ -1,5 +1,4 @@
 var id_number = -1;
-var email = "";
 
 function init() {
     $("#logout").hide();
@@ -30,8 +29,9 @@ function init() {
             if (calories == NaN || calories < 0) {
                 calories = 0;
             }
+            email = $("#email").val()
             $.ajax({
-                url: "/submitGoal?fb_id=" + id_number + "&email="+email+"&protein=" + protein + "fat=" + fat + "&calories=" + calories + "",
+                url: "/submitGoal?fb_id=" + id_number + "&email="+ email+"&protein=" + protein + "fat=" + fat + "&calories=" + calories + "",
                 failure: function(result) {
                     alert("Sorry, that didn't submit! Try again.");
                 }
@@ -79,7 +79,6 @@ window.fbAsyncInit = function() {
 function login_success() {
     FB.api('/me', function(response) {
         id_number = response.id;
-        email = response.email;
         $("#name").html(response.name);
         $('#login').hide();
         $("#logout").show();
