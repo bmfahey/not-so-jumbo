@@ -19,30 +19,29 @@ app.use(express.static(path));
 
 app.post('/submitFood', function(request, response) {
 	var fb_id = request.body.id;
-	fb_id = fb_id.replace(/[^\w\s]/gi, '');
+	//fb_id = fb_id.replace(/[^\w\s]/gi, '');
 	var timeStamp = Date();
 	var dow = timeStamp.getDay(); //0-6 sun-sat
-	var protein = request.body.protein;
-	protein = protein.replace(/[^\w\s]/gi, '');
-	var fat = request.body.fat;
-	fat = fat.replace(/[^\w\s]/gi, '');
-	var calories = request.body.calories;
-	calories = calories.replace(/[^\w\s]/gi, '');
+	var protein = parseFloat(request.body.protein);
+	//protein = protein.replace(/[^\w\s]/gi, '');
+	var fat = parseFloat(request.body.fat);
+	//fat = fat.replace(/[^\w\s]/gi, '');
+	var calories = parseFloat(request.body.calories);
+	//calories = calories.replace(/[^\w\s]/gi, '');
 	var currentProtein;
 	var currentCalories;
 	var currentFat;
 	db.collection('users', function(error, coll) {
 		if (coll.find({"FB_id":fb_id}).count() < 1) { //if user does not exist
 			initPerson(fb_id);
-			console.log
 		}
 		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
-			currentProtein = result[0].days[day].protein + protein;
-			currentCalories = result[0].days[day].calories + calories;
-			currentFat = result[0].days[day].fat + fat;
+			currentProtein = result[0].days[dow].protein + protein;
+			currentCalories = result[0].days[dow].calories + calories;
+			currentFat = result[0].days[dow].fat + fat;
 		});
 
-		coll.update({"FB_id":fb_id, "day": day}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
+		coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
 			if (error) {
 				response.send(500);
 			} else {
