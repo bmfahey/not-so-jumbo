@@ -20,7 +20,7 @@ app.use(express.static(path));
 app.post('/submitFood', function(request, response) {
 	var fb_id = request.body.id;
 	fb_id = id.replace(/[^\w\s]/gi, '');
-	var timeStamp = Date(); 
+	var timeStamp = Date();
 	var dow = timeStamp.getDay(); //0-6 sun-sat
 	var protein = request.body.protein;
 	protein = protein.replace(/[^\w\s]/gi, '');
@@ -44,7 +44,7 @@ app.post('/submitFood', function(request, response) {
 	});
 });
 function initPerson(fb_id) {
-	var toInsert() {
+	var toInsert = {
 		"FB_id": fb_id,
         "email": "",
         "goal": {
@@ -52,7 +52,7 @@ function initPerson(fb_id) {
             "protein": 0,
             "calories": 0,
             "time_stamp": “”,
-            "sent_email": false, 
+            "sent_email": false,
         },
         "days": [{"protein": 0, "fat": 0, "calories": 0},
                  {"protein": 0, "fat": 0, "calories": 0},
@@ -62,7 +62,7 @@ function initPerson(fb_id) {
                  {"protein": 0, "fat": 0, "calories": 0},
                  {"protein": 0, "fat": 0, "calories": 0}]
 
-	}
+	};
 	db.collection('users', function(error, coll) {
 		var id = coll.insert(toInsert, function(error, saved){
 			if (error) {
@@ -70,7 +70,7 @@ function initPerson(fb_id) {
 			} else {
 				response.send(200);
 			}
-		})
+		});
 	});
 }
 //finds id in database to send back progress of the user
@@ -82,7 +82,6 @@ app.post('/sendProgress', function(request, response) {
 	};
 });
 app.post('/submitGoal', function(request, response) {
-		var NameOfDB = "users" "------------------MAKE Correct-----------";
         var id = request.body.fb_id;
         var email = request.body.email;
         var calories = request.body.calories;
@@ -106,7 +105,7 @@ app.post('/submitGoal', function(request, response) {
                 });
         });
 });
-//finds id in database to make suggestions for food being served at the 
+//finds id in database to make suggestions for food being served at the
 //dining hall
 app.post('/sendSuggest', function(request, response){
 	var id = request.body.id;
