@@ -4,11 +4,13 @@ var bodyParser = require('body-parser');
 var validator = require('validator');
 
 var app = express();
-var router = express.Router();
+
 var path = __dirname + "/public/";
 
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+var router = express.Router();
 
 var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||'mongodb://localhost/not-so-jumbo';
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
