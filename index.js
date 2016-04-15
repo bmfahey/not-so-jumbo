@@ -10,8 +10,6 @@ var path = __dirname + "/public/";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var router = express.Router();
-
 var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||'mongodb://localhost/not-so-jumbo';
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
@@ -142,6 +140,9 @@ app.post('/sendSuggest', function(request, response){
 		"id":id,
 	};
 });
+
+var router = express.Router();
+
 router.use(function (request,response,next) {
 	next();
 });
