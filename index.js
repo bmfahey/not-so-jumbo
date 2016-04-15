@@ -19,6 +19,7 @@ app.use(express.static(path));
 
 app.post('/submitFood', function(request, response) {
 	var fb_id = request.body.id;
+	console.log("id is" + fb_id);
 	//fb_id = fb_id.replace(/[^\w\s]/gi, '');
 	var timeStamp = new Date();
 	var dow = timeStamp.getDay(); //0-6 sun-sat
