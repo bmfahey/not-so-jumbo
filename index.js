@@ -19,7 +19,6 @@ app.use(express.static(path));
 
 app.post('/submitFood', function(request, response) {
 	var fb_id = request.body.id;
-	console.log("id is" + fb_id);
 	//fb_id = fb_id.replace(/[^\w\s]/gi, '');
 	var timeStamp = new Date();
 	var dow = timeStamp.getDay(); //0-6 sun-sat
@@ -34,7 +33,6 @@ app.post('/submitFood', function(request, response) {
 	var currentFat;
 	db.collection('users', function(error, coll) {
 		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
-			console.log(result);
 			if (result.length < 1) {
 				initPerson(fb_id, protein, calories, fat, dow);
 			} else {
@@ -43,6 +41,7 @@ app.post('/submitFood', function(request, response) {
 					currentCalories = result[0].days[dow].calories + calories;
 					currentFat = result[0].days[dow].fat + fat;
 				});
+				console.log("current fat is "+currentFat);
 				coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
 					if (error) {
 						response.send(500);
