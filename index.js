@@ -10,7 +10,7 @@ var path = __dirname + "/public/";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||'mongodb://localhost/not-so-jumbo';
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	db = databaseConnection;
@@ -28,18 +28,26 @@ app.post('/submitFood', function(request, response) {
 	fat = fat.replace(/[^\w\s]/gi, '');
 	var calories = request.body.calories;
 	calories = calories.replace(/[^\w\s]/gi, '');
-	var update = {
-		"FB_id": fb_id,
-		$set: {"days": {"dow": dow,  "protein": protein, "fat": fat, "calories": calories, "date_edited": dayOfMonth}}
-	};
+	var currentProtein;
+	var currentCalories;
+	var currentFat;
 	db.collection('users', function(error, coll) {
 		if (coll.find({"FB_id":fb_id}).count() < 1) { //if user does not exist
 			initPerson(fb_id);
+			console.log
 		}
-		coll.find({"FD_id":fb_id}).toArray(function (error, result) {
-			result[0].days[day].protein += protein;
-			result[0].days[day].calories += calories;
-			result[0].days[day].fat += fat;
+		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
+			currentProtein = result[0].days[day].protein + protein;
+			currentCalories = result[0].days[day].calories + calories;
+			currentFat = result[0].days[day].fat + fat;
+		});
+
+		coll.update({"FB_id":fb_id, "day": day}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
+			if (error) {
+				response.send(500);
+			} else {
+				response.send(200);
+			}
 		});
 	});
 });
@@ -54,13 +62,13 @@ function initPerson(fb_id) {
             "time_stamp": "",
             "sent_email": false,
         },
-        "days": [{"protein": 0, "fat": 0, "calories": 0},
-                 {"protein": 0, "fat": 0, "calories": 0},
-                 {"protein": 0, "fat": 0, "calories": 0},
-                 {"protein": 0, "fat": 0, "calories": 0},
-                 {"protein": 0, "fat": 0, "calories": 0},
-                 {"protein": 0, "fat": 0, "calories": 0},
-                 {"protein": 0, "fat": 0, "calories": 0}]
+        "days": [{"day": 0, "protein": 0, "fat": 0, "calories": 0},
+                 {"day": 1, "protein": 0, "fat": 0, "calories": 0},
+                 {"day": 2, "protein": 0, "fat": 0, "calories": 0},
+                 {"day": 3, "protein": 0, "fat": 0, "calories": 0},
+                 {"day": 4, "protein": 0, "fat": 0, "calories": 0},
+                 {"day": 5, "protein": 0, "fat": 0, "calories": 0},
+                 {"day": 6, "protein": 0, "fat": 0, "calories": 0}]
 
 	};
 	db.collection('users', function(error, coll) {
