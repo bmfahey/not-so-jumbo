@@ -39,9 +39,9 @@ app.post('/submitFood', function(request, response) {
 				coll.find({"FB_id":fb_id}).toArray(function (error, result) {
 					console.log("what should be added: " + protein);
 					console.log("What is should be added to: " + result[0].days[dow].protein);
-					currentProtein = parseInt(result[0].days[dow].protein) + protein;
-					currentCalories = parseInt(result[0].days[dow].calories) + calories;
-					currentFat = parseInt(result[0].days[dow].fat) + fat;
+					currentProtein = parseFloat(result[0].days[dow].protein) + protein;
+					currentCalories = parseFloat(result[0].days[dow].calories) + calories;
+					currentFat = parseFloat(result[0].days[dow].fat) + fat;
 					console.log("current fat is "+ currentFat);
 					coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
 						if (error) {
