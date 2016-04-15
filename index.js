@@ -35,7 +35,7 @@ app.post('/submitFood', function(request, response) {
 		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
 			console.log(result);
 			if (result.length < 1) {
-				initPerson(fb_id, protein, calories, fat);
+				initPerson(fb_id, protein, calories, fat, dow);
 			} else {
 				coll.find({"FB_id":fb_id}).toArray(function (error, result) {
 					currentProtein = result[0].days[dow].protein + protein;
@@ -53,7 +53,7 @@ app.post('/submitFood', function(request, response) {
 		}); //if user does not exist
 	});
 });
-function initPerson(fb_id, protein, calories, fat) {
+function initPerson(fb_id, protein, calories, fat, dow) {
 	var toInsert = {
 		"FB_id": fb_id,
         "email": "",
