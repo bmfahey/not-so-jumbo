@@ -65,7 +65,7 @@ function buttonListen(){
                 protein = $("#protein").val() * $("#servings").val();
                 fat = $("fat").val() * $("#servings").val();
                 calories = $("#calories").val() * $("#servings").val();
-                $.ajax({url: "/submitFood?id=" + id_number+"&timeStamp="+now+"&protein="+protein+"fat="+fat+"&calories="+calories+"",
+                $.ajax({type:"POST",url: "/submitFood?id=" + id_number+"&timeStamp="+now+"&protein="+protein+"fat="+fat+"&calories="+calories+"",
                     failure: function (result) {
                         alert("Sorry, that didn't submit! Try again.");
                     }
