@@ -34,13 +34,13 @@ app.post('/submitFood', function(request, response) {
 	db.collection('users', function(error, coll) {
 		if (coll.find({"FB_id":fb_id}).count() < 1) { //if user does not exist
 			initPerson(fb_id);
+		} else {
+			coll.find({"FB_id":fb_id}).toArray(function (error, result) {
+				currentProtein = result[0].days[dow].protein + protein;
+				currentCalories = result[0].days[dow].calories + calories;
+				currentFat = result[0].days[dow].fat + fat;
+			});
 		}
-		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
-			currentProtein = result[0].days[dow].protein + protein;
-			currentCalories = result[0].days[dow].calories + calories;
-			currentFat = result[0].days[dow].fat + fat;
-		});
-
 		coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
 			if (error) {
 				response.send(500);
@@ -78,6 +78,11 @@ function initPerson(fb_id) {
 				response.send(200);
 			}
 		});
+		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
+				currentProtein = result[0].days[dow].protein + protein;
+				currentCalories = result[0].days[dow].calories + calories;
+				currentFat = result[0].days[dow].fat + fat;
+			});
 	});
 }
 //finds id in database to send back progress of the user
