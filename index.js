@@ -10,7 +10,7 @@ var path = __dirname + "/public/";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||'mongodb://localhost/not-so-jumbo';
+var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||'mongodb://localhost/not-so-jumbo';
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	db = databaseConnection;
@@ -78,20 +78,23 @@ function initPerson(fb_id, protein, calories, fat) {
 			if (error) {
 				response.send(500);
 			} else {
-				response.send(200);
-			}
-		});
-		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
-				currentProtein = result[0].days[dow].protein + protein;
-				currentCalories = result[0].days[dow].calories + calories;
-				currentFat = result[0].days[dow].fat + fat;
-		});
-		coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
-					if (error) {
+				coll.find({"FB_id":fb_id}).toArray(function (error, result) {
+					if(error){
 						response.send(500);
-					} else {
-						response.send(200);
+					}else{
+						currentProtein = result[0].days[dow].protein + protein;
+						currentCalories = result[0].days[dow].calories + calories;
+						currentFat = result[0].days[dow].fat + fat;
+						coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
+							if (error) {
+								response.send(500);
+							} else {
+								response.send(200);
+							}
+						});
 					}
+				});
+			}
 		});
 	});
 }
