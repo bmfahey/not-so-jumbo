@@ -34,7 +34,7 @@ app.post('/submitFood', function(request, response) {
 	db.collection('users', function(error, coll) {
 		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
 			console.log(result);
-			if (result == "undefined") {
+			if (result.length() < 1) {
 				initPerson(fb_id, protein, calories, fat);
 			} else {
 				coll.find({"FB_id":fb_id}).toArray(function (error, result) {
