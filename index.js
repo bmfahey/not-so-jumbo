@@ -36,10 +36,10 @@ app.post('/submitFood', function(request, response) {
 		if (coll.find({"FB_id":fb_id}).count() < 1) { //if user does not exist
 			initPerson(fb_id);
 		}
-		coll.find({"FD_id":fb_id}, function (error, result) {
-			result.days[day].protein += protein;
-			result.days[day].calories += calories;
-			result.days[day].fat += fat;
+		coll.find({"FD_id":fb_id}).toArray(function (error, result) {
+			result[0].days[day].protein += protein;
+			result[0].days[day].calories += calories;
+			result[0].days[day].fat += fat;
 		});
 	});
 });
