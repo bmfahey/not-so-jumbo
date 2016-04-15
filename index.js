@@ -141,28 +141,24 @@ app.post('/sendSuggest', function(request, response){
 	};
 });
 
-var router = express.Router();
-
 router.use(function (request,response,next) {
 	next();
 });
 
-router.get("/",function(request,response) {
+app.get("/",function(request,response) {
 	response.sendFile(path+"index.html");
 });
 
-router.get("/progress", function (request,response) {
+app.get("/progress", function (request,response) {
 	response.sendFile(path+"progress.html");
 });
 
-router.get("/goal", function(request,response) {
+app.get("/goal", function(request,response) {
 	response.sendFile(path+"goal.html");
 });
 
-router.get("/dining", function(request,response) {
+app.get("/dining", function(request,response) {
 	response.sendFile(path+"dining.html");
 });
-
-app.use("/",router);
 
 app.listen(process.env.PORT || 8888);
