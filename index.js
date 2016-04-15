@@ -7,8 +7,8 @@ var app = express();
 var router = express.Router();
 var path = __dirname + "/public/";
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended: true}));
 
 var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||'mongodb://localhost/not-so-jumbo';
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
