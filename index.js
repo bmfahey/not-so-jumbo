@@ -41,15 +41,16 @@ app.post('/submitFood', function(request, response) {
 					currentProtein = result[0].days[dow].protein + protein;
 					currentCalories = result[0].days[dow].calories + calories;
 					currentFat = result[0].days[dow].fat + fat;
+					console.log("current fat is "+currentFat);
+					coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
+						if (error) {
+							response.send(500);
+						} else {
+							response.send(200);
+						}
+					});
 				});
-				console.log("current fat is "+currentFat);
-				coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
-					if (error) {
-						response.send(500);
-					} else {
-						response.send(200);
-					}
-				});
+
 			}
 		}); //if user does not exist
 	});
