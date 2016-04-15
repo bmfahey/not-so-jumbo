@@ -37,7 +37,7 @@ app.post('/submitFood', function(request, response) {
 				initPerson(fb_id, protein, calories, fat, dow);
 			} else {
 				coll.find({"FB_id":fb_id}).toArray(function (error, result) {
-					console.log("result at zero is "  + result[0]);
+					console.log("what should be added: "  + result[0].days[dow].protein);
 					currentProtein = result[0].days[dow].protein + protein;
 					currentCalories = result[0].days[dow].calories + calories;
 					currentFat = result[0].days[dow].fat + fat;
