@@ -54,7 +54,7 @@ function buttonListen(){
                 $("#calories").val() = 0;
             }
             if ($("#fat").val() < 0 || $("#fat").val() == "") {
-                $("fat").val() = 0;
+                $("#fat").val() = 0;
             }
             if (id_number == -1) {
                 $("#results").html("Please Log In to Facebook");
@@ -63,7 +63,7 @@ function buttonListen(){
                 now = new Date();
                 now = now.toString();
                 protein = $("#protein").val() * $("#servings").val();
-                fat = $("fat").val() * $("#servings").val();
+                fat = $("#fat").val() * $("#servings").val();
                 calories = $("#calories").val() * $("#servings").val();
                 $.ajax({type:"POST",url: "/submitFood?id=" + id_number+"&protein="+protein+"fat="+fat+"&calories="+calories+"",
                     failure: function (result) {
