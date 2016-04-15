@@ -65,10 +65,11 @@ function buttonListen(){
                 protein = $("#protein").val() * $("#servings").val();
                 fat = $("#fat").val() * $("#servings").val();
                 calories = $("#calories").val() * $("#servings").val();
-                $.ajax({type:"POST",url: "/submitFood?id=" + id_number+"&protein="+protein+"fat="+fat+"&calories="+calories+"",
+                $.ajax({type:"POST",url: "/submitFood"
                     failure: function (result) {
                         alert("Sorry, that didn't submit! Try again.");
-                    }
+                    },
+                    data: "id=" + id_number+"&protein="+protein+"fat="+fat+"&calories="+calories+""
                 });
                 window.location.href="/progress";
             }
