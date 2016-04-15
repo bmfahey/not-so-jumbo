@@ -51,7 +51,7 @@ function initPerson(fb_id) {
             "fat": 0,
             "protein": 0,
             "calories": 0,
-            "time_stamp": “”,
+            "time_stamp": "",
             "sent_email": false,
         },
         "days": [{"protein": 0, "fat": 0, "calories": 0},
@@ -114,7 +114,7 @@ app.post('/sendSuggest', function(request, response){
 		"id":id,
 	};
 });
-router.use(function (req,res,next) {
+router.use(function (request,response,next) {
 	next();
 });
 
