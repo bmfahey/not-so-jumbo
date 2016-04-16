@@ -28,9 +28,9 @@ app.post('/submitFood', function(request, response) {
 	//fat = fat.replace(/[^\w\s]/gi, '');
 	var calories = parseFloat(request.body.calories);
 	//calories = calories.replace(/[^\w\s]/gi, '');
-	//var currentProtein;
-	//var currentCalories;
-	//var currentFat;
+	var currentProtein = 0;
+	var currentCalories = 0;
+	var currentFat = 0;
 	db.collection('users', function(error, coll) {
 		coll.find({"FB_id":fb_id}).toArray(function (error, result) {
 			if (result.length < 1) {
@@ -40,10 +40,10 @@ app.post('/submitFood', function(request, response) {
 					console.log("what should be added: " + protein);
 					console.log("What is should be added to: " + result[0].days[dow].protein);
 					console.log("This is what happens when you add them: " + (result[0].days[dow].protein + protein));
-					var currentProtein = parseFloat(result[0].days[dow].protein) + protein;
-					var currentCalories = parseFloat(result[0].days[dow].calories) + calories;
-					var currentFat = parseFloat(result[0].days[dow].fat) + fat;
-					console.log("current fat is "+ currentFat);
+					currentProtein = parseFloat(result[0].days[dow].protein) + protein;
+					currentCalories = parseFloat(result[0].days[dow].calories) + calories;
+					currentFat = parseFloat(result[0].days[dow].fat) + fat;
+					console.log("current fat is "+ currentProtein);
 					coll.update({"FB_id":fb_id, "day": dow}, {$set: {"days.$.protein": currentProtein, "days.$.fat": currentFat, "days.$.calories": currentCalories}}, function(error, result) {
 						if (error) {
 							response.send(500);
