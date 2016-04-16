@@ -40,6 +40,7 @@ app.post('/submitFood', function(request, response) {
 					console.log("what should be added: " + fat);
 					console.log("What is should be added to: " + result[0].days[dow].fat);
 					console.log("This is what happens when you add them: " + (result[0].days[dow].fat + fat));
+					console.log("fat: "+fat + " protein: "+ protein+ " calories: " + calories);
 					currentProtein = result[0].days[dow].protein + protein;
 					currentCalories = result[0].days[dow].calories + calories;
 					currentFat = result[0].days[dow].fat + fat;
