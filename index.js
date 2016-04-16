@@ -39,6 +39,7 @@ app.post('/submitFood', function(request, response) {
 				coll.find({"FB_id":fb_id}).toArray(function (error, result) {
 					console.log("what should be added: " + protein);
 					console.log("What is should be added to: " + result[0].days[dow].protein);
+					console.log("This is what happens when you add them: " + (result[0].days[dow].protein + protein));
 					var currentProtein = parseFloat(result[0].days[dow].protein) + protein;
 					var currentCalories = parseFloat(result[0].days[dow].calories) + calories;
 					var currentFat = parseFloat(result[0].days[dow].fat) + fat;
