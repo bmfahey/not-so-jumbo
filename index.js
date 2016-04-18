@@ -41,9 +41,9 @@ app.post('/submitFood', function(request, response) {
 					currentCalories = result[0].days[dow].calories + calories;
 					currentFat = result[0].days[dow].fat + fat;
 					var update = { $set : {} };
-					update.$set[days[dow].protein] = currentProtein;
-					update.$set[days[dow].fat] = currentFat;
-					update.$set[days[dow].calories] = currentCalories;
+					update.$set[result[0]days[dow].protein] = currentProtein;
+					update.$set[result[0]days[dow].fat] = currentFat;
+					update.$set[result[0]days[dow].calories] = currentCalories;
 					coll.update({"FB_id":fb_id}, update, function(error, result) {
 						if (error) {
 							response.send(500);
