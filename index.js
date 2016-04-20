@@ -128,7 +128,7 @@ app.post('/submitGoal', function(request, response) {
                 "time_stamp": new Date()
         };
         db.collection("users", function(error, col){
-                col.update({"FB_id":id},{$set: {goals:toInsert}},{"upsert":true},function(error, count, status) {
+                col.update({"FB_id":id},{$set: {"goals":toInsert}},{"upsert":true},function(error, count, status) {
                         if(error){
                                 response.send(500);
                         } else {
