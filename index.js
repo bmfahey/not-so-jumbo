@@ -32,7 +32,7 @@ app.post('/submitFood', function(request, response) {
 	var currentCalories = 0;
 	var currentFat = 0;
 	db.collection('users', function(error, coll) {
-		db.collection('users').find({"FB_id":fb_id}).toArray(function (error, result) {
+		db.collection('users')t .find({"FB_id":fb_id}).toArray(function (error, result) {
 			if (result.length < 1) {
 				initPerson(fb_id, protein, calories, fat, dow);
 			}
@@ -43,7 +43,7 @@ app.post('/submitFood', function(request, response) {
 					currentFat = result[0].days[dow].fat + fat;
 					result[0].days[dow].fat = currentFat;
 					result[0].days[dow].protein = currentProtein;
-					result[0].days[dow].calories = currentCalories.
+					result[0].days[dow].calories = currentCalories;
 					db.collection('users').update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
 						if (error) {
 							response.send(500);
@@ -89,7 +89,7 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 						currentFat = result[0].days[dow].fat + fat;
 						result[0].days[dow].fat = currentFat;
 						result[0].days[dow].protein = currentProtein;
-						result[0].days[dow].calories = currentCalories.
+						result[0].days[dow].calories = currentCalories;
 						coll.update({"FB_id":fb_id}, {$set: result}, function(error, result) {
 							if (error) {
 								response.send(500);
