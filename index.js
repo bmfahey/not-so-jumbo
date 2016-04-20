@@ -44,7 +44,7 @@ app.post('/submitFood', function(request, response) {
 					result[0].days[dow].fat = currentFat;
 					result[0].days[dow].protein = currentProtein;
 					result[0].days[dow].calories = currentCalories.
-					db.collection('users').update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
+					coll.update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
 						if (error) {
 							response.send(500);
 						} else {
