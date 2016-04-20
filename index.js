@@ -40,11 +40,10 @@ app.post('/submitFood', function(request, response) {
 					currentProtein = result[0].days[dow].protein + protein;
 					currentCalories = result[0].days[dow].calories + calories;
 					currentFat = result[0].days[dow].fat + fat;
-					var update = {};
-					update[$.days.dow.protein] = currentProtein;
-					update[$.days.dow.fat] = currentFat;
-					update[$.days.dow.calories] = currentCalories;
-					coll.update({"FB_id":fb_id}, {$set: update}, function(error, result) {
+					result[0].days[dow].fat = currentFat;
+					result[0].days[dow].protein = currentProtein;
+					result[0].days[dow].calories = currentCalories.
+					coll.update({"FB_id":fb_id}, {$set: result}, function(error, result) {
 						if (error) {
 							response.send(500);
 						} else {
@@ -87,7 +86,17 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 						currentProtein = result[0].days[dow].protein + protein;
 						currentCalories = result[0].days[dow].calories + calories;
 						currentFat = result[0].days[dow].fat + fat;
-						coll.update({"FB_id":fb_id}, {$set: {"days.$$dow.protein": currentProtein, "days.$$dow.fat": currentFat, "days.$$dow.calories": currentCalories}}, function(error, result) {
+						result[0].days[dow].fat = currentFat;
+						result[0].days[dow].protein = currentProtein;
+						result[0].days[dow].calories = currentCalories.
+						coll.update({"FB_id":fb_id}, {$set: result}, function(error, result) {
+							if (error) {
+								response.send(500);
+							} else {
+								response.send(200);
+							}
+						});
+						//coll.update({"FB_id":fb_id}, {$set: {"days.$$dow.protein": currentProtein, "days.$$dow.fat": currentFat, "days.$$dow.calories": currentCalories}}, function(error, result) {
 						});
 					}
 				});
