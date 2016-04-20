@@ -24,3 +24,8 @@ and the server.
 
 Also, we updated README file as we are no longer using FatSecret but the 
 USDA food database as one of our API's. 
+
+Comments by Ming:
+1. "We want to be able to accomplish data persistence and be able to send data back and forth between the client and the server" - a good goal
+2. "Finally, we developed a theoretical plan for how we will store the persistant
+data in Mongo when we get that part running." --definitely outline the data that you need to read/write on paper first before doing any implementation.
