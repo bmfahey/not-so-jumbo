@@ -97,7 +97,7 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 							}
 						});
 						//coll.update({"FB_id":fb_id}, {$set: {"days.$$dow.protein": currentProtein, "days.$$dow.fat": currentFat, "days.$$dow.calories": currentCalories}}, function(error, result) {
-						});
+						//});
 					}
 				});
 			}
