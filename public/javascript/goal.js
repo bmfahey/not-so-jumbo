@@ -31,11 +31,14 @@ function init() {
             }
             email = $("#email").val()
             $.ajax({
-                url: "/submitGoal?fb_id=" + id_number + "&email="+ email+"&protein=" + protein + "fat=" + fat + "&calories=" + calories + "",
+                type:"POST",
+                data: "fb_id=" + id_number +"&email="+email+"&protein="+protein+"&fat="+fat+"&calories=" +calories,
+                url: "/submitGoal",
                 failure: function(result) {
                     alert("Sorry, that didn't submit! Try again.");
                 }
             });
+            window.location.href="/progress";
         }
     });
 }
