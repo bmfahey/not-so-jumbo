@@ -133,9 +133,9 @@ app.post('/sendProgress', function(request, response) {
 
 						if(diff_days < 7) { //goal is not outdated by week
 							for(var i=goal_dow; i<(goal_dow+diff_days); i++) {
-								prog_fat += result[0].days[i%7].fat;
-								prog_prot += result[0].days[i%7].protein;
-								prog_cal += result[0].days[i%7].calories;
+								prog_fat += result[0].days[i%6].fat;
+								prog_prot += result[0].days[i%6].protein;
+								prog_cal += result[0].days[i%6].calories;
 							}
 
 							if(result[0].goal.fat !== 0)
