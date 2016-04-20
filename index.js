@@ -32,7 +32,7 @@ app.post('/submitFood', function(request, response) {
 	var currentCalories = 0;
 	var currentFat = 0;
 	db.collection('users', function(error, coll) {
-		db.collection('users')t .find({"FB_id":fb_id}).toArray(function (error, result) {
+		db.collection('users').find({"FB_id":fb_id}).toArray(function (error, result) {
 			if (result.length < 1) {
 				initPerson(fb_id, protein, calories, fat, dow);
 			}
