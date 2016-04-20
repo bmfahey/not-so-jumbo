@@ -38,6 +38,7 @@ function init() {
                     alert("Sorry, that didn't submit! Try again.");
                 }
             });
+            window.location.href="/progress";
         }
     });
 }
