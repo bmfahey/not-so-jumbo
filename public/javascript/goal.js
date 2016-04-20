@@ -32,7 +32,7 @@ function init() {
             email = $("#email").val()
             $.ajax({
                 type:"POST",
-                data: "fb_id=" + id +"&email="+email+"&protein="+protein+"&fat="+fat+"&calories=" +calories,
+                data: "fb_id=" + id_number +"&email="+email+"&protein="+protein+"&fat="+fat+"&calories=" +calories,
                 url: "/submitGoal",
                 failure: function(result) {
                     alert("Sorry, that didn't submit! Try again.");
