@@ -91,11 +91,11 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 						result[0].days[dow].protein = currentProtein;
 						result[0].days[dow].calories = currentCalories;
 						coll.update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
-							if (error) {
-								response.send(500);
-							} else {
-								response.send(200);
-							}
+							//if (error) {
+							//	response.send(500);
+							//} else {
+							//	response.send(200);
+							//}
 						});
 						//coll.update({"FB_id":fb_id}, {$set: {"days.$$dow.protein": currentProtein, "days.$$dow.fat": currentFat, "days.$$dow.calories": currentCalories}}, function(error, result) {
 						//});
