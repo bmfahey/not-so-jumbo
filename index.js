@@ -109,9 +109,48 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 app.post('/sendProgress', function(request, response) {
 	var id = request.body.id;
 	id = id.replace(/[^\w\s]/gi, '');
-	var toInsert = {
-		"FB_id":id,
-	};
+	var current_time = new Date();
+
+
+	db.collection("users", function(error, col){
+		if(error) {
+		} else {
+			find({"FB_id":id}).toArray(function(err, result) {
+				if(err) {
+				} else {
+					var goal_time = result[0].goal.time_stamp;
+					var prog_fat = 0;
+					var prog_cal = 0;
+					var prog_prot = 0;
+
+					if(goal_time !== "")
+					{
+						//find diff in days
+						var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+						var diff_days = Math.round(Math.abs((current_time.getTime() - goal_time.getTime())/(oneDay)));
+						var current_dow = current_time.getDay();
+						var goal_dow = goal_time.getDay(); //dow goal was set
+
+						if(diff_days < 7) { //goal is not outdated by week
+							for(var i=goal_dow; i<(goal_dow+diff_days); i++) {
+								prog_fat += result[0].days[i%7].fat;
+								prog_prot += result[0].days[i%7].protein;
+								prog_cal += result[0].days[i%7].calories;
+							}
+
+							if(result[0].goal.fat !== 0)
+								prog_fat = prog_fat/result[0].goal.fat;
+							if(result[0].goal.calories !== 0)
+								prog_cal = prog_cal/result[0].goal.calories;
+							if(result[0].goal.protein !== 0)
+								prog_prot = prog_prot/result[0].goal.protein;
+						}
+					}
+					response.send("{"progress": {"fat": prog_fat}, {"protein": prog_prot}, {"calories": prog_cal}}");
+				}
+			});
+		}
+	});
 });
 app.post('/submitGoal', function(request, response) {
         var id = request.body.fb_id;
@@ -128,7 +167,7 @@ app.post('/submitGoal', function(request, response) {
                 "time_stamp": new Date()
         };
         db.collection("users", function(error, col){
-                col.update({"FB_id":id},{$set: {"goals":toInsert}},{"upsert":true},function(error, count, status) {
+                col.update({"FB_id":id},{$set: {"goal":toInsert}},{"upsert":true},function(error, count, status) {
                         if(error){
                                 response.send(500);
                         } else {
