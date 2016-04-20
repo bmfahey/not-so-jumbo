@@ -3,13 +3,13 @@
 <head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    
+
     <meta charset = "utf-8">
 
     <title>Progress</title>
 
     <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
-    
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -23,7 +23,7 @@
 
     <!-- JavaScript for this page -->
     <script src="javascript/progress.js"></script>
-    
+
 </head>
 
 <body onload = "init()">
@@ -61,9 +61,17 @@
             <label for="goal-display">Your Goal:</label>
             <input type="text" class="form-control" id="goal-display" val = "Please Log In to Facebook" disabled>
             <br><br><br><br>
-            <label for="progress">Progress:</label>
+            <label for="progress">Progress for Calories:</label>
             <div class = "progress">
-                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div> 
+                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
+            </div>
+			<label for="progress">Progress for Protein:</label>
+            <div class = "progress">
+                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
+            </div>
+			<label for="progress">Progress for Fat:</label>
+            <div class = "progress">
+                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
             </div>
         </div>
         <div id = "graph" class = "col-small-8">
