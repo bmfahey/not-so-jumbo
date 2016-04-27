@@ -5,7 +5,8 @@
                 "express": "latest",
                 "mongodb": "latest",
                 "body-parser": "latest",
-                "validator": "latest"
+                "validator": "latest",
+                "node-crontab": "latest"
         },
         "scripts" : {
         	"start" : "node server.js"
