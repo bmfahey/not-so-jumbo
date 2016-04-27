@@ -237,7 +237,7 @@ router.get("/dining", function(request,response) {
 
 app.use("/",router);
 
-deleteThisDay(day){
+function deleteThisDay(day){
         db.collection('users', function(error, coll) {
                 db.collection('users').find().toArray(function (error, result) {
                         for(i = 0; i < result.length; i++){
