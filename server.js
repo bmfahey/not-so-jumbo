@@ -239,7 +239,7 @@ app.use("/",router);
 
 function deleteThisDay(day){
         db.collection('users', function(error, coll) {
-                db.collection('users').find().toArray(function (error, result) {
+                coll.find().toArray(function (error, result) {
                         for(i = 0; i < result.length; i++){
                                 result[i].days[day].fat = 0;
                                 result[i].days[day].protein = 0;
