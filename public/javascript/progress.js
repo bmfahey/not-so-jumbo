@@ -10,6 +10,23 @@ function init(){
         $("#login").show();
         $("#name").html("");
     });
+
+    $.ajax({
+        type:"POST",
+        data: "id=" + id_number,
+        url: "/sendProgress",
+        failure: function(result) {
+            alert("Sorry, that didn't submit! Try again.");
+        }
+        success: function(response) {
+            result = JSON.parse(response);
+            var fat = result.progress.fat;
+            var protein = result.progress.protein;
+            var calories = result.progress.calories;
+            $("#fatprog").width(fat);
+            $("#fatprog").value(fat);
+        }
+    });
 }
 
 function statusChange(response) {
@@ -54,4 +71,4 @@ function login_success() {
         $('#login').hide();
         $("#logout").show();
     });
-} 
+}
