@@ -244,13 +244,7 @@ function deleteThisDay(day){
                                 result[i].days[day].fat = 0;
                                 result[i].days[day].protein = 0;
                                 result[i].days[day].calories = 0;
-                                db.collection('users').update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
-                                        if (error) {
-                                                response.send(500);
-                                        } else {
-                                                response.send(200);
-                                        }
-                                });
+                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]}});
                         }
                 }); //if user does not exist
         });
