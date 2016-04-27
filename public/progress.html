@@ -29,8 +29,8 @@
 <body onload = "init()">
     <div class="container-fluid">
         <div class = "page-header">
-            <span id = "title">Not So Jumbo - Your Progress</span>
-            <img src = "./images/elephant.png" alt = "Elephant Picture">
+			<img src = "./images/elephant.png" alt = "Elephant Picture">
+			<span id = "title">Not So Jumbo - Your Progress</span>
             <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
             </fb:login-button>
             <span id = "top-right">
@@ -52,12 +52,13 @@
                     <li><a href="/">Home</a></li>
                     <li><a href = "#">My Progress</a></li>
                     <li><a href = "/goal">My Goal</a></li>
-                    <li><a href = "/dining">Dining Hall Suggestions</a></li>
+					<li><a href = "/history">Weekly History</a></li>
+                    <li><a href = "/dining">Dining Hall Menus</a></li>
                 </ul>
             </div>
         </nav>
 
-        <div id = "goal" class="col-small-4">
+        <div id = "goal" class="col-small-8">
             <label for="goal-display">Your Goal:</label>
             <input type="text" class="form-control" id="goal-display" val = "Please Log In to Facebook" disabled>
             <br><br><br><br>
@@ -73,8 +74,6 @@
             <div class = "progress">
                 <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
             </div>
-        </div>
-        <div id = "graph" class = "col-small-8">
         </div>
     </div>
 </body>
