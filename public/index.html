@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <meta charset = "utf-8">
+
+    <title>Not So Jumbo</title>
+
+    <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="javascript/index.js"></script>
+
+    </head>
+
+    <body onload = "buttonListen()">
+      <div class = "container-fluid">
+        <div class = "page-header">
+            <img src = "./images/elephant.png" alt = "Elephant Picture">
+            <span id = "title">Not So Jumbo</span>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
+            </fb:login-button>
+            <span id = "top-right">
+              <span id = "name"> </span>
+              <button type="button" class="btn btn-default" id='logout'>Logout</button>
+            </span>
+        </div>
+
+        <nav class = "navbar navbar-default">
+        	<div class="navbar-header">
+        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+        		<span class = "icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class = "icon-bar"></span>
+        		</button>
+        	</div>
+        	<div class="collapse navbar-collapse" id="navBar">
+        		<ul class="nav navbar-nav">
+        			<li><a href="#">Home</a></li>
+        			<li><a href = "/progress">My Progress</a></li>
+        			<li><a href = "/goal">My Goal</a></li>
+					<li><a href = "/history">Weekly History</a></li>
+        			<li><a href = "/dining">Dining Hall Menus</a></li>
+        		</ul>
+        	</div>
+        </nav>
+
+        <div id = "food-input-api" class = "col-sm-6">
+          <label for="food-input">Find a Food:</label>
+          <input type="text" class="form-control" id="search-input">
+          <button type="button" class="btn btn-default" id="food_search">Search</button>
+          <hr>
+          <label for="results">Click on a Result:</label>
+          <div id = "results" class = "list-group"></div>
+        </div>
+
+        <div id = "food-input-manual" class = "col-sm-6">
+        		<label for="food_name">Food Name:</label>
+        		<input type="text" class="form-control" id="food_name">
+        		<label for="calories">Calories (C per serving):</label>
+        		<input type = "number" class = "form-control" id="calories">
+        		<label for="protein">Protein (g per serving):</label>
+        		<input type="number" class="form-control" id="protein">
+        		<label for="fat">Fat (g per serving):</label>
+        		<input type="number" class="form-control" id="fat">
+        		<br>
+        		<span id="serving-size"></span>
+        		<br>
+        		<label for="servings">Servings:</label>
+        		<input type="number" class="form-control" id="servings">
+        	<button type = "button" class = "btn btn-default" id = "food-input">Submit This Food!</button>
+        </div>
+
+      </div>
+    </body>
+</html>
