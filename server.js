@@ -244,7 +244,7 @@ function deleteThisDay(day){
                                 result[i].days[day].fat = 0;
                                 result[i].days[day].protein = 0;
                                 result[i].days[day].calories = 0;
-                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]}});
+                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
                         }
                 }); //if user does not exist
         });
