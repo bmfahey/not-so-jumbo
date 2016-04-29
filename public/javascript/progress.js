@@ -25,7 +25,7 @@ function init(){
             var protein = result.protein;
             var calories = result.calories;
             $("#fatprog").width(fat);
-            $("#fatprog").value(fat);
+//            $("#fatprog").value(fat);
         }
     });
 }
