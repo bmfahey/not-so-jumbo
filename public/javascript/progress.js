@@ -26,7 +26,7 @@ function init(){
             var calories = result.calories;
             $("#fatprog").attr('value',50);
             $("#fatprog").val(50);
-            $("#fatprog").attr('style:width',"50%");
+            $("#fatprog").css('width',"50%");
         }
     });
 }
