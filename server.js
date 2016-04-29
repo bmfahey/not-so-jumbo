@@ -128,7 +128,7 @@ app.post('/sendProgress', function(request, response) {
 	db.collection("users", function(error, col){
 		if(error) {
 		} else {
-			find({"FB_id":id}).toArray(function(err, result) {
+			col.find({"FB_id":id}).toArray(function(err, result) {
 				if(err) {
 				} else {
 					if (result.length == 1) {
