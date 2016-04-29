@@ -23,7 +23,7 @@ var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
 	var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
 	var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
-})
+});
 
 
 
@@ -104,14 +104,8 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 						result[0].days[dow].protein = currentProtein;
 						result[0].days[dow].calories = currentCalories;
 						coll.update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
-							//if (error) {
-							//	response.send(500);
-							//} else {
-							//	response.send(200);
-							//}
 						});
-						//coll.update({"FB_id":fb_id}, {$set: {"days.$$dow.protein": currentProtein, "days.$$dow.fat": currentFat, "days.$$dow.calories": currentCalories}}, function(error, result) {
-						//});
+
 					}
 				});
 			}
