@@ -24,7 +24,7 @@ function init(){
             var fat = result.fat;
             var protein = result.protein;
             var calories = result.calories;
-            $("#fatprog").attr('value',50);
+            $("#fatprog").progressBar({value:50});
             $("#fatprog").val(50);
             $("#fatprog").css('width',"50%");
         }
