@@ -21,3 +21,6 @@ img {
 	padding-left: 4px;
 }
 
+.navbar navbar-default {
+	float:right;
+}
