@@ -21,6 +21,7 @@ function init(){
         success: function(response) {
             //var result = JSON.parse(response);
             var result = response;
+            console.log("result: "+result);
             var fat = parseInt(result.fat) * 100;
             console.log("fat: " + fat);
             var protein = parseInt(result.protein) * 100;
