@@ -136,14 +136,8 @@ app.post('/sendProgress', function(request, response) {
 							var diff_days = Math.round(Math.abs((current_time.getTime() - goal_time.getTime())/(one_day)));
 							var current_dow = current_time.getDay();
 							var goal_dow = goal_time.getDay(); //dow goal was set
-
-							console.log("diffdays: " + diff_days);
-							console.log("init i: " + goal_dow);
-							console.log("current dow: "+ current_dow);
-							console.log("finish i: " + (goal_dow + Math.abs(current_dow - goal_dow)));
 							if(diff_days < 7) { //goal is not outdated by week
 								for(var i=goal_dow; i<=goal_dow + Math.abs((current_dow - goal_dow)); i++) {
-									console.log("getting into loop");
 									prog_fat += result[0].days[i%6].fat;
 									prog_prot += result[0].days[i%6].protein;
 									prog_cal += result[0].days[i%6].calories;
@@ -156,7 +150,7 @@ app.post('/sendProgress', function(request, response) {
 									prog_prot = prog_prot/result[0].goal.protein;
 							}
 						}
-						response.json({"fat": prog_fat, "protein": prog_prot, "calories": prog_cal});
+						response.json({"fat": prog_fat, "protein": prog_prot, "calories": prog_cal, "cal_goal": result[0].goal.calories, "fat_goal": result[0].goal.fat, "pro_goal" : result[0].goal.fat});
 					}
 					else {
 						response.json({});

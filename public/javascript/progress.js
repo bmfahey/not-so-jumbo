@@ -72,6 +72,10 @@ function login_success() {
                 $("#proprog").css('width',protein+"%");
                 $("#calprog").html(calories+"%");
                 $("#calprog").css('width',calories+"%");
+                var fat_goal = result.fat_goal;
+                var protein_goal = result.pro_goal;
+                var calories_goal = result.cal_goal;
+                $("#goal-display").val("Calories: " + calories_goal + "\nProtein: " + protein_goal + "\nFat: " + fat_goal);
             }
         });
     });
