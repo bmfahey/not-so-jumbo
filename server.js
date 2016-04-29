@@ -117,8 +117,6 @@ app.post('/sendProgress', function(request, response) {
 	var id = request.body.id;
 	id = id.replace(/[^\w\s]/gi, '');
 	var current_time = new Date();
-
-
 	db.collection("users", function(error, col){
 		if(error) {
 		} else {
@@ -127,9 +125,9 @@ app.post('/sendProgress', function(request, response) {
 				} else {
 					if (result.length == 1) {
 						var goal_time = result[0].goal.time_stamp;
-						var prog_fat = 1;
-						var prog_cal = 1;
-						var prog_prot = 1;
+						var prog_fat = 0;
+						var prog_cal = 0;
+						var prog_prot = 0;
 
 						if(goal_time != "")
 						{
@@ -140,7 +138,7 @@ app.post('/sendProgress', function(request, response) {
 							var goal_dow = goal_time.getDay(); //dow goal was set
 
 							if(diff_days < 7) { //goal is not outdated by week
-								for(var i=goal_dow; i<(goal_dow+diff_days); i++) {
+								for(var i=goal_dow; i<Math.abs((current_dow - goal_dow)); i++) {
 									prog_fat += result[0].days[i%6].fat;
 									prog_prot += result[0].days[i%6].protein;
 									prog_cal += result[0].days[i%6].calories;
