@@ -164,6 +164,20 @@ app.post('/sendProgress', function(request, response) {
 		}
 	});
 });
+
+function deleteThisDay(day){
+        db.collection('users', function(error, coll) {
+                coll.find().toArray(function (error, result) {
+                        for(i = 0; i < result.length; i++){
+                                result[i].days[day].fat = 0;
+                                result[i].days[day].protein = 0;
+                                result[i].days[day].calories = 0;
+                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
+                        }
+                }); //if user does not exist
+        });
+}
+
 app.post('/submitGoal', function(request, response) {
         var id = request.body.fb_id;
         var email = request.body.email;
@@ -236,18 +250,5 @@ router.get("/dining", function(request,response) {
 });
 
 app.use("/",router);
-
-function deleteThisDay(day){
-        db.collection('users', function(error, coll) {
-                db.collection().find().toArray(function (error, result) {
-                        for(i = 0; i < result.length; i++){
-                                result[i].days[day].fat = 0;
-                                result[i].days[day].protein = 0;
-                                result[i].days[day].calories = 0;
-                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
-                        }
-                }); //if user does not exist
-        });
-}
 
 app.listen(process.env.PORT || 8888);
