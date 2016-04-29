@@ -63,9 +63,9 @@ function login_success() {
                 alert("Sorry, that didn't submit! Try again.");
             },
             success: function(result) {
-                var fat = parseFloat(result.fat) * 100;
-                var protein = parseFloat(result.protein) * 100;
-                var calories = parseFloat(result.calories) * 100;
+                var fat = parseInt(parseFloat(result.fat) * 100);
+                var protein = parseInt(parseFloat(result.protein) * 100);
+                var calories = parseInt(parseFloat(result.calories) * 100);
                 $("#fatprog").html(fat+"%");
                 $("#fatprog").css('width',fat+"%");
                 $("#proprog").html(protein+"%");
