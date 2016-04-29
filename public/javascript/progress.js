@@ -22,6 +22,7 @@ function init(){
             //var result = JSON.parse(response);
             var result = response;
             var fat = parseInt(result.fat) * 100;
+            console.log("fat: " + fat);
             var protein = parseInt(result.protein) * 100;
             var calories = parseInt(result.calories) * 100;
             $("#fatprog").html(fat+"%");
