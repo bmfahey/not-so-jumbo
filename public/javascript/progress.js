@@ -66,6 +66,15 @@ function login_success() {
                 var fat = parseInt(parseFloat(result.fat) * 100);
                 var protein = parseInt(parseFloat(result.protein) * 100);
                 var calories = parseInt(parseFloat(result.calories) * 100);
+                if (fat > 100) {
+                    fat = 100;
+                }
+                if (protein > 100) {
+                    protein = 100;
+                }
+                if (calories > 100) {
+                    calories = 100;
+                }
                 $("#fatprog").html(fat+"%");
                 $("#fatprog").css('width',fat+"%");
                 $("#proprog").html(protein+"%");
