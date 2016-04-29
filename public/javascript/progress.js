@@ -11,29 +11,6 @@ function init(){
         $("#name").html("");
     });
 
-    $.ajax({
-        type:"POST",
-        data: "id=" + id_number,
-        url: "/sendProgress",
-        failure: function(result) {
-            alert("Sorry, that didn't submit! Try again.");
-        },
-        success: function(response) {
-            //var result = JSON.parse(response);
-            var result = response;
-            console.log("result: "+result);
-            var fat = parseInt(result.fat) * 100;
-            console.log("fat: " + fat);
-            var protein = parseInt(result.protein) * 100;
-            var calories = parseInt(result.calories) * 100;
-            $("#fatprog").html(fat+"%");
-            $("#fatprog").css('width',fat+"%");
-            $("#proprog").html(protein+"%");
-            $("#proprog").css('width',protein+"%");
-            $("#calprog").html(calories+"%");
-            $("#calprog").css('width',calories+"%");
-        }
-    });
 }
 
 function statusChange(response) {
@@ -77,5 +54,29 @@ function login_success() {
         $("#name").html(response.name);
         $('#login').hide();
         $("#logout").show();
+
+        $.ajax({
+            type:"POST",
+            data: "id=" + id_number,
+            url: "/sendProgress",
+            failure: function(result) {
+                alert("Sorry, that didn't submit! Try again.");
+            },
+            success: function(response) {
+                //var result = JSON.parse(response);
+                var result = response;
+                console.log("result: "+result);
+                var fat = parseInt(result.fat) * 100;
+                console.log("fat: " + fat);
+                var protein = parseInt(result.protein) * 100;
+                var calories = parseInt(result.calories) * 100;
+                $("#fatprog").html(fat+"%");
+                $("#fatprog").css('width',fat+"%");
+                $("#proprog").html(protein+"%");
+                $("#proprog").css('width',protein+"%");
+                $("#calprog").html(calories+"%");
+                $("#calprog").css('width',calories+"%");
+            }
+        });
     });
 }
