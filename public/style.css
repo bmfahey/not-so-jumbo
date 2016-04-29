@@ -24,3 +24,7 @@ img {
 .navbar navbar-default {
 	float:right;
 }
+
+.navbar-toggle {
+	float:right;
+}
