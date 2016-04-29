@@ -24,9 +24,12 @@ function init(){
             var fat = result.fat;
             var protein = result.protein;
             var calories = result.calories;
-            $("#fatprog").html("50%");
-            $("#fatprog").val(50);
-            $("#fatprog").css('width',"50%");
+            $("#fatprog").html(fat+"%");
+            $("#fatprog").css('width',fat+"%");
+            $("#proprog").html(protein+"%");
+            $("#proprog").css('width',protein+"%");
+            $("#calprog").html(calories+"%");
+            $("#calprog").css('width',calories+"%");
         }
     });
 }
