@@ -75,7 +75,7 @@ function login_success() {
                 var fat_goal = result.fat_goal;
                 var protein_goal = result.pro_goal;
                 var calories_goal = result.cal_goal;
-                $("#goal-display").val("Calories: " + calories_goal + "<br>Protein: " + protein_goal + "<br>Fat: " + fat_goal);
+                $("#goal-display").val("Calories: " + calories_goal + "     Protein: " + protein_goal + "     Fat: " + fat_goal);
             }
         });
     });
