@@ -17,7 +17,7 @@ function init(){
         url: "/sendProgress",
         failure: function(result) {
             alert("Sorry, that didn't submit! Try again.");
-        }
+        },
         success: function(response) {
             result = JSON.parse(response);
             var fat = result.fat;
