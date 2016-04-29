@@ -137,6 +137,9 @@ app.post('/sendProgress', function(request, response) {
 							var current_dow = current_time.getDay();
 							var goal_dow = goal_time.getDay(); //dow goal was set
 
+							console.log("diffdays: " + diff_days);
+							console.log("init i: " + goal_dow);
+							console.log("finish i: " + Math.abs((current_dow - goal_dow)));
 							if(diff_days < 7) { //goal is not outdated by week
 								for(var i=goal_dow; i<goal_dow + Math.abs((current_dow - goal_dow)); i++) {
 									console.log("getting into loop");
