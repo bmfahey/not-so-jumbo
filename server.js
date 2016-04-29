@@ -163,7 +163,7 @@ app.post('/sendProgress', function(request, response) {
 									prog_prot = prog_prot/result[0].goal.protein;
 							}
 						}
-						response.send('{"progress": {"fat": prog_fat}, {"protein": prog_prot}, {"calories": prog_cal}}');
+						response.send({"progress": {"fat": prog_fat}, {"protein": prog_prot}, {"calories": prog_cal}});
 					}
 					else {
 						response.json({});
