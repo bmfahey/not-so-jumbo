@@ -19,7 +19,8 @@ function init(){
             alert("Sorry, that didn't submit! Try again.");
         },
         success: function(response) {
-            result = JSON.parse(response);
+            //var result = JSON.parse(response);
+            var result = response;
             var fat = result.fat;
             var protein = result.protein;
             var calories = result.calories;
