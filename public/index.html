@@ -27,6 +27,7 @@
 
     <body onload = "buttonListen()">
       <div class = "container-fluid">
+		<div class = "col-sm-8">
         <div class = "page-header">
             <img src = "./images/elephant.png" alt = "Elephant Picture">
             <span id = "title">Not So Jumbo</span>
@@ -37,7 +38,9 @@
               <button type="button" class="btn btn-default" id='logout'>Logout</button>
             </span>
         </div>
+	</div>
 
+		<div class = "col-sm-4">
         <nav class = "navbar navbar-default">
         	<div class="navbar-header">
         		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
@@ -56,6 +59,7 @@
         		</ul>
         	</div>
         </nav>
+		</div>
 
         <div id = "food-input-api" class = "col-sm-6">
           <label for="food-input">Find a Food:</label>
