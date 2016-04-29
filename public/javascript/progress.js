@@ -20,9 +20,9 @@ function init(){
         }
         success: function(response) {
             result = JSON.parse(response);
-            var fat = result.progress.fat;
-            var protein = result.progress.protein;
-            var calories = result.progress.calories;
+            var fat = result.fat;
+            var protein = result.protein;
+            var calories = result.calories;
             $("#fatprog").width(fat);
             $("#fatprog").value(fat);
         }
