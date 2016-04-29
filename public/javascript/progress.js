@@ -21,9 +21,9 @@ function init(){
         success: function(response) {
             //var result = JSON.parse(response);
             var result = response;
-            var fat = result.fat;
-            var protein = result.protein;
-            var calories = result.calories;
+            var fat = result.fat * 100;
+            var protein = result.protein * 100;
+            var calories = result.calories * 100;
             $("#fatprog").html(fat+"%");
             $("#fatprog").css('width',fat+"%");
             $("#proprog").html(protein+"%");
