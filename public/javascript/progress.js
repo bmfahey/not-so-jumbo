@@ -62,14 +62,10 @@ function login_success() {
             failure: function(result) {
                 alert("Sorry, that didn't submit! Try again.");
             },
-            success: function(response) {
-                //var result = JSON.parse(response);
-                var result = response;
-                console.log("result: "+result);
-                var fat = parseInt(result.fat) * 100;
-                console.log("fat: " + fat);
-                var protein = parseInt(result.protein) * 100;
-                var calories = parseInt(result.calories) * 100;
+            success: function(result) {
+                var fat = parseFloat(result.fat) * 100;
+                var protein = parseFloat(result.protein) * 100;
+                var calories = parseFloat(result.calories) * 100;
                 $("#fatprog").html(fat+"%");
                 $("#fatprog").css('width',fat+"%");
                 $("#proprog").html(protein+"%");
