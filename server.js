@@ -142,7 +142,7 @@ app.post('/sendProgress', function(request, response) {
 							console.log("current dow: "+ current_dow);
 							console.log("finish i: " + (goal_dow + Math.abs(current_dow - goal_dow)));
 							if(diff_days < 7) { //goal is not outdated by week
-								for(var i=goal_dow; i<goal_dow + Math.abs((current_dow - goal_dow)); i++) {
+								for(var i=goal_dow; i<=goal_dow + Math.abs((current_dow - goal_dow)); i++) {
 									console.log("getting into loop");
 									prog_fat += result[0].days[i%6].fat;
 									prog_prot += result[0].days[i%6].protein;
