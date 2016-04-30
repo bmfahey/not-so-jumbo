@@ -3,6 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var validator = require('validator');
 
+var crontab = require('node-crontab');
+
 var app = express();
 
 var path = __dirname + "/public/";
@@ -14,7 +16,18 @@ var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.en
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	db = databaseConnection;
-})
+	var job0 = crontab.scheduleJob("1 0 * * 0", deleteThisDay(0));
+	var job1 = crontab.scheduleJob("1 0 * * 1", deleteThisDay(1));
+	var job2 = crontab.scheduleJob("1 0 * * 2", deleteThisDay(2));
+	var job3 = crontab.scheduleJob("1 0 * * 3", deleteThisDay(3));
+	var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
+	var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
+	var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
+});
+
+
+
+
 app.use(express.static(path));
 
 app.post('/submitFood', function(request, response) {
@@ -91,14 +104,8 @@ function initPerson(fb_id, protein, calories, fat, dow) {
 						result[0].days[dow].protein = currentProtein;
 						result[0].days[dow].calories = currentCalories;
 						coll.update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
-							//if (error) {
-							//	response.send(500);
-							//} else {
-							//	response.send(200);
-							//}
 						});
-						//coll.update({"FB_id":fb_id}, {$set: {"days.$$dow.protein": currentProtein, "days.$$dow.fat": currentFat, "days.$$dow.calories": currentCalories}}, function(error, result) {
-						//});
+
 					}
 				});
 			}
@@ -110,48 +117,63 @@ app.post('/sendProgress', function(request, response) {
 	var id = request.body.id;
 	id = id.replace(/[^\w\s]/gi, '');
 	var current_time = new Date();
-
-
 	db.collection("users", function(error, col){
 		if(error) {
 		} else {
-			find({"FB_id":id}).toArray(function(err, result) {
+			col.find({"FB_id":id}).toArray(function(err, result) {
 				if(err) {
 				} else {
-					var goal_time = result[0].goal.time_stamp;
-					var prog_fat = 0;
-					var prog_cal = 0;
-					var prog_prot = 0;
+					if (result.length == 1) {
+						var goal_time = result[0].goal.time_stamp;
+						var prog_fat = 0;
+						var prog_cal = 0;
+						var prog_prot = 0;
 
-					if(goal_time !== "")
-					{
-						//find diff in days
-						var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-						var diff_days = Math.round(Math.abs((current_time.getTime() - goal_time.getTime())/(oneDay)));
-						var current_dow = current_time.getDay();
-						var goal_dow = goal_time.getDay(); //dow goal was set
-
-						if(diff_days < 7) { //goal is not outdated by week
-							for(var i=goal_dow; i<(goal_dow+diff_days); i++) {
-								prog_fat += result[0].days[i%6].fat;
-								prog_prot += result[0].days[i%6].protein;
-								prog_cal += result[0].days[i%6].calories;
+						if(goal_time != "")
+						{
+							//find diff in days
+							var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+							var diff_days = Math.round(Math.abs((current_time.getTime() - goal_time.getTime())/(one_day)));
+							var current_dow = current_time.getDay();
+							var goal_dow = goal_time.getDay(); //dow goal was set
+							if(diff_days < 7) { //goal is not outdated by week
+								for(var i=goal_dow; i<=goal_dow + Math.abs((current_dow - goal_dow)); i++) {
+									prog_fat += result[0].days[i%6].fat;
+									prog_prot += result[0].days[i%6].protein;
+									prog_cal += result[0].days[i%6].calories;
+								}
+								if(result[0].goal.fat != 0)
+									prog_fat = prog_fat/result[0].goal.fat;
+								if(result[0].goal.calories != 0)
+									prog_cal = prog_cal/result[0].goal.calories;
+								if(result[0].goal.protein != 0)
+									prog_prot = prog_prot/result[0].goal.protein;
 							}
-
-							if(result[0].goal.fat !== 0)
-								prog_fat = prog_fat/result[0].goal.fat;
-							if(result[0].goal.calories !== 0)
-								prog_cal = prog_cal/result[0].goal.calories;
-							if(result[0].goal.protein !== 0)
-								prog_prot = prog_prot/result[0].goal.protein;
 						}
+						response.json({"fat": prog_fat, "protein": prog_prot, "calories": prog_cal, "cal_goal": result[0].goal.calories, "fat_goal": result[0].goal.fat, "pro_goal" : result[0].goal.fat});
 					}
-					response.send('{"progress": {"fat": prog_fat}, {"protein": prog_prot}, {"calories": prog_cal}}');
+					else {
+						response.json({});
+					}
 				}
 			});
 		}
 	});
 });
+
+function deleteThisDay(day) {
+        db.collection('users', function(error, coll) {
+                coll.find().toArray(function (error, result) {
+                        for(i = 0; i < result.length; i++){
+                                result[i].days[day].fat = 0;
+                                result[i].days[day].protein = 0;
+                                result[i].days[day].calories = 0;
+                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
+                        }
+                }); //if user does not exist
+        });
+}
+
 app.post('/submitGoal', function(request, response) {
         var id = request.body.fb_id;
         var email = request.body.email;

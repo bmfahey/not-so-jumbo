@@ -10,6 +10,7 @@ function init(){
         $("#login").show();
         $("#name").html("");
     });
+
 }
 
 function statusChange(response) {
@@ -53,5 +54,38 @@ function login_success() {
         $("#name").html(response.name);
         $('#login').hide();
         $("#logout").show();
+
+        $.ajax({
+            type:"POST",
+            data: "id=" + id_number,
+            url: "/sendProgress",
+            failure: function(result) {
+                alert("Sorry, that didn't submit! Try again.");
+            },
+            success: function(result) {
+                var fat = parseInt(parseFloat(result.fat) * 100);
+                var protein = parseInt(parseFloat(result.protein) * 100);
+                var calories = parseInt(parseFloat(result.calories) * 100);
+                if (fat > 100) {
+                    fat = 100;
+                }
+                if (protein > 100) {
+                    protein = 100;
+                }
+                if (calories > 100) {
+                    calories = 100;
+                }
+                $("#fatprog").html(fat+"%");
+                $("#fatprog").css('width',fat+"%");
+                $("#proprog").html(protein+"%");
+                $("#proprog").css('width',protein+"%");
+                $("#calprog").html(calories+"%");
+                $("#calprog").css('width',calories+"%");
+                var fat_goal = result.fat_goal;
+                var protein_goal = result.pro_goal;
+                var calories_goal = result.cal_goal;
+                $("#goal-display").val("Calories: " + calories_goal + "C     Protein: " + protein_goal + "g     Fat: " + fat_goal + "g");
+            }
+        });
     });
-} 
+}
