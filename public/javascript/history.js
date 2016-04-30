@@ -86,13 +86,13 @@ function drawChart(result) {
       data.addColumn('number', 'Fat');
 
       data.addRows([
-        ["Sun", result.days[0].fat],
-        ["Mon", result.days[1].fat],
-        ["Tues", result.days[2].fat],
-        ["Wed", result.days[3].fat],
-        ["Thurs", result.days[4].fat],
-        ["Fri", result.days[5].fat],
-        ["Sat", result.days[6].fat]
+        ["Sun", result[0].days[0].fat],
+        ["Mon", result[0].days[1].fat],
+        ["Tues", result[0].days[2].fat],
+        ["Wed", result[0].days[3].fat],
+        ["Thurs", result[0].days[4].fat],
+        ["Fri", result[0].days[5].fat],
+        ["Sat", result[0].days[6].fat]
       ]);
 
       var options = {
