@@ -39,6 +39,7 @@
             </span>
         </div>
 
+		<div class = "col-sm-12">
         <nav class = "navbar navbar-default">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
@@ -57,22 +58,23 @@
                 </ul>
             </div>
         </nav>
+		</div>
 
         <div id = "goal" class="col-small-8">
-            <label for="goal-display">Your Goal:</label>
+            <label for="goal-display">Your Weekly Goal:</label>
             <input type="text" class="form-control" id="goal-display" val = "Please Log In to Facebook" disabled>
             <br><br><br><br>
             <label for="progress">Progress for Calories:</label>
             <div class = "progress">
-                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
+                <div id = "calprog" class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
             </div>
 			<label for="progress">Progress for Protein:</label>
             <div class = "progress">
-                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
+                <div id = "proprog" class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
             </div>
 			<label for="progress">Progress for Fat:</label>
             <div class = "progress">
-                <div class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
+                <div id = "fatprog" class = "progress-bar" role = "progressbar" aria-valuenow = "0" aria-valuemin = "0" aria-valuemax="100" style="width:0%">0%</div>
             </div>
         </div>
     </div>

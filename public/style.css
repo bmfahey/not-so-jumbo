@@ -21,3 +21,25 @@ img {
 	padding-left: 4px;
 }
 
+.navbar navbar-default {
+	float:right;
+}
+
+.navbar-toggle {
+	float:right;
+}
+
+#fat_chart {
+	width: 100%;
+	height: 100%;
+}
+
+#prot_chart {
+	width: 100%;
+	height: 100%;
+}
+
+#cal_chart {
+	width: 100%;
+	height: 100%;
+}
