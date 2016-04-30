@@ -42,3 +42,9 @@ img {
 	border-radius: 2px;
 	padding-left: 5px;
 }
+
+
+#results {
+	overflow-y:scroll;
+	height:350px;
+}
