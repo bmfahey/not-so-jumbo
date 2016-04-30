@@ -69,6 +69,7 @@ function display_dining()
     //Dewick
     $.get("https://tuftsdiningdata.herokuapp.com/menus/dewick/"+day+"/"+month+"/"+2016, function(data){
                 //check for Brunch
+                var count = 0;
                 for (key in data.data.Breakfast)
                 {
                     count += 1;
