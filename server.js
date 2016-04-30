@@ -201,11 +201,11 @@ function sendEmail() {
                                                     if(error){
                                                         console.log(error);
                                                     }
-													result[i].sent_email = true;
-	                                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
                                                     // Uncomment to understand what is happening
                                                     console.log('Message sent: ' + info.response);
                                                 });
+												result[i].sent_email = true;
+												coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
 
                                         }
                                 }
