@@ -70,27 +70,27 @@ function login_success() {
 	    	},
 	    	success: function(result) {
 	    		google.charts.load('current', {'packages':['line']});
-    			google.charts.setOnLoadCallback(drawChart(result));
+    			google.charts.setOnLoadCallback(drawChart);
 
 	    	}
 	   	});
     });
 }
 
-function drawChart(result) {
+function drawChart() {
 
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Day');
       data.addColumn('number', 'Fat');
 
       data.addRows([
-        ["Sun", result["days"][0]."fat"],
-        ["Mon", result["days"][1]."fat"],
-        ["Tues", result["days"][2]."fat"],
-        ["Wed", result["days"][3]."fat"],
-        ["Thurs", result["days"][4]."fat"],
-        ["Fri", result["days"][5]."fat"],
-        ["Sat", result["days"][6]."fat"]
+        ["Sun",  37.8],
+        ["Mon",  30.9],
+        ["Tues",  25.4],
+        ["Wed",  11.7],
+        ["Thurs",  11.9],
+        ["Fri",   8.8],
+        ["Sat",   7.6]
       ]);
 
       var options = {
@@ -98,8 +98,8 @@ function drawChart(result) {
           title: 'Fat Consumed in this week',
           subtitle: 'in grams (g)'
         },
-        width: 800,
-        height: 400,
+        width: 900,
+        height: 500,
         series: {
           0: {axis: "Fat"},
         },
@@ -113,4 +113,4 @@ function drawChart(result) {
       var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
       chart.draw(data, options);
-    }
+}
