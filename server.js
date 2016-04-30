@@ -188,7 +188,7 @@ function sendEmail() {
                                         diff_days = Math.round(Math.abs((current_time.getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
                                         if(diff_days>7){
 											result[i].goal["sent_email"] = true;
-											coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
+											coll.update({"FB_id":result[i].FB_id}, {$set: result[i]});
                                                 // SEND EMAIL
                                                 var mailOptions = {
                                                     from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
