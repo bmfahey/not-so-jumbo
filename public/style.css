@@ -36,7 +36,7 @@ img {
 .menu {
 	resize: none;
 	overflow-y: scroll;
-	max-height: 300px;
+	max-height: 350px;
 	border: 1px solid #d3d3d3;
 	margin: 10px;
 	border-radius: 2px;
