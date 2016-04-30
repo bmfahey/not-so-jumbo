@@ -188,7 +188,7 @@ function sendEmailThisDay(day) {
         db.collection('users', function(error, coll) {
                 coll.find().toArray(function (error, result) {
                         for(i = 0; i < result.length; i++){
-                                if(!result[i].goal[sent_email] && 
+                                if(!result[i].goal["sent_email"] && 
                                    result[i].email != "" /*&& result[i].email != null*/){
                                         //find diff in days
                                         var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
