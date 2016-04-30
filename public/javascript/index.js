@@ -103,7 +103,10 @@ function buttonListen(){
         }
 
         function populate_info(number) {
-            number += "";
+          number += "";
+          while (number.length < 5) {
+              number = "0" + number;
+          }
           window.location.hash = "#food-input-manual";
           $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + number + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
                 $("#food_name").val(result.report.food.name);
