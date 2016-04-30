@@ -181,18 +181,19 @@ function sendEmail() {
         db.collection('users', function(error, coll) {
                 coll.find().toArray(function (error, result) {
                         for(i = 0; i < result.length; i++){
-                                if(!result[i].goal["sent_email"] &&
-                                   result[i].email != "" /*&& result[i].email != null*/){
+                                if((!result[i].goal["sent_email"]) && result[i].email != ""){
                                         //find diff in days
                                         one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
                                         current_time = new Date();
                                         diff_days = Math.round(Math.abs((current_time.getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
                                         if(diff_days>7){
+											result[i].goal["sent_email"] = true;
+											coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
                                                 // SEND EMAIL
                                                 var mailOptions = {
                                                     from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
                                                     to: result[i]["email"], // list of receivers
-                                                    subject: 'YOUR PROGRESS', // Subject line
+                                                    subject: 'Update your goal!', // Subject line
                                                     text: "YOUR PROGRESS\n"+"TESTING", // plaintext body
                                                     html: '<h1>YOUR PROGRESS</h1><br />TESTING' // html body
                                                 };
@@ -203,8 +204,7 @@ function sendEmail() {
                                                     // Uncomment to understand what is happening
                                                     console.log('Message sent: ' + info.response);
                                                 });
-												result[i].goal["sent_email"] = true;
-												coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
+
 
                                         }
                                 }
@@ -219,12 +219,16 @@ app.post('/submitGoal', function(request, response) {
         var calories = request.body.calories;
         var fat = request.body.fat;
         var protein = request.body.protein;
+		var email_bool = false;
+		if (email == "") {
+			email_bool = true;
+		}
         var toInsert;
         toInsert = {
                 "calories": calories,
                 "fat" : fat,
                 "protein" : protein,
-                "sent_email": false,
+                "sent_email": email_bool,
                 "time_stamp": new Date()
         };
         db.collection("users", function(error, col){
