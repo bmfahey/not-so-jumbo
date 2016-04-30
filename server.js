@@ -150,7 +150,7 @@ app.post('/sendProgress', function(request, response) {
 									prog_prot = prog_prot/result[0].goal.protein;
 							}
 						}
-						response.json({"fat": prog_fat, "protein": prog_prot, "calories": prog_cal, "cal_goal": result[0].goal.calories, "fat_goal": result[0].goal.fat, "pro_goal" : result[0].goal.fat});
+						response.json({"fat": prog_fat, "protein": prog_prot, "calories": prog_cal, "cal_goal": result[0].goal.calories, "fat_goal": result[0].goal.fat, "pro_goal" : result[0].goal.protein});
 					}
 					else {
 						response.json({});
