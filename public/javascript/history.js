@@ -69,15 +69,18 @@ function login_success() {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
-	    		//google.charts.load('current', {'packages':['line']});
-    			//google.charts.setOnLoadCallback(drawChart);
+	    		requestData = $.parseJSON(result);
+	    		console.log(result);
+	    		console.log(requestData);
+	    		google.charts.load('current', {'packages':['line']});
+    			google.charts.setOnLoadCallback(drawChart);
 
 	    	}
 	   	});
     });
 }
 
-/*function drawChart() {
+function drawChart() {
 
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Day');
@@ -113,4 +116,4 @@ function login_success() {
       var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
       chart.draw(data, options);
-}*/
+}
