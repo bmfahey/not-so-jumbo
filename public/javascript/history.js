@@ -63,7 +63,7 @@ function login_success() {
 
         $.ajax({
 	    	type: "POST",
-	    	data: "id=" + id_number,
+	    	data: "fb_id=" + id_number,
 	    	url: "/submitHistory",
 	    	failure: function(result) {
 	    		alert("Sorry, this did not process!");
@@ -77,7 +77,7 @@ function login_success() {
     });
 }
 
-function drawChart() {
+/*function drawChart() {
 
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Day');
@@ -113,4 +113,4 @@ function drawChart() {
       var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
       chart.draw(data, options);
-}
+}*/
