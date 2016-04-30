@@ -205,8 +205,10 @@ app.post('/submitHistory', function(request, response){
 		db.collection("users").find({"FB_id": id}).toArray(function(er, cursor){
 			if(!er)
 			{
+				console.log(cursor);
 				response.send(cursor);
 			} else {
+				console.log("hi");
 				response.send(500);
 			}
 		});

@@ -69,8 +69,8 @@ function login_success() {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
-	    		google.charts.load('current', {'packages':['line']});
-    			google.charts.setOnLoadCallback(drawChart);
+	    		//google.charts.load('current', {'packages':['line']});
+    			//google.charts.setOnLoadCallback(drawChart);
 
 	    	}
 	   	});
