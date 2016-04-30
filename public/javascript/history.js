@@ -74,27 +74,27 @@ function login_success() {
 		    		console.log(result);
 		    		//console.log(requestData);
 		    		google.charts.load('current', {'packages':['line']});
-	    			google.charts.setOnLoadCallback(drawChart);
+	    			google.charts.setOnLoadCallback(drawChart(result));
 	    		//}
 	    	}
 	   	});
     });
 }
 
-function drawChart() {
+function drawChart(result) {
 
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Day');
       data.addColumn('number', 'Fat');
 
       data.addRows([
-        ["Sun",  37.8],
-        ["Mon",  30.9],
-        ["Tues",  25.4],
-        ["Wed",  11.7],
-        ["Thurs",  11.9],
-        ["Fri",   8.8],
-        ["Sat",   7.6]
+        ["Sun", result.days[0].fat],
+        ["Mon", result.days[1].fat],
+        ["Tues", result.days[2].fat],
+        ["Wed", result.days[3].fat],
+        ["Thurs", result.days[4].fat],
+        ["Fri", result.days[5].fat],
+        ["Sat", result.days[6].fat]
       ]);
 
       var options = {
