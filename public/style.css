@@ -30,6 +30,11 @@ img {
 }
 
 .chart {
-	width: 800px;
-	height: 700px;
+	height: 100%;
+}
+
+#dewick {
+	resize: none;
+	overflow-y: scroll;
+	max-height: 100px;
 }
