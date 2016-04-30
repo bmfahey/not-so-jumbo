@@ -20,7 +20,6 @@ var MongoClient = require('mongodb').MongoClient, format = require('util').forma
 var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	db = databaseConnection;
 
-
 var job0 = crontab.scheduleJob("1 0 * * 0", deleteThisDay(0));
 var job1 = crontab.scheduleJob("1 0 * * 1", deleteThisDay(1));
 var job2 = crontab.scheduleJob("1 0 * * 2", deleteThisDay(2));
@@ -29,9 +28,7 @@ var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
 var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
 var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
 var send_email = crontab.scheduleJob("*/2 * * * *", sendEmail());
-var two_min_log = crontab.scheduleJob("* * * * *", function(app){
-        console.log("It's been 1 minutes!");
-});
+
 });
 
 
@@ -194,6 +191,7 @@ function sendEmail() {
                                         if(diff_days>7){
                                                 // SEND EMAIL
                                                 result[i].sent_email = true;
+                                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
                                                 var mailOptions = {
                                                     from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
                                                     to: result[i]["email"], // list of receivers
@@ -203,7 +201,7 @@ function sendEmail() {
                                                 };
                                                 transporter.sendMail(mailOptions, function(error, info){
                                                     if(error){
-                                                        return console.log(error);
+                                                        console.log(error);
                                                     }
                                                     // Uncomment to understand what is happening
                                                     console.log('Message sent: ' + info.response);
