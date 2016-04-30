@@ -193,7 +193,7 @@ function sendEmail() {
                                                     subject: 'Update your goal!', // Subject line
                                                     text: "It's been over a week since you updated your goal, "
 																+ "set a new one to continue tracking your progress!"
-																+ "\n\n https://not-so-jumbo.herokuapp.com/goal", // plaintext body
+																+ "\n\n http://not-so-jumbo.herokuapp.com/goal", // plaintext body
                                                 };
                                                 transporter.sendMail(mailOptions, function(error, info){
                                                     if(error){
