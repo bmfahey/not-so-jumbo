@@ -1,5 +1,8 @@
 var express = require('express');
 
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport('smtps://not.so.jumbo@gmail.com:comp20-s2016-team2@smtp.gmail.com');
+
 var bodyParser = require('body-parser');
 var validator = require('validator');
 
@@ -23,6 +26,13 @@ var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
 	var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
 	var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
+        var job0_2 = crontab.scheduleJob("1 0 * * 0", sendEmailThisDay(0));
+        var job1_2 = crontab.scheduleJob("1 0 * * 1", sendEmailThisDay(1));
+        var job2_2 = crontab.scheduleJob("1 0 * * 2", sendEmailThisDay(2));
+        var job3_2 = crontab.scheduleJob("1 0 * * 3", sendEmailThisDay(3));
+        var job4_2 = crontab.scheduleJob("1 0 * * 4", sendEmailThisDay(4));
+        var job5_2 = crontab.scheduleJob("1 0 * * 5", sendEmailThisDay(5));
+        var job6_2 = crontab.scheduleJob("1 0 * * 6", sendEmailThisDay(6));
 });
 
 
@@ -169,6 +179,39 @@ function deleteThisDay(day) {
                                 result[i].days[day].protein = 0;
                                 result[i].days[day].calories = 0;
                                 coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
+                        }
+                }); //if user does not exist
+        });
+}
+
+function sendEmailThisDay(day) {
+        db.collection('users', function(error, coll) {
+                coll.find().toArray(function (error, result) {
+                        for(i = 0; i < result.length; i++){
+                                if(!result[i].goal["sent_email"] && 
+                                   result[i].email != "" /*&& result[i].email != null*/){
+                                        //find diff in days
+                                        var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                                        var diff_days = Math.round(Math.abs((Date().getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
+                                        if(diff_days>7){
+                                                // SEND EMAIL
+                                                var mailOptions = {
+                                                    from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
+                                                    to: result[i]["email"], // list of receivers
+                                                    subject: 'YOUR PROGRESS', // Subject line
+                                                    text: "YOUR PROGRESS\n"+"TESTING", // plaintext body
+                                                    html: '<h1>YOUR PROGRESS</h1><br />TESTING' // html body
+                                                };
+                                                transporter.sendMail(mailOptions, function(error, info){
+                                                    if(error){
+                                                        return console.log(error);
+                                                    }
+                                                    // Uncomment to understand what is happening
+                                                    console.log('Message sent: ' + info.response);
+                                                });
+
+                                        }
+                                }
                         }
                 }); //if user does not exist
         });
