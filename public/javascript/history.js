@@ -65,13 +65,14 @@ function login_success() {
 	    	type: "POST",
 	    	data: "fb_id=" + id_number,
 	    	url: "/submitHistory",
+	    	datatype: "json",
 	    	failure: function(result) {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
 	    		//if (result) {
 		    		//requestData = JSON.parse(result);
-		    		console.log(JSON.parse(result.responseText));
+		    		console.log(result);
 		    		//console.log(requestData);
 		    		//google.charts.load('current', {'packages':['line']});
 	    			//google.charts.setOnLoadCallback(function(){ drawChart(result) });
