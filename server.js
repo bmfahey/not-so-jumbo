@@ -29,7 +29,7 @@ var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
 var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
 var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
 var send_email = crontab.scheduleJob("*/2 * * * *", sendEmail());
-var two_min_log = crontab.scheduleJob("* * * * *", function(1){
+var two_min_log = crontab.scheduleJob("* * * * *", function(app){
         console.log("It's been 1 minutes!");
 });
 });
