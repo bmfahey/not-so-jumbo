@@ -48,3 +48,7 @@ img {
 	overflow-y:scroll;
 	height:350px;
 }
+
+body {
+	background-color: #aee3f2;
+}
