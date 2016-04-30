@@ -56,4 +56,46 @@ function login_success() {
         $('#login').hide();
         $("#logout").show();
     });
+
+    display_dining();
+}
+
+function display_dining()
+{
+    var time = new Date();
+    var day = time.getDate(); 
+    var month = time.getMonth()+1;
+    output = '';
+    //Dewick
+    $.get("https://tuftsdiningdata.herokuapp.com/menus/dewick/"+day+"/"+month+"/"+2016, function(data){
+                for (key in data.data.Breakfast)
+                {
+                    output += "<h3>"+key+"</h3><ul>";
+                    for(j=0; j<data["data"]["Breakfast"][key].length; j++)
+                    {
+                        output += "<li>"+data["data"]["Breakfast"][key][j]+"</li>";
+                    }
+                    output += "</ul>";
+                }
+                for (key in data.data.Lunch)
+                {
+                    output += "<h3>"+key+"</h3><ul>";
+                    for(j=0; j<data["data"]["Lunch"][key].length; j++)
+                    {
+                        output += "<li>"+data["data"]["Lunch"][key][j]+"</li>";
+                    }
+                    output += "</ul>";
+                }
+                for (key in data.data.Dinner)
+                {
+                    output += "<h3>"+key+"</h3><ul>";
+                    for(j=0; j<data["data"]["Dinner"][key].length; j++)
+                    {
+                        output += "<li>"+data["data"]["Dinner"][key][j]+"</li>";
+                    }
+                    output += "</ul>";
+                }
+                $('#dewick_box').html(output);
+
+    })
 }
