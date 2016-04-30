@@ -27,7 +27,7 @@ var job3 = crontab.scheduleJob("1 0 * * 3", deleteThisDay, [3]);
 var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay, [4]);
 var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay, [5]);
 var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay, [6]);
-var send_email = crontab.scheduleJob("* */2 * * *", sendEmail);
+var send_email = crontab.scheduleJob("0 * * * *", sendEmail);
 });
 
 
