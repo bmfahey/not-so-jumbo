@@ -70,10 +70,8 @@ function login_success() {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
-	    		alert(result);
-		    		console.log(result);
-		    		google.charts.load('current', {'packages':['line']});
-	    			google.charts.setOnLoadCallback(function(){ drawChart(result) });
+		    	google.charts.load('current', {'packages':['line']});
+	    		google.charts.setOnLoadCallback(function(){ drawChart(result) });
 	    	}
 	   	});
     });
@@ -143,8 +141,41 @@ function drawChart(result) {
         },
       };
 
+      var dataCal = new google.visualization.DataTable();
+      dataCal.addColumn('string', 'Day');
+      dataCal.addColumn('number', 'Calories');
+
+      dataCal.addRows([
+        ["Sun", result[0].days[0].calories],
+        ["Mon", result[0].days[1].calories],
+        ["Tues", result[0].days[2].calories],
+        ["Wed", result[0].days[3].calories],
+        ["Thurs", result[0].days[4].calories],
+        ["Fri", result[0].days[5].calories],
+        ["Sat", result[0].days[6].calories]
+      ]);
+
+      var optionsCal = {
+        chart: {
+          title: 'Calories Consumed in this week',
+          subtitle: 'in Calorie (C)'
+        },
+        width: 900,
+        height: 500,
+        series: {
+          0: {axis: "Calorie"},
+        },
+        axes: {
+          y: {
+            Calorie: {label: "Calorie(g)"},
+          }
+        },
+      };
+
       var chart = new google.charts.Line(document.getElementById('fat_chart'));
 	  chart.draw(dataFat, optionsFat);
 	  var chart = new google.charts.Line(document.getElementById('prot_chart'));
 	  chart.draw(dataProtein, optionsProtein);
+	  var chart = new google.charts.Line(document.getElementById('cal_chart'));
+	  chart.draw(dataCal, optionsCal);
 }
