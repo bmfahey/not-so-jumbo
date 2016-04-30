@@ -19,16 +19,16 @@ var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.en
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 	db = databaseConnection;
-	var job0 = crontab.scheduleJob("1 0 * * 0", deleteThisDay(0));
-	var job1 = crontab.scheduleJob("1 0 * * 1", deleteThisDay(1));
-	var job2 = crontab.scheduleJob("1 0 * * 2", deleteThisDay(2));
-	var job3 = crontab.scheduleJob("1 0 * * 3", deleteThisDay(3));
-	var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
-	var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
-	var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
-        var send_email = crontab.scheduleJob("*/2 * * * *", sendEmail());
 });
 
+var job0 = crontab.scheduleJob("1 0 * * 0", deleteThisDay(0));
+var job1 = crontab.scheduleJob("1 0 * * 1", deleteThisDay(1));
+var job2 = crontab.scheduleJob("1 0 * * 2", deleteThisDay(2));
+var job3 = crontab.scheduleJob("1 0 * * 3", deleteThisDay(3));
+var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
+var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
+var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
+var send_email = crontab.scheduleJob("*/2 * * * *", sendEmail());
 
 
 
