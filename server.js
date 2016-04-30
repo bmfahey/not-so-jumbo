@@ -29,7 +29,9 @@ var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
 var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
 var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
 var send_email = crontab.scheduleJob("*/2 * * * *", sendEmail());
-
+var two_min_log = crontab.scheduleJob("* * * * *" function(){
+        console.log("It's been 1 minutes!");
+});
 });
 
 
@@ -186,9 +188,9 @@ function sendEmail() {
                                 if(!result[i].goal["sent_email"] && 
                                    result[i].email != "" /*&& result[i].email != null*/){
                                         //find diff in days
-                                        var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                                        var current_time = new Date();
-                                        var diff_days = Math.round(Math.abs((current_time.getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
+                                        one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                                        current_time = new Date();
+                                        diff_days = Math.round(Math.abs((current_time.getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
                                         if(diff_days>7){
                                                 // SEND EMAIL
                                                 result[i].sent_email = true;
