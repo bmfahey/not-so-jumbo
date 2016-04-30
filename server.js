@@ -202,7 +202,7 @@ app.post('/submitGoal', function(request, response) {
 app.post('/submitHistory', function(request, response){
 	var id = request.body.fb_id;
 	db.collection("users", function(err, coll){
-		response.send(coll.find({"FB_id": id})).toArray(function(er, cursor){
+		coll.find({"FB_id": id}).toArray(function(er, cursor){
 			if(!er)
 			{
 				response.send(cursor);
