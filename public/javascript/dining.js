@@ -63,7 +63,7 @@ function login_success() {
 function display_dining()
 {
     var time = new Date();
-    var day = time.getDate(); 
+    var day = time.getDate();
     var month = time.getMonth()+1;
     output = '';
     //Dewick
@@ -76,9 +76,9 @@ function display_dining()
                     count += 1;
                 }
                 if(count === 0)
-                    output += "<div class='menu'><h1>Dewick</h1><h4>Brunch</h4>";
+                    output += "<div class='menu'><h4>Brunch</h4>";
                 else {
-                    output += "<div class='menu'><h1>Dewick</h1><h4>Breakfast</h4>";
+                    output += "<div class='menu'><h4>Breakfast</h4>";
                     for (key in data.data.Breakfast)
                     {
                         output += "<h5>"+key+"</h5><ul>";
@@ -124,9 +124,9 @@ function display_dining()
                     count += 1;
                 }
                 if(count === 0)
-                    output += "<div class='menu'><h1>Carmichael</h1><h4>Brunch</h4>";
+                    output += "<div class='menu'><h4>Brunch</h4>";
                 else {
-                    output += "<div class='menu'><h1>Carmichael</h1><h4>Breakfast</h4>";
+                    output += "<div class='menu'><h4>Breakfast</h4>";
                     for (key in data.data.Breakfast)
                     {
                         output += "<h5>"+key+"</h5><ul>";
