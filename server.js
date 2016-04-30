@@ -39,11 +39,8 @@ app.post('/submitFood', function(request, response) {
 	var timeStamp = new Date();
 	var dow = timeStamp.getDay(); //0-6 sun-sat
 	var protein = parseFloat(request.body.protein);
-	protein = protein.replace(/[^\w\s]/gi, '');
 	var fat = parseFloat(request.body.fat);
-	fat = fat.replace(/[^\w\s]/gi, '');
 	var calories = parseFloat(request.body.calories);
-	calories = calories.replace(/[^\w\s]/gi, '');
 	var currentProtein = 0;
 	var currentCalories = 0;
 	var currentFat = 0;
