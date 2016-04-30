@@ -27,8 +27,8 @@ var job3 = crontab.scheduleJob("1 0 * * 3", deleteThisDay(3));
 var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay(4));
 var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay(5));
 var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay(6));
-var send_email = crontab.scheduleJob("1 0 * * *", sendEmail());
-
+//var send_email = crontab.scheduleJob("1 0 * * *", sendEmail());
+sendEmail();
 });
 
 
@@ -182,7 +182,7 @@ function sendEmail() {
         db.collection('users', function(error, coll) {
                 coll.find().toArray(function (error, result) {
                         for(i = 0; i < result.length; i++){
-                                if(!result[i].goal["sent_email"] && 
+                                if(!result[i].goal["sent_email"] &&
                                    result[i].email != "" /*&& result[i].email != null*/){
                                         //find diff in days
                                         one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
@@ -190,8 +190,6 @@ function sendEmail() {
                                         diff_days = Math.round(Math.abs((current_time.getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
                                         if(diff_days>7){
                                                 // SEND EMAIL
-                                                result[i].sent_email = true;
-                                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
                                                 var mailOptions = {
                                                     from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
                                                     to: result[i]["email"], // list of receivers
@@ -203,6 +201,8 @@ function sendEmail() {
                                                     if(error){
                                                         console.log(error);
                                                     }
+													result[i].sent_email = true;
+	                                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
                                                     // Uncomment to understand what is happening
                                                     console.log('Message sent: ' + info.response);
                                                 });
