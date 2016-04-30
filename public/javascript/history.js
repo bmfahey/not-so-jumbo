@@ -70,11 +70,11 @@ function login_success() {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
-	    		alert(result);
+	    		//alert(result);
 	    		//if (result) {
-		    		requestData = JSON.parse(result);
-		    		//console.log(JSON.parse(result));
-		    		console.log(requestData);
+		    		//requestData = JSON.parse(result);
+		    		console.log(result);
+		    		//console.log(requestData);
 		    		//google.charts.load('current', {'packages':['line']});
 	    			//google.charts.setOnLoadCallback(function(){ drawChart(result) });
 	    		//}
