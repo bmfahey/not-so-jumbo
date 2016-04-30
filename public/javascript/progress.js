@@ -63,7 +63,7 @@ function login_success() {
                 alert("Sorry, that didn't submit! Try again.");
             },
             success: function(result) {
-                if (result == {} || (result.fat_goal == "" && result.pro_goal == "" && result.cal_goal == "")) {
+                if (result == {} || result.fat_goal == "") {
                     $("#goal-display").val("Something went wrong! Make sure you are logged into Facebook and have set a goal.");
                 }
                 var fat = parseInt(parseFloat(result.fat) * 100);
