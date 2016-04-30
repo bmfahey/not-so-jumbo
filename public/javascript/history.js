@@ -81,11 +81,11 @@ function login_success() {
 
 function drawChart(result) {
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Day');
-      data.addColumn('number', 'Fat');
+      var dataFat = new google.visualization.DataTable();
+      dataFat.addColumn('string', 'Day');
+      dataFat.addColumn('number', 'Fat');
 
-      data.addRows([
+      dataFat.addRows([
         ["Sun", result[0].days[0].fat],
         ["Mon", result[0].days[1].fat],
         ["Tues", result[0].days[2].fat],
@@ -95,7 +95,7 @@ function drawChart(result) {
         ["Sat", result[0].days[6].fat]
       ]);
 
-      var options = {
+      var optionsFat = {
         chart: {
           title: 'Fat Consumed in this week',
           subtitle: 'in grams (g)'
@@ -112,7 +112,39 @@ function drawChart(result) {
         },
       };
 
-      var chart = new google.charts.Line(document.getElementById('fat_chart'));
+      var dataProtein = new google.visualization.DataTable();
+      dataProtein.addColumn('string', 'Day');
+      dataProtein.addColumn('number', 'Protein');
 
-      chart.draw(data, options);
+      dataProtein.addRows([
+        ["Sun", result[0].days[0].protein],
+        ["Mon", result[0].days[1].protein],
+        ["Tues", result[0].days[2].protein],
+        ["Wed", result[0].days[3].protein],
+        ["Thurs", result[0].days[4].protein],
+        ["Fri", result[0].days[5].protein],
+        ["Sat", result[0].days[6].protein]
+      ]);
+
+      var optionsProtein = {
+        chart: {
+          title: 'Protein Consumed in this week',
+          subtitle: 'in grams (g)'
+        },
+        width: 900,
+        height: 500,
+        series: {
+          0: {axis: "Protein"},
+        },
+        axes: {
+          y: {
+            Protein: {label: "Protein (g)"},
+          }
+        },
+      };
+
+      var chart = new google.charts.Line(document.getElementById('fat_chart'));
+	  chart.draw(dataFat, optionsFat);
+	  var chart = new google.charts.Line(document.getElementById('prot_chart'));
+	  chart.draw(dataProtein, optionsProtein);
 }
