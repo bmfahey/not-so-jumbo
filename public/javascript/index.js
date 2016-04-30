@@ -85,7 +85,7 @@ function buttonListen(){
           all_results_str = "";
           for (i = 0; i < result.list.item.length; i++) {
               num = (result.list.item[i].ndbno).toString();
-              numbers.insert(num);
+              numbers[i] = (num);
               all_results_str += "<a onclick = populate_info(" + i +") class='list-group-item'>" + result.list.item[i].name + "</a>";
           }
           $("#results").html(all_results_str);
