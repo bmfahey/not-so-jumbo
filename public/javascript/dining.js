@@ -69,15 +69,16 @@ function display_dining()
     //Dewick
     $.get("https://tuftsdiningdata.herokuapp.com/menus/dewick/"+day+"/"+month+"/"+2016, function(data){
                 //check for Brunch
+                output = '';
                 var count = 0;
                 for (key in data.data.Breakfast)
                 {
                     count += 1;
                 }
                 if(count === 0)
-                    output += "<div id='dewick'><h1>Dewick</h1><h4>Brunch</h4>";
+                    output += "<div class='menu'><h1>Dewick</h1><h4>Brunch</h4>";
                 else {
-                    output += "<div id='dewick'><h1>Dewick</h1><h4>Breakfast</h4>";
+                    output += "<div id='menu'><h1>Dewick</h1><h4>Breakfast</h4>";
                     for (key in data.data.Breakfast)
                     {
                         output += "<h5>"+key+"</h5><ul>";
@@ -123,9 +124,9 @@ function display_dining()
                     count += 1;
                 }
                 if(count === 0)
-                    output += "<div id='carm'><h1>Carmichael</h1><h4>Brunch</h4>";
+                    output += "<div id='menu'><h1>Carmichael</h1><h4>Brunch</h4>";
                 else {
-                    output += "<div id='carm'><h1>Carmichael</h1><h4>Breakfast</h4>";
+                    output += "<div id='menu'><h1>Carmichael</h1><h4>Breakfast</h4>";
                     for (key in data.data.Breakfast)
                     {
                         output += "<h5>"+key+"</h5><ul>";
