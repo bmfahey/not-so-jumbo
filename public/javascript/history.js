@@ -70,6 +70,7 @@ function login_success() {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
+	    		alert(result);
 	    		//if (result) {
 		    		//requestData = JSON.parse(result);
 		    		console.log(result);
