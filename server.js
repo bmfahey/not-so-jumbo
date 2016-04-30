@@ -209,7 +209,6 @@ app.post('/submitHistory', function(request, response){
 			} else {
 				response.send(500);
 			}
-			}
 		});
 	});
 });
