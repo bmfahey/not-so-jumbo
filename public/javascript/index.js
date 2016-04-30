@@ -107,7 +107,6 @@ function buttonListen(){
         }
 
         function populate_info(number) {
-        console.log(number);
           numstring = (numbers[number]).toString();
           while (numstring.length < 5) {
               numstring = "0" + numstring;
