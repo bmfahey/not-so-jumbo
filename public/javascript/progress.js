@@ -66,20 +66,20 @@ function login_success() {
                 var fat = parseInt(parseFloat(result.fat) * 100);
                 var protein = parseInt(parseFloat(result.protein) * 100);
                 var calories = parseInt(parseFloat(result.calories) * 100);
+                $("#fatprog").html(fat+"%");
                 if (fat > 100) {
                     fat = 100;
                 }
+                $("#fatprog").css('width',fat+"%");
+                $("#proprog").html(protein+"%");
                 if (protein > 100) {
                     protein = 100;
                 }
+                $("#proprog").css('width',protein+"%");
+                $("#calprog").html(calories+"%");
                 if (calories > 100) {
                     calories = 100;
                 }
-                $("#fatprog").html(fat+"%");
-                $("#fatprog").css('width',fat+"%");
-                $("#proprog").html(protein+"%");
-                $("#proprog").css('width',protein+"%");
-                $("#calprog").html(calories+"%");
                 $("#calprog").css('width',calories+"%");
                 var fat_goal = result.fat_goal;
                 var protein_goal = result.pro_goal;
