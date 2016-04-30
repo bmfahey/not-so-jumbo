@@ -69,12 +69,13 @@ function login_success() {
 	    		alert("Sorry, this did not process!");
 	    	},
 	    	success: function(result) {
-	    		requestData = $.parseJSON(result);
-	    		console.log(result);
-	    		console.log(requestData);
-	    		google.charts.load('current', {'packages':['line']});
-    			google.charts.setOnLoadCallback(drawChart);
-
+	    		if (result) {
+		    		requestData = JSON.parse(result);
+		    		console.log(result);
+		    		console.log(requestData);
+		    		google.charts.load('current', {'packages':['line']});
+	    			google.charts.setOnLoadCallback(drawChart);
+	    		}
 	    	}
 	   	});
     });
