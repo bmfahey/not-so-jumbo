@@ -103,17 +103,30 @@ function display_dining()
     });
     $.get("https://tuftsdiningdata.herokuapp.com/menus/carm/"+day+"/"+month+"/"+2016, function(data){
                 output = '';
-                output += "<div id='carm'><h1>Carmichael</h1><h4>Breakfast</h4>";
+                var count = 0;
+
+                //check for Brunch
                 for (key in data.data.Breakfast)
                 {
-                    output += "<h5>"+key+"</h5><ul>";
-                    for(j=0; j<data["data"]["Breakfast"][key].length; j++)
-                    {
-                        output += "<li>"+data["data"]["Breakfast"][key][j]+"</li>";
-                    }
-                    output += "</ul>";
+                    count += 1;
                 }
-                output += "<h4>Lunch</h4>";
+                if(count === 0)
+                    output += "<div id='carm'><h1>Carmichael</h1><h4>Brunch</h4>";
+                else {
+                    output += "<div id='carm'><h1>Carmichael</h1><h4>Breakfast</h4>";
+                    for (key in data.data.Breakfast)
+                    {
+                        output += "<h5>"+key+"</h5><ul>";
+                        for(j=0; j<data["data"]["Breakfast"][key].length; j++)
+                        {
+                            output += "<li>"+data["data"]["Breakfast"][key][j]+"</li>";
+                        }
+                        output += "</ul>";
+                    }
+                    output += "<h4>Lunch</h4>";
+                }
+
+                //Lunch and Dinner always there
                 for (key in data.data.Lunch)
                 {
                     output += "<h5>"+key+"</h5><ul>";
