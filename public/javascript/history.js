@@ -83,7 +83,7 @@ function login_success() {
 
 function drawChart(result) {
 
-      var data = new google.visualization.DataTable();
+      var data = new google.visualization.DataTable(result);
       data.addColumn('string', 'Day');
       data.addColumn('number', 'Fat');
 
