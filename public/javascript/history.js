@@ -65,7 +65,7 @@ function login_success() {
 	    	type: "POST",
 	    	data: "fb_id=" + id_number,
 	    	url: "/submitHistory",
-	    	datatype: "json",
+	    	dataType: "json",
 	    	failure: function(result) {
 	    		alert("Sorry, this did not process!");
 	    	},
