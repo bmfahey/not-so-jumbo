@@ -65,6 +65,7 @@ function login_success() {
             success: function(result) {
                 if (result == {} || result.fat_goal == "") {
                     $("#goal-display").val("Something went wrong! Make sure you are logged into Facebook and have set a goal.");
+                    return;
                 }
                 var fat = parseInt(parseFloat(result.fat) * 100);
                 var protein = parseInt(parseFloat(result.protein) * 100);
