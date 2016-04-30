@@ -72,7 +72,7 @@ function login_success() {
 	    		//if (result) {
 		    		//requestData = JSON.parse(result);
 		    		console.log(result);
-		    		console.log(requestData);
+		    		//console.log(requestData);
 		    		google.charts.load('current', {'packages':['line']});
 	    			google.charts.setOnLoadCallback(drawChart);
 	    		//}
