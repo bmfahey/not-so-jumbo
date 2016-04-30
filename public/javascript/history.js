@@ -60,6 +60,18 @@ function login_success() {
         $("#name").html(response.name);
         $('#login').hide();
         $("#logout").show();
+
+        $.ajax({
+	    	type: "POST",
+	    	data: "id=" + id_number,
+	    	url: "/submitHistory",
+	    	failure: function(result) {
+	    		alert("Sorry, this did not process!");
+	    	},
+	    	success: function(result) {
+	    		console.log(result);
+	    	}
+	   	});
     });
 }
 

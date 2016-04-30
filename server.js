@@ -245,6 +245,9 @@ router.get("/dining", function(request,response) {
 	response.sendFile(path+"dining.html");
 });
 
+router.get("/history", function(request, response) {
+	response.sendFile(path+"history.html");
+});
 app.use("/",router);
 
 app.listen(process.env.PORT || 8888);
