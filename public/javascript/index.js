@@ -106,7 +106,7 @@ function buttonListen(){
         console.log(number);
           numstring = number.toString();
           while (numstring.length < 5) {
-              numstring = "0" + number;
+              numstring = "0" + numstring;
           }
           window.location.hash = "#food-input-manual";
           $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + numbstring + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
