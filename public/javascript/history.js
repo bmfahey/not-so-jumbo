@@ -114,7 +114,7 @@ function drawChart() {
         },
       };
 
-      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+      var chart = new google.charts.Line(document.getElementById('fat_chart'));
 
       chart.draw(data, options);
 }
