@@ -100,5 +100,40 @@ function display_dining()
                 }
                 $('#dewick_box').html(output);
 
-    })
+    });
+    $.get("https://tuftsdiningdata.herokuapp.com/menus/carm/"+day+"/"+month+"/"+2016, function(data){
+                output = '';
+                output += "<div id='carm'><h1>Carmichael</h1><h4>Breakfast</h4>";
+                for (key in data.data.Breakfast)
+                {
+                    output += "<h5>"+key+"</h5><ul>";
+                    for(j=0; j<data["data"]["Breakfast"][key].length; j++)
+                    {
+                        output += "<li>"+data["data"]["Breakfast"][key][j]+"</li>";
+                    }
+                    output += "</ul>";
+                }
+                output += "<h4>Lunch</h4>";
+                for (key in data.data.Lunch)
+                {
+                    output += "<h5>"+key+"</h5><ul>";
+                    for(j=0; j<data["data"]["Lunch"][key].length; j++)
+                    {
+                        output += "<li>"+data["data"]["Lunch"][key][j]+"</li>";
+                    }
+                    output += "</ul>";
+                }
+                output += "<h4>Dinner</h4>";
+                for (key in data.data.Dinner)
+                {
+                    output += "<h5>"+key+"</h5><ul>";
+                    for(j=0; j<data["data"]["Dinner"][key].length; j++)
+                    {
+                        output += "<li>"+data["data"]["Dinner"][key][j]+"</li>";
+                    }
+                    output += "</ul></div>";
+                }
+                $('#carm_box').html(output);
+
+    });
 }
