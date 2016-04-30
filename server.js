@@ -1,5 +1,7 @@
 var express = require('express');
 
+var nodemailer = require('nodemailer');
+
 var bodyParser = require('body-parser');
 var validator = require('validator');
 
