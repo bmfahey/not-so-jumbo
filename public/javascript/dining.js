@@ -68,34 +68,37 @@ function display_dining()
     output = '';
     //Dewick
     $.get("https://tuftsdiningdata.herokuapp.com/menus/dewick/"+day+"/"+month+"/"+2016, function(data){
+                output += "<h1>Dewick</h1><h4>Breakfast</h4>";
                 for (key in data.data.Breakfast)
                 {
-                    output += "<h3>"+key+"</h3><ul>";
+                    output += "<h5>"+key+"</h5><ul>";
                     for(j=0; j<data["data"]["Breakfast"][key].length; j++)
                     {
                         output += "<li>"+data["data"]["Breakfast"][key][j]+"</li>";
                     }
                     output += "</ul>";
                 }
+                output += "<h4>Lunch</h4>";
                 for (key in data.data.Lunch)
                 {
-                    output += "<h3>"+key+"</h3><ul>";
+                    output += "<h5>"+key+"</h5><ul>";
                     for(j=0; j<data["data"]["Lunch"][key].length; j++)
                     {
                         output += "<li>"+data["data"]["Lunch"][key][j]+"</li>";
                     }
                     output += "</ul>";
                 }
+                output += "<h4>Dinner</h4>";
                 for (key in data.data.Dinner)
                 {
-                    output += "<h3>"+key+"</h3><ul>";
+                    output += "<h5>"+key+"</h5><ul>";
                     for(j=0; j<data["data"]["Dinner"][key].length; j++)
                     {
                         output += "<li>"+data["data"]["Dinner"][key][j]+"</li>";
                     }
                     output += "</ul>";
                 }
-                $('#dewick_box').html(output);
+                $('#dewick_sug').html(output);
 
     })
 }
