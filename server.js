@@ -191,8 +191,9 @@ function sendEmail() {
                                                     from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
                                                     to: result[i]["email"], // list of receivers
                                                     subject: 'Update your goal!', // Subject line
-                                                    text: "YOUR PROGRESS\n"+"TESTING", // plaintext body
-                                                    html: '<h1>YOUR PROGRESS</h1><br />TESTING' // html body
+                                                    text: "It's been over a week since you updated your goal, "
+																+ "set a new one to continue tracking your progress!"
+																+ "\n\n https://not-so-jumbo.herokuapp.com/goal", // plaintext body
                                                 };
                                                 transporter.sendMail(mailOptions, function(error, info){
                                                     if(error){
