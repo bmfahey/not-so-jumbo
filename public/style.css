@@ -28,3 +28,8 @@ img {
 .navbar-toggle {
 	float:right;
 }
+
+.chart {
+	width: 95%;
+	height: 80%;
+}

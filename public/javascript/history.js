@@ -98,8 +98,8 @@ function drawChart(result) {
           title: 'Fat Consumed in this week',
           subtitle: 'in grams (g)'
         },
-        width: 95%,
-        height: 90%,
+      //  width: 95%,
+       // height: 90%,
         series: {
           0: {axis: "Fat"},
         },
@@ -129,8 +129,8 @@ function drawChart(result) {
           title: 'Protein Consumed in this week',
           subtitle: 'in grams (g)'
         },
-        width: 95%,
-        height: 90%,
+       // width: 95%,
+       // height: 90%,
         series: {
           0: {axis: "Protein"},
         },
@@ -160,8 +160,8 @@ function drawChart(result) {
           title: 'Calories Consumed in this week',
           subtitle: 'in Calorie (C)'
         },
-        width: 95%,
-        height: 90%,
+      //  width: 95%,
+       // height: 90%,
         series: {
           0: {axis: "Calorie"},
         },
