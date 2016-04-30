@@ -20,8 +20,3 @@ img {
 	height: 60px;
 	padding-left: 4px;
 }
-
-#results {
-	overflow-y:scroll;
-	height:350px;
-}

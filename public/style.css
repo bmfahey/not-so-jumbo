@@ -41,3 +41,8 @@ img {
 	margin-bottom: 5%;
 	margin-top: 5%;
 }
+
+#results {
+	overflow-y:scroll;
+	height:350px;
+}
