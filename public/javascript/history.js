@@ -95,7 +95,7 @@ function drawChart(result) {
 
       var optionsFat = {
         chart: {
-          title: 'Fat Consumed in this week',
+          title: 'Fat Consumed This Week',
           subtitle: 'in grams (g)'
         },
         series: {
@@ -124,7 +124,7 @@ function drawChart(result) {
 
       var optionsProtein = {
         chart: {
-          title: 'Protein Consumed in this week',
+          title: 'Protein Consumed This Week',
           subtitle: 'in grams (g)'
         },
         series: {
@@ -153,7 +153,7 @@ function drawChart(result) {
 
       var optionsCal = {
         chart: {
-          title: 'Calories Consumed in this week',
+          title: 'Calories Consumed This Week ',
           subtitle: 'in Calorie (C)'
         },
         series: {
@@ -161,7 +161,7 @@ function drawChart(result) {
         },
         axes: {
           y: {
-            Calorie: {label: "Calorie(C)"},
+            Calorie: {label: "Calorie (C)"},
           }
         },
       };
