@@ -102,6 +102,7 @@ function display_dining()
 
     });
     $.get("https://tuftsdiningdata.herokuapp.com/menus/carm/"+day+"/"+month+"/"+2016, function(data){
+                output = '';
                 output += "<div id='carm'><h1>Carmichael</h1><h4>Breakfast</h4>";
                 for (key in data.data.Breakfast)
                 {
