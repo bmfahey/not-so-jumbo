@@ -74,7 +74,7 @@ function login_success() {
 		    		console.log(result);
 		    		//console.log(requestData);
 		    		google.charts.load('current', {'packages':['line']});
-	    			google.charts.setOnLoadCallback(drawChart(result));
+	    			google.charts.setOnLoadCallback(function(){ drawChart(result) });
 	    		//}
 	    	}
 	   	});
@@ -83,7 +83,7 @@ function login_success() {
 
 function drawChart(result) {
 
-      var data = new google.visualization.DataTable(result);
+      var data = new google.visualization.DataTable();
       data.addColumn('string', 'Day');
       data.addColumn('number', 'Fat');
 
