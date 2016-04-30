@@ -1,4 +1,5 @@
 var id_number = -1;
+var numbers = {};
 
 function buttonListen(){
     $("#logout").hide();
@@ -13,6 +14,7 @@ function buttonListen(){
     });
 
     $("#food_search").click(function() {
+        numbers = {};
         if (id_number == -1) {
             $("#results").html("Please Log In to Facebook!");
         } else {
@@ -25,6 +27,7 @@ function buttonListen(){
 
     $("#search-input").keyup(function(event) {
         if (event.which == 13) {
+            numbers = {};
             if (id_number == -1) {
                 $("#results").html("Please Log In to Facebook");
             } else {
@@ -82,7 +85,8 @@ function buttonListen(){
           all_results_str = "";
           for (i = 0; i < result.list.item.length; i++) {
               num = (result.list.item[i].ndbno).toString();
-              all_results_str += "<a onclick = populate_info(" + num +") class='list-group-item'>" + result.list.item[i].name + "</a>";
+              numbers.insert(num);
+              all_results_str += "<a onclick = populate_info(" + i +") class='list-group-item'>" + result.list.item[i].name + "</a>";
           }
           $("#results").html(all_results_str);
           }
@@ -104,7 +108,7 @@ function buttonListen(){
 
         function populate_info(number) {
         console.log(number);
-          numstring = number.toString();
+          numstring = (numbers[i]).toString();
           while (numstring.length < 5) {
               numstring = "0" + numstring;
           }
