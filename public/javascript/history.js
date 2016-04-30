@@ -154,7 +154,7 @@ function drawChart(result) {
       var optionsCal = {
         chart: {
           title: 'Calories Consumed This Week ',
-          subtitle: 'in Calorie (C)'
+          subtitle: 'in Calories (C)'
         },
         series: {
           0: {axis: "Calorie"},
