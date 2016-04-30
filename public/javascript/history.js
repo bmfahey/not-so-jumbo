@@ -71,10 +71,10 @@ function login_success() {
 	    	success: function(result) {
 	    		//if (result) {
 		    		//requestData = JSON.parse(result);
-		    		console.log(result);
+		    		console.log(JSON.parse(result.responseText));
 		    		//console.log(requestData);
-		    		google.charts.load('current', {'packages':['line']});
-	    			google.charts.setOnLoadCallback(function(){ drawChart(result) });
+		    		//google.charts.load('current', {'packages':['line']});
+	    			//google.charts.setOnLoadCallback(function(){ drawChart(result) });
 	    		//}
 	    	}
 	   	});
