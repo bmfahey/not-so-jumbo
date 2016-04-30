@@ -81,7 +81,7 @@ function buttonListen(){
           window.location.hash = "#results";
           all_results_str = "";
           for (i = 0; i < result.list.item.length; i++) {
-              num = result.list.item[i].ndbno + "";
+              num = (result.list.item[i].ndbno).toString();
               all_results_str += "<a onclick = populate_info(" + num +") class='list-group-item'>" + result.list.item[i].name + "</a>";
           }
           $("#results").html(all_results_str);
@@ -109,7 +109,7 @@ function buttonListen(){
               numstring = "0" + numstring;
           }
           window.location.hash = "#food-input-manual";
-          $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + numbstring + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
+          $.ajax({url: "http://api.nal.usda.gov/ndb/reports/?ndbno=" + numstring + "&type=f&format=json&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
                 $("#food_name").val(result.report.food.name);
                 $("#protein").val(result.report.food.nutrients[3].value);
                 $("#calories").val(result.report.food.nutrients[1].value);
