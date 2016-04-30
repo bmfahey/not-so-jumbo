@@ -6,7 +6,8 @@
                 "mongodb": "latest",
                 "body-parser": "latest",
                 "validator": "latest",
-                "node-crontab": "latest"
+                "node-crontab": "latest",
+                "nodemailer":"latest"
         },
         "scripts" : {
         	"start" : "node server.js"
