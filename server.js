@@ -186,7 +186,7 @@ function sendEmail() {
                                    result[i].email != "" /*&& result[i].email != null*/){
                                         //find diff in days
                                         var one_day = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                                        var current_time = new Data();
+                                        var current_time = new Date();
                                         var diff_days = Math.round(Math.abs((current_time.getTime() - result[i].goal["time_stamp"].getTime())/(one_day)));
                                         if(diff_days>7){
                                                 // SEND EMAIL
