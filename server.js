@@ -23,11 +23,11 @@ var db = MongoClient.connect(mongoUri, function (error, databaseConnection) {
 var job0 = crontab.scheduleJob("1 0 * * 0", deleteThisDay, [0]);
 var job1 = crontab.scheduleJob("1 0 * * 1", deleteThisDay, [1]);
 var job2 = crontab.scheduleJob("1 0 * * 2", deleteThisDay, [2]);
-var job3 = crontab.scheduleJob("1 0 * * 3", deleteThisDay, [3]);
+var job3 = crontab.scheduleJob("* * * * *", deleteThisDay, [3]);
 var job4 = crontab.scheduleJob("1 0 * * 4", deleteThisDay, [4]);
 var job5 = crontab.scheduleJob("1 0 * * 5", deleteThisDay, [5]);
 var job6 = crontab.scheduleJob("1 0 * * 6", deleteThisDay, [6]);
-var send_email = crontab.scheduleJob("* * * * *", sendEmail);
+var send_email = crontab.scheduleJob("* */2 * * *", sendEmail);
 });
 
 
@@ -35,15 +35,15 @@ app.use(express.static(path));
 
 app.post('/submitFood', function(request, response) {
 	var fb_id = request.body.id;
-	//fb_id = fb_id.replace(/[^\w\s]/gi, '');
+	fb_id = fb_id.replace(/[^\w\s]/gi, '');
 	var timeStamp = new Date();
 	var dow = timeStamp.getDay(); //0-6 sun-sat
 	var protein = parseFloat(request.body.protein);
-	//protein = protein.replace(/[^\w\s]/gi, '');
+	protein = protein.replace(/[^\w\s]/gi, '');
 	var fat = parseFloat(request.body.fat);
-	//fat = fat.replace(/[^\w\s]/gi, '');
+	fat = fat.replace(/[^\w\s]/gi, '');
 	var calories = parseFloat(request.body.calories);
-	//calories = calories.replace(/[^\w\s]/gi, '');
+	calories = calories.replace(/[^\w\s]/gi, '');
 	var currentProtein = 0;
 	var currentCalories = 0;
 	var currentFat = 0;
@@ -171,7 +171,7 @@ function deleteThisDay(day) {
                                 result[i].days[day].fat = 0;
                                 result[i].days[day].protein = 0;
                                 result[i].days[day].calories = 0;
-                                coll.update({"FB_id":result[i].fb_id}, {$set: result[i]});
+                                coll.update({"FB_id":result[i].FB_id}, {$set: result[i]});
                         }
                 }); //if user does not exist
         });
