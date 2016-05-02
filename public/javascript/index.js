@@ -239,7 +239,7 @@ function buttonListen(){
 
                           console.log("serv: "+serv);
                           console.log("result: " + result);
-                          all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
+                          all_results_str += "<a onclick = populate_info_dining("+name.toString()+","+calories+","+fat+","+protein+","+serv.toString()+") class='list-group-item'>" + name + "</a>";
 
                         $("#results").html(all_results_str);
                     }
