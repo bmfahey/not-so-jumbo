@@ -24,7 +24,7 @@ function buttonListen(){
                     $("#search-input").val("");
                     window.location.hash = "#results";
                     all_results_str = "";
-                    for each (key in result) {
+                    for (key of result) {
                         name = key;
                         calories = result[key].calories;
                         fat = result[key].fat;
@@ -55,7 +55,7 @@ function buttonListen(){
                         $("#search-input").val("");
                         window.location.hash = "#results";
                         all_results_str = "";
-                        for each (key in result) {
+                        for (key of result) {
                             name = key;
                             calories = result[key].calories;
                             fat = result[key].fat;
