@@ -33,6 +33,10 @@ var send_email = crontab.scheduleJob("0 * * * *", sendEmail);
 
 app.use(express.static(path));
 
+app.get("/tuftsSuggestions", function(request, response) {
+	response.sendFile(path+"tufts_dining_data.json");
+});
+
 app.post('/submitFood', function(request, response) {
 	var fb_id = request.body.id;
 	fb_id = fb_id.replace(/[^\w\s]/gi, '');
@@ -290,9 +294,6 @@ router.get("/history", function(request, response) {
 	response.sendFile(path+"history.html");
 });
 
-router.get("/tuftsSuggestions", function(request, response) {
-	response.sendFile(path+"tufts_dining_data.json");
-});
 
 app.use("/",router);
 
