@@ -144,7 +144,7 @@ function buttonListen(){
                             calories: 619,
                             protein: 72.3,
                             fat: 23.4,
-                            serving_size, "1"
+                            serving_size: "1"
                           },
                           "The Harvard Square": {
                             calories: 547,
