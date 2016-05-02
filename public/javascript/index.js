@@ -338,14 +338,14 @@ function buttonListen(){
           fat = parseFloat(fat);
           protein = parseFloat(protein);
           name = name.toString().replace(/_/g, ' ');
-          serv = serv.toString();
+          serv = serv.toString().replace(/_/g, ' ');
 
           window.location.hash = "#food-input-manual";
             $("#food_name").val(name);
             $("#protein").val(protein);
             $("#calories").val(calories);
             $("#fat").val(fat);
-            $("#serving-size").html(serv);
+            $("#serving-size").html("Serving size: " + serv);
         }
 
         window.fbAsyncInit = function() {
