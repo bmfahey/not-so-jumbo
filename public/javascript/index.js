@@ -19,9 +19,27 @@ function buttonListen(){
             $("#results").html("Please Log In to Facebook!");
         } else {
             search_string = $("#search-input").val();
-            search_string = search_string.replace("%","%25");
-        $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
-              display_search_results(result);
+            if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
+                $.ajax({url: "/tuftsSuggestions" , success: function(result) {
+                    $("#search-input").val("");
+                    window.location.hash = "#results";
+                    all_results_str = "";
+                    for each (key in result) {
+                        name = key;
+                        calories = result[key].calories;
+                        fat = result[key].fat;
+                        protein = result[key].protein;
+                        serv = result[key].serving_size;
+                        all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
+                    }
+                    $("#results").html(all_results_str);
+                }});
+            }
+            else {
+                search_string = search_string.replace("%","%25");
+                $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
+                    display_search_results(result);
+            }
         }});
     }});
 
@@ -32,16 +50,27 @@ function buttonListen(){
                 $("#results").html("Please Log In to Facebook");
             } else {
                 search_string = $("#search-input").val();
-                search_string = search_string.replace("%","%25");
-                $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", statusCode: {0: function() {
-                    $("#results").html("Sorry, no results. Please widen your search!");
-                }, 404: function() {
-                    $("#results").html("Sorry, no results. Please widen your search!");
-                }},
-                    success: function(result) {
+                if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
+                    $.ajax({url: "/tuftsSuggestions" , success: function(result) {
+                        $("#search-input").val("");
+                        window.location.hash = "#results";
+                        all_results_str = "";
+                        for each (key in result) {
+                            name = key;
+                            calories = result[key].calories;
+                            fat = result[key].fat;
+                            protein = result[key].protein;
+                            serv = result[key].serving_size;
+                            all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
+                        }
+                        $("#results").html(all_results_str);
+                    }});
+                }
+                else {
+                    search_string = search_string.replace("%","%25");
+                    $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
                         display_search_results(result);
-                    }
-                });
+                }
             }
         }
     });
@@ -119,6 +148,21 @@ function buttonListen(){
                 $("#fat").val(result.report.food.nutrients[4].value);
                 $("#serving-size").html("Serving Size: 100 g");
           }});
+        }
+
+        function populate_info_dining(name, calories, fat, protein, serv) {
+          calories = parseFloat(calories);
+          fat = parseFloat(fat);
+          protein = parseFloat(protein);
+          name = name.toString();
+          serv = serv.toString();
+
+          window.location.hash = "#food-input-manual";
+            $("#food_name").val(name);
+            $("#protein").val(protein);
+            $("#calories").val(calories);
+            $("#fat").val(fat);
+            $("#serving-size").html(serv);
         }
 
         window.fbAsyncInit = function() {
