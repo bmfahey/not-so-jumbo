@@ -34,6 +34,8 @@ var send_email = crontab.scheduleJob("0 * * * *", sendEmail);
 app.use(express.static(path));
 
 app.get("/tuftsSuggestions", function(request, response) {
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	response.sendFile(path+"tufts_dining_data.json");
 });
 
