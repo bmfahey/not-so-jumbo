@@ -19,9 +19,10 @@ function buttonListen(){
             $("#results").html("Please Log In to Facebook!");
         } else {
             search_string = $("#search-input").val();
+            $("#search-input").val("");
             if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                $.ajax({url: "/tuftsSuggestions" , success: function(result) {
-                    $("#search-input").val("");
+                $.ajax({url: "/tuftsSuggestions" , success: function(res) {
+                    result = JSON.parse(res);
                     window.location.hash = "#results";
                     all_results_str = "";
                     for (key in result) {
@@ -51,12 +52,17 @@ function buttonListen(){
                 $("#results").html("Please Log In to Facebook");
             } else {
                 search_string = $("#search-input").val();
+                $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                    $.ajax({url: "/tuftsSuggestions" , success: function(result) {
-                        $("#search-input").val("");
+                    console.log("recognized as common meals");
+                    $.ajax({url: "http://not-so-jumbo.herokuapp.com/tuftsSuggestions" , success: function(result) {
+                        console.log("got a response: " + result);
+                        result = JSON.parse(result);
+                        console.log("response is parsed: " + result);
                         window.location.hash = "#results";
                         all_results_str = "";
                         for (key in result) {
+                            console.log("entered for loop");
                             name = key;
                             calories = result[key].calories;
                             fat = result[key].fat;
@@ -67,7 +73,7 @@ function buttonListen(){
                             all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
                         }
                         $("#results").html(all_results_str);
-                    }});
+                    }, failure: function() {console.log("FAIL");}});
                 }
                 else {
                     search_string = search_string.replace("%","%25");
