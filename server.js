@@ -188,7 +188,7 @@ function sendEmail() {
 											coll.update({"FB_id":result[i].FB_id}, {$set: result[i]});
                                                 // SEND EMAIL
                                                 var mailOptions = {
-                                                    from: '"Not So Jumbo" <no-relpy@not.so.jumbo.heroku.com>', // sender address
+                                                    from: '"Not So Jumbo" <no-reply@not.so.jumbo.heroku.com>', // sender address
                                                     to: result[i]["email"], // list of receivers
                                                     subject: 'Update your goal!', // Subject line
                                                     text: "It's been over a week since you updated your goal, "
@@ -289,6 +289,11 @@ router.get("/dining", function(request,response) {
 router.get("/history", function(request, response) {
 	response.sendFile(path+"history.html");
 });
+
+router.get("/tuftsSuggestions", function(request, response) {
+	response.send(path+"../tufts_dining_data.json");
+});
+
 app.use("/",router);
 
 app.listen(process.env.PORT || 8888);
