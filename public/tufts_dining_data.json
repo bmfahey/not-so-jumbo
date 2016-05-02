@@ -3,7 +3,7 @@
     serving_size: "1 OZ",
     protein: 1.7,
     calories: 97,
-    fat: 9.7 
+    fat: 9.7
   },
   "Blueberry Yogurt": {
     serving_size: "1 OZ",
@@ -148,6 +148,5 @@
     protein: 19.1,
     fat: 17.1,
     serving_size: "7 wings"
-    },
   }
 }
