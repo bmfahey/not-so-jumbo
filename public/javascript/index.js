@@ -229,18 +229,18 @@ function buttonListen(){
                       all_results_str = "";
                       for (key in result) {
                           console.log("entered for loop");
-                          name = key;
+                          name = "'" + key.toString() + "'";
                           calories = result[key].calories;
                           fat = result[key].fat;
                           protein = result[key].protein;
-                          serv = result[key].serving_size;
+                          serv = "'" + (result[key].serving_size).toString() + "'";
                           console.log("name: "+name);
                           console.log("calories: "+calories);
 
                           console.log("serv: "+serv);
                           console.log("result: " + result);
                           console.log("should be the correct string:" + name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString());
-                          string_to_input = "'" + name.toString() + "'" + "," + "'" + calories.toString() + "'" +"," + "'" +fat.toString() + "'" + "," + "'" + protein.toString() + "'" + "," + "'" + serv.toString() + "'";
+                          string_to_input = name "," calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
                           all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name + "</a>";
 
                         $("#results").html(all_results_str);
