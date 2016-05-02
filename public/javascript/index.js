@@ -182,7 +182,7 @@ function buttonListen(){
                             fat: 24.1,
                             serving_size: "1"
                           },
-                          "Roasted Vegie Quesadilla": {
+                          "Roasted Veggie Quesadilla": {
                             calories: 503,
                             protein: 22.9,
                             fat: 19.5,
@@ -240,7 +240,8 @@ function buttonListen(){
                           console.log("serv: "+serv);
                           console.log("result: " + result);
                           console.log("should be the correct string:" + name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString());
-                          all_results_str += "<a onclick = populate_info_dining("+name.toString()+","+calories+","+fat+","+protein+","+serv.toString()+") class='list-group-item'>" + name + "</a>";
+                          string_to_input = name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString();
+                          all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name + "</a>";
 
                         $("#results").html(all_results_str);
                     }
