@@ -230,9 +230,9 @@ function buttonListen(){
                       for (key in result) {
                           console.log("entered for loop");
                           name = key;
-                          calories = result[key][calories];
-                          fat = result[key][fat];
-                          protein = result[key][protein];
+                          calories = result[key].calories;
+                          fat = result[key].fat;
+                          protein = result[key].protein;
                           serv = result[key].serving_size;
                           console.log("name: "+name);
                           console.log("calories: "+calories);
