@@ -73,6 +73,7 @@ function buttonListen(){
                             console.log("should be the correct string:" + name.toString().replace(/_/g, ' ') + "," + calories + "," + fat + "," + protein + "," + serv.toString());
                             string_to_input = name +","+ calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
                             all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";
+                        }
                       window.location.hash = "#results";
                       //all_results_str = "";
                       /*for (key in result) {
@@ -92,8 +93,8 @@ function buttonListen(){
                           all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";*/
 
                         $("#results").html(all_results_str);
-                    }
-                }
+                    //}
+                });
                 else {
                     search_string = search_string.replace("%","%25");
                     $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
