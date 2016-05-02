@@ -59,6 +59,7 @@ function buttonListen(){
                         //result = JSON.parse(result);
                         window.location.hash = "#results";
                         result = res.food;
+                        console.log(result);
                         all_results_str = "";
                         for (key in result) {
                             name = "'" + key.toString().replace(/ /g,'_') + "'";
