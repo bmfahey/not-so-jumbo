@@ -54,7 +54,8 @@ function buttonListen(){
                 search_string = $("#search-input").val();
                 $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                    $.get("https://not-so-jumbo.herokuapp.com/tuftsSuggestions" , function(res) {
+                    $.get("/tuftsSuggestions" , function(res) {
+                        console.log(res);
                         //result = JSON.parse(result);
                         window.location.hash = "#results";
                         result = res.food;
