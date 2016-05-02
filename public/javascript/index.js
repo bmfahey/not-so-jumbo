@@ -58,7 +58,7 @@ function buttonListen(){
                         console.log(res);
                         //result = JSON.parse(result);
                         window.location.hash = "#results";
-                        result = res.food;
+                        result = res[0].food;
                         console.log(result);
                         all_results_str = "";
                         for (key in result) {
