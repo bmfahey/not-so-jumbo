@@ -218,11 +218,11 @@ function buttonListen(){
                             fat: 4.8,
                             serving_size: "1"
                           },
-                          "'Honey Garlic Chicken Wings'": {
+                          "Honey Garlic Chicken Wings": {
                             calories: 307,
                             protein: 19.1,
                             fat: 17.1,
-                            serving_size: "'7 wings'"
+                            serving_size: "7 wings"
                           }
                       };
                       window.location.hash = "#results";
@@ -240,7 +240,7 @@ function buttonListen(){
                           console.log("serv: "+serv);
                           console.log("result: " + result);
                           console.log("should be the correct string:" + name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString());
-                          string_to_input = name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString();
+                          string_to_input = name.toString().replace(' ','%20') + "," + calories + "," + fat + "," + protein + "," + serv.toString().replace(' ','%20');
                           all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name + "</a>";
 
                         $("#results").html(all_results_str);
