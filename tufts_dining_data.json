@@ -1,60 +1,60 @@
 {
   "Cream Cheese": {
-    servering_size: "1 OZ",
+    serving_size: "1 OZ",
     protein: 1.7,
     calories: 97,
     fat: 9.7 
   },
   "Blueberry Yogurt": {
-    servering_size: "1 OZ",
+    serving_size: "1 OZ",
     protein: 1.2,
     calories: 20,
     fat: 0
   },
   "Assorted Bagels": {
-    servering_size:"1 EACH",
+    serving_size:"1 EACH",
     protein: 10.7,
     calories: 264,
     fat: 1
   },
   "1% Milk": {
-    servering_size:"1 OZ",
+    serving_size:"1 OZ",
     protein: 1,
     calories: 13,
     fat: 0.3
   },
   "Chocolate Low Fat Soft Serve Ice Cream": {
-    servering_size:"1 OZ",
+    serving_size:"1 OZ",
     protein: 1.3,
     calories: 39,
     fat: 1.1
   },
   "Hot Chocolate": {
-    servering_size:"1 OZ",
+    serving_size:"1 OZ",
     protein: 1,
     calories: 122,
     fat: 2
   },
   "Macintosh Apples": {
-    servering_size:"1 EACH",
+    serving_size:"1 EACH",
     protein: 0.3,
     calories: 62,
     fat: 0.2
   },
   "Apple Sauce": {
-    servering_size:"1 OZ",
+    serving_size:"1 OZ",
     protein: 0,
     calories: 12,
     fat: 0
   },
   "Cheese Pizza":{
-    servering_size: "1/8 of Pizza",
+    serving_size: "1/8 of Pizza",
     protein: 13.7,
     calories: 281,
     fat: 10.5
   },
   "Whole Eggs":{
-    servering_size: "1 EACh",
+    serving_size: "1 EACH",
     protein: 3.6,
     calories: 44,
     fat: 3
