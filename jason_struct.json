@@ -1,0 +1,16 @@
+{
+  meal_name: {
+    tod: "Breakfast/Lunch/Dinner"
+    meal: {
+      food_name: {
+        serving_size: ,
+        calories: ##,
+        protein: ##,
+        fat: ##
+      },
+      food_name:{
+
+      }
+    }
+  }
+}
