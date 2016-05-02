@@ -240,7 +240,7 @@ function buttonListen(){
                           console.log("serv: "+serv);
                           console.log("result: " + result);
                           console.log("should be the correct string:" + name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString());
-                          string_to_input = name.toString().replace(' ','%20') + "," + calories + "," + fat + "," + protein + "," + serv.toString().replace(' ','%20');
+                          string_to_input = name.toString().replace(/ /g,'%20') + "," + calories + "," + fat + "," + protein + "," + serv.toString().replace(' ','%20');
                           all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name + "</a>";
 
                         $("#results").html(all_results_str);
@@ -333,6 +333,7 @@ function buttonListen(){
         }
 
         function populate_info_dining(name, calories, fat, protein, serv) {
+        console.log("getting into populate info");
           calories = parseFloat(calories);
           fat = parseFloat(fat);
           protein = parseFloat(protein);
