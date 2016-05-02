@@ -230,11 +230,14 @@ function buttonListen(){
                       for (key in result) {
                           console.log("entered for loop");
                           name = key;
-                          calories = result[key].calories;
-                          fat = result[key].fat;
-                          protein = result[key].protein;
-                          serv = result[key].serving_size;
-                          console.log(serv);
+                          calories = result[key][calories];
+                          fat = result[key][fat];
+                          protein = result[key][protein];
+                          serv = result[key][serving_size];
+                          console.log("name: "+name);
+                          console.log("calories: "+calories);
+
+                          console.log("serv: "+serv);
                           console.log("result: " + result);
                           all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
 
