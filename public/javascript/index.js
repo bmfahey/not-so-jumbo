@@ -19,9 +19,10 @@ function buttonListen(){
             $("#results").html("Please Log In to Facebook!");
         } else {
             search_string = $("#search-input").val();
+            $("#search-input").val("");
             if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                $.ajax({url: "/tuftsSuggestions" , success: function(result) {
-                    $("#search-input").val("");
+                $.ajax({url: "/tuftsSuggestions" , success: function(res) {
+                    result = JSON.parse(res);
                     window.location.hash = "#results";
                     all_results_str = "";
                     for (key in result) {
@@ -51,13 +52,17 @@ function buttonListen(){
                 $("#results").html("Please Log In to Facebook");
             } else {
                 search_string = $("#search-input").val();
+                $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
+                    console.log("recognized as common meals");
                     $.ajax({url: "/tuftsSuggestions" , success: function(res) {
+                        console.log("got a response: " + res);
                         result = JSON.parse(res);
-                        $("#search-input").val("");
+                        console.log("response is parsed: " + result);
                         window.location.hash = "#results";
                         all_results_str = "";
                         for (key in result) {
+                            console.log("entered for loop");
                             name = key;
                             calories = result[key].calories;
                             fat = result[key].fat;
