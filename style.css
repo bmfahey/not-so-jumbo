@@ -25,3 +25,9 @@ img {
 	overflow-y:scroll;
 	height:350px;
 }
+
+.menu {
+	resize: none;
+	overflow-y: scroll;
+	max-height: 60%;
+}
