@@ -233,12 +233,13 @@ function buttonListen(){
                           calories = result[key][calories];
                           fat = result[key][fat];
                           protein = result[key][protein];
-                          serv = result[key][serving_size];
+                          serv = result[key].serving_size;
                           console.log("name: "+name);
                           console.log("calories: "+calories);
 
                           console.log("serv: "+serv);
                           console.log("result: " + result);
+                          console.log("should be the correct string:" + name.toString() + "," + calories + "," + fat + "," + protein + "," + serv.toString());
                           all_results_str += "<a onclick = populate_info_dining("+name.toString()+","+calories+","+fat+","+protein+","+serv.toString()+") class='list-group-item'>" + name + "</a>";
 
                         $("#results").html(all_results_str);
