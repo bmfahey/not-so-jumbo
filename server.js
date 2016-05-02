@@ -36,7 +36,11 @@ app.use(express.static(path));
 app.get("/tuftsSuggestions", function(request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	response.sendFile(path+"tufts_dining_data.json");
+	db.collection('tuftsSuggestions', function (error, coll) {
+		coll.find().toArray(function (error, result) {
+			response.json(result);
+		});
+	});
 });
 
 app.post('/submitFood', function(request, response) {
@@ -142,7 +146,6 @@ app.post('/sendProgress', function(request, response) {
 							var diff_days = Math.round(Math.abs((current_time.getTime() - goal_time.getTime())/(one_day)));
 							var current_dow = current_time.getDay();
 							var goal_dow = goal_time.getDay(); //dow goal was set
-							if(diff_days < 7) { //goal is outdated by week
 								for(var i=goal_dow; i<=goal_dow + Math.abs((current_dow - goal_dow)); i++) {
 									prog_fat += result[0].days[i%7].fat;
 									prog_prot += result[0].days[i%7].protein;
@@ -154,7 +157,6 @@ app.post('/sendProgress', function(request, response) {
 									prog_cal = prog_cal/result[0].goal.calories;
 								if(result[0].goal.protein != 0)
 									prog_prot = prog_prot/result[0].goal.protein;
-							}
 						}
 						response.json({"fat": prog_fat, "protein": prog_prot, "calories": prog_cal, "cal_goal": result[0].goal.calories, "fat_goal": result[0].goal.fat, "pro_goal" : result[0].goal.protein});
 					}

@@ -55,22 +55,15 @@ function buttonListen(){
                 $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
                     $.get("https://not-so-jumbo.herokuapp.com/tuftsSuggestions" , function(result) {
-                        result = JSON.parse(result);
+                        //result = JSON.parse(result);
                         window.location.hash = "#results";
                         all_results_str = "";
                         for (key in result) {
-                            console.log("entered for loop");
                             name = "'" + key.toString().replace(/ /g,'_') + "'";
                             calories = result[key].calories;
                             fat = result[key].fat;
                             protein = result[key].protein;
                             serv = "'" + (result[key].serving_size).toString().replace(/ /g,'_') + "'";
-                            console.log("name: "+name);
-                            console.log("calories: "+calories);
-
-                            console.log("serv: "+serv);
-                            console.log("result: " + result);
-                            console.log("should be the correct string:" + name.toString().replace(/_/g, ' ') + "," + calories + "," + fat + "," + protein + "," + serv.toString());
                             string_to_input = name +","+ calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
                             all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";
                         }
