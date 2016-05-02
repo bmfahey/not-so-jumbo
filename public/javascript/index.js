@@ -39,9 +39,10 @@ function buttonListen(){
                 search_string = search_string.replace("%","%25");
                 $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
                     display_search_results(result);
+                }
+                });
             }
         }});
-    }});
 
     $("#search-input").keyup(function(event) {
         if (event.which == 13) {
