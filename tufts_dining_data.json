@@ -58,7 +58,8 @@
     protein: 3.6,
     calories: 44,
     fat: 3
-  },  "The Charles/MGH": {
+  },
+  "The Charles/MGH": {
       calories: 738,
       protein: 83.1,
       fat: 31.8,
@@ -148,5 +149,5 @@
     fat: 17.1,
     serving_size: "7 wings"
     },
-
+  }
 }
