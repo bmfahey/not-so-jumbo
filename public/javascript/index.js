@@ -55,7 +55,7 @@ function buttonListen(){
                 $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
                     console.log("recognized as common meals");
-                    $.get({url: "http://not-so-jumbo.herokuapp.com/tuftsSuggestions" , function(result) {
+                    $.get("http://not-so-jumbo.herokuapp.com/tuftsSuggestions" , function(result) {
                         console.log("got a response: " + result);
                         //result = JSON.parse(result);
                         console.log("response is parsed: " + result);
@@ -73,7 +73,7 @@ function buttonListen(){
                             all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
                         }
                         $("#results").html(all_results_str);
-                    }});
+                    });
                 }
                 else {
                     search_string = search_string.replace("%","%25");
