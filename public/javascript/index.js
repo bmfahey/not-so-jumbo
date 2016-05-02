@@ -56,8 +56,8 @@ function buttonListen(){
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
                     console.log("recognized as common meals");
                     $.ajax({url: "http://not-so-jumbo.herokuapp.com/tuftsSuggestions" , success: function(result) {
-                        console.log("got a response: " + res);
-                        result = JSON.parse(res);
+                        console.log("got a response: " + result);
+                        result = JSON.parse(result);
                         console.log("response is parsed: " + result);
                         window.location.hash = "#results";
                         all_results_str = "";
