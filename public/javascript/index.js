@@ -54,9 +54,12 @@ function buttonListen(){
                 search_string = $("#search-input").val();
                 $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                    $.get("https://not-so-jumbo.herokuapp.com/tuftsSuggestions" , function(result) {
+                    $.get("/tuftsSuggestions" , function(res) {
+                        console.log(res);
                         //result = JSON.parse(result);
                         window.location.hash = "#results";
+                        result = res[0].food;
+                        console.log(result);
                         all_results_str = "";
                         for (key in result) {
                             name = "'" + key.toString().replace(/ /g,'_') + "'";
