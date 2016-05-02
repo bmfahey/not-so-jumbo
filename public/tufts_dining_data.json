@@ -69,7 +69,7 @@
     calories: 619,
     protein: 72.3,
     fat: 23.4,
-    serving_size, "1"
+    serving_size: "1"
   },
   "The Harvard Square": {
     calories: 547,
@@ -107,7 +107,7 @@
     fat: 24.1,
     serving_size: "1"
   },
-  "Roasted Vegie Quesadilla": {
+  "Roasted Veggie Quesadilla": {
     calories: 503,
     protein: 22.9,
     fat: 19.5,

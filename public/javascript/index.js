@@ -54,180 +54,28 @@ function buttonListen(){
                 search_string = $("#search-input").val();
                 $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                    console.log("recognized as common meals");
-                    /*$.get("http://not-so-jumbo.herokuapp.com/tuftsSuggestions" , function(result) {
-                        console.log("got a response: " + result);
-                        //result = JSON.parse(result);
-                        console.log("response is parsed: " + result);
+                    $.get("/tuftsSuggestions" , function(result) {
+                        result = JSON.parse(result);
                         window.location.hash = "#results";
                         all_results_str = "";
                         for (key in result) {
                             console.log("entered for loop");
-                            name = key;
+                            name = "'" + key.toString().replace(/ /g,'_') + "'";
                             calories = result[key].calories;
                             fat = result[key].fat;
                             protein = result[key].protein;
-                            serv = result[key].serving_size;
-                            console.log(serv);
+                            serv = "'" + (result[key].serving_size).toString().replace(/ /g,'_') + "'";
+                            console.log("name: "+name);
+                            console.log("calories: "+calories);
+
+                            console.log("serv: "+serv);
                             console.log("result: " + result);
-                            all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
-                        }*/
-                        var result =
-                        {
-                          "Cream Cheese": {
-                            serving_size: "1 OZ",
-                            protein: 1.7,
-                            calories: 97,
-                            fat: 9.7
-                          },
-                          "Blueberry Yogurt": {
-                            serving_size: "1 OZ",
-                            protein: 1.2,
-                            calories: 20,
-                            fat: 0
-                          },
-                          "Assorted Bagels": {
-                            serving_size:"1 EACH",
-                            protein: 10.7,
-                            calories: 264,
-                            fat: 1
-                          },
-                          "1% Milk": {
-                            serving_size:"1 OZ",
-                            protein: 1,
-                            calories: 13,
-                            fat: 0.3
-                          },
-                          "Chocolate Low Fat Soft Serve Ice Cream": {
-                            serving_size:"1 OZ",
-                            protein: 1.3,
-                            calories: 39,
-                            fat: 1.1
-                          },
-                          "Hot Chocolate": {
-                            serving_size:"1 OZ",
-                            protein: 1,
-                            calories: 122,
-                            fat: 2
-                          },
-                          "Macintosh Apples": {
-                            serving_size:"1 EACH",
-                            protein: 0.3,
-                            calories: 62,
-                            fat: 0.2
-                          },
-                          "Apple Sauce": {
-                            serving_size:"1 OZ",
-                            protein: 0,
-                            calories: 12,
-                            fat: 0
-                          },
-                          "Cheese Pizza":{
-                            serving_size: "1/8 of Pizza",
-                            protein: 13.7,
-                            calories: 281,
-                            fat: 10.5
-                          },
-                          "Whole Eggs":{
-                            serving_size: "1 EACH",
-                            protein: 3.6,
-                            calories: 44,
-                            fat: 3
-                          },
-                          "The Charles/MGH": {
-                              calories: 738,
-                              protein: 83.1,
-                              fat: 31.8,
-                              serving_size: "1"
-                          },
-                          "The Davis Square": {
-                            calories: 619,
-                            protein: 72.3,
-                            fat: 23.4,
-                            serving_size: "1"
-                          },
-                          "The Harvard Square": {
-                            calories: 547,
-                            protein: 42.3,
-                            fat: 15.4,
-                            serving_size: "1"
-                          },
-                          "Chicken Parmesan Sub": {
-                            calories: 604,
-                            protein: 36.3,
-                            fat: 17.7,
-                            serving_size: "1"
-                          },
-                          "Steak & Cheese Sub": {
-                            calories: 484,
-                            protein: 34.2,
-                            fat: 28.1,
-                            serving_size: "1"
-                          },
-                          "Beef Burrito Caliente": {
-                            calories: 720,
-                            protein: 35,
-                            fat: 32.4,
-                            serving_size: "1"
-                          },
-                          "Chicken Quesadilla": {
-                            calories: 577,
-                            protein: 37.2,
-                            fat: 20.8,
-                            serving_size: "1"
-                          },
-                          "Pork Carnitas Burrito Caliente": {
-                            calories: 657,
-                            protein: 41,
-                            fat: 24.1,
-                            serving_size: "1"
-                          },
-                          "Roasted Veggie Quesadilla": {
-                            calories: 503,
-                            protein: 22.9,
-                            fat: 19.5,
-                            serving_size: "1"
-                          },
-                          "Chicken Stir Fry for Pan Asia": {
-                            calories: 165,
-                            protein: 20.5,
-                            fat: 5.3,
-                            serving_size: "1"
-                          },
-                          "Stir Fry Tofu for Pan Asia": {
-                            calories: 90,
-                            protein: 11.8,
-                            fat: 5.5,
-                            serving_size: "1"
-                          },
-                          "Egg Noodles for Pan Asia": {
-                            calories: 168,
-                            protein: 5.4,
-                            fat: 3.5,
-                            serving_size: "1"
-                          },
-                          "Sticky Rice for Pan Asia": {
-                            calories: 396,
-                            protein: 6.6,
-                            fat: 4.8,
-                            serving_size: "1"
-                          },
-                          "Grilled Chicken Sandwich": {
-                            calories: 322,
-                            protein: 37.3,
-                            fat: 4.8,
-                            serving_size: "1"
-                          },
-                          "Honey Garlic Chicken Wings": {
-                            calories: 307,
-                            protein: 19.1,
-                            fat: 17.1,
-                            serving_size: "7 wings"
-                          }
-                      };
+                            console.log("should be the correct string:" + name.toString().replace(/_/g, ' ') + "," + calories + "," + fat + "," + protein + "," + serv.toString());
+                            string_to_input = name +","+ calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
+                            all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";
                       window.location.hash = "#results";
-                      all_results_str = "";
-                      for (key in result) {
+                      //all_results_str = "";
+                      /*for (key in result) {
                           console.log("entered for loop");
                           name = "'" + key.toString().replace(/ /g,'_') + "'";
                           calories = result[key].calories;
@@ -241,7 +89,7 @@ function buttonListen(){
                           console.log("result: " + result);
                           console.log("should be the correct string:" + name.toString().replace(/_/g, ' ') + "," + calories + "," + fat + "," + protein + "," + serv.toString());
                           string_to_input = name +","+ calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
-                          all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";
+                          all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";*/
 
                         $("#results").html(all_results_str);
                     }
