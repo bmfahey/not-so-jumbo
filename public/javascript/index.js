@@ -218,11 +218,11 @@ function buttonListen(){
                             fat: 4.8,
                             serving_size: "1"
                           },
-                          "Honey Garlic Chicken Wings": {
+                          "'Honey Garlic Chicken Wings'": {
                             calories: 307,
                             protein: 19.1,
                             fat: 17.1,
-                            serving_size: "7 wings"
+                            serving_size: "'7 wings'"
                           }
                       };
                       window.location.hash = "#results";
