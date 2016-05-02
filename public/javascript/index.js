@@ -229,11 +229,11 @@ function buttonListen(){
                       all_results_str = "";
                       for (key in result) {
                           console.log("entered for loop");
-                          name = "'" + key.toString() + "'";
+                          name = "'" + key.toString().replace(/ /g,'_') + "'";
                           calories = result[key].calories;
                           fat = result[key].fat;
                           protein = result[key].protein;
-                          serv = "'" + (result[key].serving_size).toString() + "'";
+                          serv = "'" + (result[key].serving_size).toString().replace(/ /g,'_') + "'";
                           console.log("name: "+name);
                           console.log("calories: "+calories);
 
