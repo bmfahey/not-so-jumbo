@@ -291,7 +291,7 @@ router.get("/history", function(request, response) {
 });
 
 router.get("/tuftsSuggestions", function(request, response) {
-	response.send(path+"../tufts_dining_data.json");
+	response.sendFile(path+"../tufts_dining_data.json");
 });
 
 app.use("/",router);
