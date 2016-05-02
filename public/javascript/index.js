@@ -62,6 +62,7 @@ function buttonListen(){
                             fat = result[key].fat;
                             protein = result[key].protein;
                             serv = result[key].serving_size;
+                            console.log(serv);
                             all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
                         }
                         $("#results").html(all_results_str);
