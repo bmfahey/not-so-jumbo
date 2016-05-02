@@ -52,7 +52,8 @@ function buttonListen(){
             } else {
                 search_string = $("#search-input").val();
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                    $.ajax({url: "/tuftsSuggestions" , success: function(result) {
+                    $.ajax({url: "/tuftsSuggestions" , success: function(res) {
+                        result = JSON.parse(res);
                         $("#search-input").val("");
                         window.location.hash = "#results";
                         all_results_str = "";
