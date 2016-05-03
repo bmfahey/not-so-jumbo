@@ -146,7 +146,7 @@ app.post('/sendProgress', function(request, response) {
 							var diff_days = Math.round(Math.abs((current_time.getTime() - goal_time.getTime())/(one_day)));
 							var current_dow = current_time.getDay();
 							var goal_dow = goal_time.getDay(); //dow goal was set
-								for(var i=goal_dow; i<=goal_dow + Math.abs((current_dow - goal_dow)); i++) {
+								for(var i=goal_dow; (i<= goal_dow + diff_days) && (i <=7); i++) {
 									prog_fat += result[0].days[i%7].fat;
 									prog_prot += result[0].days[i%7].protein;
 									prog_cal += result[0].days[i%7].calories;
