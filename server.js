@@ -135,9 +135,9 @@ app.post('/sendProgress', function(request, response) {
 				} else {
 					if (result.length == 1) {
 						var goal_time = result[0].goal.time_stamp;
-						var prog_fat = 0;
-						var prog_cal = 0;
-						var prog_prot = 0;
+						var prog_fat = 1;
+						var prog_cal = 1;
+						var prog_prot = 1;
 
 						if(goal_time != "")
 						{
