@@ -21,28 +21,30 @@ function buttonListen(){
             search_string = $("#search-input").val();
             $("#search-input").val("");
             if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
-                $.ajax({url: "/tuftsSuggestions" , success: function(res) {
-                    result = JSON.parse(res);
+                $.get("/tuftsSuggestions" , function(res) {
                     window.location.hash = "#results";
+                    result = res[0].food;
                     all_results_str = "";
                     for (key in result) {
-                        name = key;
+                        name = "'" + key.toString().replace(/ /g,'_') + "'";
                         calories = result[key].calories;
                         fat = result[key].fat;
                         protein = result[key].protein;
-                        serv = result[key].serving_size;
-                        all_results_str += "<a onclick = populate_info_dining("+name+","+calories+","+fat+","+protein+","+serv+") class='list-group-item'>" + name + "</a>";
+                        serv = "'" + (result[key].serving_size).toString().replace(/ /g,'_') + "'";
+                        string_to_input = name +","+ calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
+                        all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";
                     }
-                    $("#results").html(all_results_str);
-                }});
-            }
+                  window.location.hash = "#results";
+                $("#results").html(all_results_str);
+            });
+        }
             else {
                 search_string = search_string.replace("%","%25");
                 $.ajax({url: "http://api.nal.usda.gov/ndb/search/?format=json&q=" + search_string + "&sort=r&max=250&offset=0&api_key=F3tkXI4IvcYIxiwOZMqUq0VK4ezF5FCaW7L2vWLU", success: function(result) {
                     display_search_results(result);
                 }
-                });
-            }
+            });
+        }
         }});
 
     $("#search-input").keyup(function(event) {
@@ -55,11 +57,8 @@ function buttonListen(){
                 $("#search-input").val("");
                 if (search_string.toUpperCase().replace(/ /g, "") == "COMMONMEALS") {
                     $.get("/tuftsSuggestions" , function(res) {
-                        console.log(res);
-                        //result = JSON.parse(result);
                         window.location.hash = "#results";
                         result = res[0].food;
-                        console.log(result);
                         all_results_str = "";
                         for (key in result) {
                             name = "'" + key.toString().replace(/ /g,'_') + "'";
@@ -71,25 +70,7 @@ function buttonListen(){
                             all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";
                         }
                       window.location.hash = "#results";
-                      //all_results_str = "";
-                      /*for (key in result) {
-                          console.log("entered for loop");
-                          name = "'" + key.toString().replace(/ /g,'_') + "'";
-                          calories = result[key].calories;
-                          fat = result[key].fat;
-                          protein = result[key].protein;
-                          serv = "'" + (result[key].serving_size).toString().replace(/ /g,'_') + "'";
-                          console.log("name: "+name);
-                          console.log("calories: "+calories);
-
-                          console.log("serv: "+serv);
-                          console.log("result: " + result);
-                          console.log("should be the correct string:" + name.toString().replace(/_/g, ' ') + "," + calories + "," + fat + "," + protein + "," + serv.toString());
-                          string_to_input = name +","+ calories.toString() + "," + fat.toString() + "," + protein.toString() + "," + serv;
-                          all_results_str += "<a onclick = populate_info_dining("+string_to_input+") class='list-group-item'>" + name.replace(/'/g, '').replace(/_/g, ' ') + "</a>";*/
-
-                        $("#results").html(all_results_str);
-                    //}
+                    $("#results").html(all_results_str);
                 });
             }
                 else {
@@ -179,7 +160,6 @@ function buttonListen(){
         }
 
         function populate_info_dining(name, calories, fat, protein, serv) {
-        console.log("getting into populate info");
           calories = parseFloat(calories);
           fat = parseFloat(fat);
           protein = parseFloat(protein);
