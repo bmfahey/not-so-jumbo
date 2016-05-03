@@ -270,6 +270,7 @@ app.post('/submitGoal', function(request, response) {
                 }
         });
 });
+}
 
 app.post('/submitHistory', function(request, response){
 	var id = request.body.fb_id;
