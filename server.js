@@ -242,7 +242,29 @@ app.post('/submitGoal', function(request, response) {
                         if(error){
                                 response.send(500);
                         } else {
-                                response.send(200);
+                                if (count == 0) {
+									var toInsert = {
+										"FB_id": fb_id,
+								        "email": email,
+								        "goal": {
+								            "fat": fat,
+								            "protein": protein,
+								            "calories": calories,
+								            "time_stamp": new Date(),
+								            "sent_email": email_bool,
+								        },
+								        "days": [{"day": 0, "protein": 0, "fat": 0, "calories": 0},
+								                 {"day": 1, "protein": 0, "fat": 0, "calories": 0},
+								                 {"day": 2, "protein": 0, "fat": 0, "calories": 0},
+								                 {"day": 3, "protein": 0, "fat": 0, "calories": 0},
+								                 {"day": 4, "protein": 0, "fat": 0, "calories": 0},
+								                 {"day": 5, "protein": 0, "fat": 0, "calories": 0},
+								                 {"day": 6, "protein": 0, "fat": 0, "calories": 0}]
+
+									};
+									db.collection('users', function(error, coll) {
+										var id = coll.insert(toInsert);
+								}
 
                         }
                 });
