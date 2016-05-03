@@ -264,7 +264,7 @@ app.post('/submitGoal', function(request, response) {
 									};
 									db.collection('users', function(error, coll) {
 										var id = coll.insert(toInsert);
-								}
+								});
 
                         }
                 });
