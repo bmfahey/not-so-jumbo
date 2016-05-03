@@ -267,7 +267,7 @@ app.post('/submitGoal', function(request, response) {
 								});
 
                         }
-                });
+                }
         });
 });
 
