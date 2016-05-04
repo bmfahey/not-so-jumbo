@@ -64,7 +64,12 @@ function login_success() {
             },
             success: function(result) {
                 if (result == {} || result.fat_goal == "") {
-                    $("#goal-display").val("Something went wrong! Make sure you are logged into Facebook and have set a goal.");
+                    if (id_number == -1) {
+                        $("#goal-display").val("Please login to Facebook.");
+                    }
+                    else {
+                        $("#goal-display").val("Please make sure you have set a goal.");
+                    }
                     return;
                 }
                 var fat = parseInt(parseFloat(result.fat) * 100);
