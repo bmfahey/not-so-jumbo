@@ -7,7 +7,7 @@
 }
 
 #title {
-	font-size: 36px;
+	font-size: 200%;
 	font-family: Impact;
 }
 
@@ -36,28 +36,15 @@ img {
 .menu {
 	resize: none;
 	overflow-y: scroll;
-<<<<<<< HEAD
-	max-height: 60%;
-	border: 1px solid #D3D3D3;
-	margin-bottom: 5%;
-	margin-top: 5%;
-}
-
-#results {
-	overflow-y:scroll;
-	height:350px;
-}
-=======
-	max-height: 300px;
+	max-height: 350px;
 	border: 1px solid #d3d3d3;
 	margin: 10px;
 	border-radius: 2px;
 	padding-left: 5px;
 }
-#dewick {
-	margin-left: 10px;
+
+
+#results {
+	overflow-y:scroll;
+	max-height:350px;
 }
-#carm {
-	margin-left: 10px;
-}
->>>>>>> 3101e818ce234c08c3612eb2da650488a634e8e2

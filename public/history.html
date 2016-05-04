@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <meta charset = "utf-8">
+
+    <title>Weekly History</title>
+
+    <link rel='shortcut icon' href='./images/favicon.ico' type='image/x-icon'/ >
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Google Graphs API -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- JavaScript for this page -->
+    <script src="javascript/history.js"></script>
+
+</head>
+<body onload = "init()">
+    <div class="container-fluid">
+        <div class = "page-header">
+            <img src = "./images/elephant.png" alt = "Elephant Picture">
+            <span id = "title">Not So Jumbo - Weekly History</span>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" id="login">
+            </fb:login-button>
+            <span id = "top-right">
+              <span id = "name"> </span>
+              <button type="button" class="btn btn-default" id='logout'>Logout</button>
+            </span>
+        </div>
+
+        <nav class = "navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+                <span class = "icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class = "icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navBar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Input Food</a></li>
+                    <li><a href = "/goal">Update Goal</a></li>
+                    <li><a href = "/progress">Current Progress</a></li>
+					<li><a href = "#">Weekly History</a></li>
+                    <li><a href = "/dining">Dining Hall Today</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class = "col-sm-8">
+        	<div id = "fat_chart" class = "chart"></div>
+          	<div id = "prot_chart" class = "chart"></div>
+          	<div id = "cal_chart" class = "chart"></div>
+        </div>
+
+    </div>
+</body>
+</html>

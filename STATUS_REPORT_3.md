@@ -13,9 +13,3 @@ homework is hard.
 
 3. Our goals for the next week are to implement the Google graphs API to display our
 data and send weekly emails that will remind the user to complete the goal.
-
-#Comments by Ming
-* "Just about everything dealing with Mongo gave us problems. We had to rewrite our entire database structure a few times just to be able to store and access anything" => If there is one thing that you learned from this class, MongoDB is not for everything.  It's good for dumping data but not good if you are working with structured data and if structured data is important for your team (seems like the case).
-* "We also did not have enough time to implement
-all our goals from the last status report because we are all in comp15 and this last 
-homework is hard." => scope down.
