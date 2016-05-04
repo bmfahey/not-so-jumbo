@@ -61,19 +61,21 @@ app.post('/submitFood', function(request, response) {
 			}
 			else {
 				db.collection('users').find({"FB_id":fb_id}).toArray(function (error, result) {
-					currentProtein = result[0].days[dow].protein + protein;
-					currentCalories = result[0].days[dow].calories + calories;
-					currentFat = result[0].days[dow].fat + fat;
-					result[0].days[dow].fat = currentFat;
-					result[0].days[dow].protein = currentProtein;
-					result[0].days[dow].calories = currentCalories;
-					db.collection('users').update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
-						if (error) {
-							response.send(500);
-						} else {
-							response.send(200);
-						}
-					});
+					if (result.length != 0) {
+						currentProtein = result[0].days[dow].protein + protein;
+						currentCalories = result[0].days[dow].calories + calories;
+						currentFat = result[0].days[dow].fat + fat;
+						result[0].days[dow].fat = currentFat;
+						result[0].days[dow].protein = currentProtein;
+						result[0].days[dow].calories = currentCalories;
+						db.collection('users').update({"FB_id":fb_id}, {$set: result[0]}, function(error, result) {
+							if (error) {
+								response.send(500);
+							} else {
+								response.send(200);
+							}
+						});
+					}
 				});
 
 			}
