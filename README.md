@@ -5,10 +5,14 @@
 ### Problem Statement
 
 	For when you need to lose some pounds (or a lot) from all your late night pizza runs and mounds of snacks.
+		We want to end the Freshman 15!
 
 ### Solution
 
-	A application that will allow you to set goals to stay healty and lose weight (be jumbo no more!).
+	An application that will allow you to set goals to stay healthy and lose weight (be jumbo no more!).  Users
+		can store nutritional information for foods that they have eaten and compare that against their goals
+		for the week. The website includes some information from Tufts' Dining Halls, which makes it perfect
+		for students at this school to keep off the pounds.
 
 ### Features
 
@@ -16,15 +20,21 @@
 
 	2. Front-end Framework Using Bootstrap: provides template for us to work on.
 
-	3. Sends SMS: notifies the user to complete certain goals.
+	3. Sends Emails: notifies the user when goals have expired and to set a new goal.
 
-	4. Charts and Graphs: will display the progress for the week (i.e. how many calories, protein, carbs, etc. you have consumed)
+	4. Charts and Graphs: will display the progress for the week (i.e. how many calories, protein, fat, etc. you have consumed).
 
 ### Data Collected and Used
 
-	1. The dining hall menus (ingredients and nutritional information).
+	1. The dining hall menus (ingredients and nutritional information) from Team 3's API.
 
-	2. The nutrition database from the USDA.
+	2. The nutrition information from certain items on the menus was hardcoded into the database as this is only a prototype and
+	we did not have enough time to implement full data scraping from the Tufts Dining site.
+
+	3. The nutrition database from the USDA.
+
+	4. We collect users' nutrition information for a week, their Facebook ID number, and their email (only if they provide it).
+		We do not collect their name or password.
 
 ### APIs
 
@@ -33,8 +43,22 @@
 
 	2. Google Charts API: displays charts for your progress in completing goals.
 
+	3. Tufts Dining API (created by Team 3): sends the entire menu from a specified dining hall.
+
+	4. Facebook API: user can login with their Facebook account.
+
 ### Algorithms
-	We will need to calculate total nutritional information for the week in terms of calories, fat, and protein. We will need to use the Document Object Model to parse through the HTML of the Tufts Dining website to get nutritional information for each food.
+
+	We will need to calculate total nutritional information for the week in terms of calories, fat, and protein. We have an event
+	listener that goes through the database each morning and resets all users' data for the current day. We also check whether a user
+	has entered an email and whether it has been more than a week since they set their goal. If both are true and an email hasn't already
+	been sent, they will recieve a reminder email from not.so.jumbo@gmail.com.
+
+### Future Implementations
+
+	In the future, we plan to fully implement data scraping the nutritional information from the Tufts Dining Site so that the user
+	may input foods from the different dining halls, which will then added to the database. Also, we could implement more security.
+	As of now, we have sanitized the data but more could be done.
 
 ### Mockups
 ![Home Page](/mockups/home.png)
@@ -51,4 +75,14 @@
 The amount of pushes does not reflect relative work! Brendan pushed a lot early on and then he became the only
 one that could push to both GitHub and Heroku. We passed a lot of code around on Google Docs and one person
 would copy-paste it into a file before pushing it, and that person was usually Donna or Brendan. Most of
-the code that we wrote was done together in Halligan and discussed between everyone.
+the code that we wrote was done together in Halligan and in Dewick and discussed between everyone.
+
+##References:
+
+Team 3 Dining API: https://piazza.com/class/ij0y3zcyi0g1pc?cid=252. Thank you for creating this API. It was very helpful for this project.
+
+StackOverflow: for miscellaneous debugging.
+
+Piazza: for specific help.
+
+API and package documentation: for specific help pertaining to the APIs and packages.
